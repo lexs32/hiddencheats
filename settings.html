@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Account Settings - HiddenCheats</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/core.css">
+  <link rel="stylesheet" href="assets/css/framework.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
+  <link rel="stylesheet" href="assets/css/custom.css?v=2.2">
+  <style>
+    body {
+      background: #0f1117;
+      color: #cbd5e1;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+    }
+    #theme-header {
+      background: #191a20;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      height: 90px;
+      width: 100%;
+      position: relative;
+      z-index: 20;
+    }
+    .theme-spacer--hr {
+      border-right: 1px solid rgba(255, 255, 255, 0.14);
+      height: 32px;
+      width: 0px;
+      display: block;
+      margin: 0 24px;
+    }
+    .nav-chams-link {
+      color: #ffffff !important;
+      font-size: 15px;
+      font-weight: 500;
+      text-decoration: none;
+      padding: 0 1.25em;
+      border-radius: 0.5em;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 40px;
+      position: relative;
+      z-index: 1;
+    }
+    .nav-chams-link:hover {
+      color: #c930d6 !important;
+    }
+    .chams-search-btn {
+      background: #27262e;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #ffffff;
+      width: 42px;
+      height: 42px;
+      border-radius: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .cCartTrigger {
+      background: #27262e;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #ffffff;
+      height: 42px;
+      padding: 0 16px;
+      border-radius: 9px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .st-input {
+      background: #141720;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      padding: 12px 16px;
+      color: #ffffff;
+      font-size: 14px;
+      width: 100%;
+      outline: none;
+      box-sizing: border-box;
+      transition: border-color 0.2s ease;
+    }
+    .st-input:focus {
+      border-color: #9041ea;
+    }
+    .st-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: #8896a6;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 6px;
+      display: block;
+    }
+    .st-btn-save {
+      background: linear-gradient(135deg, #b937e2, #7d44ed);
+      border: none;
+      color: #ffffff;
+      padding: 12px 24px;
+      border-radius: 10px;
+      font-weight: 800;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .st-btn-save:hover {
+      filter: brightness(1.15);
+      transform: translateY(-1px);
+    }
+    #cFooter {
+      background: linear-gradient(to top, #0f1116, #14161b) !important;
+      border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+      margin-top: 4rem !important;
+    }
+    #cFooter:before {
+      background: linear-gradient(to left, rgba(144, 65, 234, 0), #9041ea, rgba(144, 65, 234, 0)) !important;
+    }
+  </style>
+</head>
+<body class="ipsApp ipsApp_front ipsClearfix">
+
+  <div class="theme-main--header">
+    <header id="theme-header">
+      <div class="ipsLayout_container" style="display:flex;align-items:center;justify-content:space-between;width:100%;max-width:1560px;margin:0 auto;padding:0 40px;height:100%;">
+        <div style="display:flex;align-items:center;">
+          <a href="index.html" id="elLogo" style="display:inline-flex;align-items:center;text-decoration:none;">
+            <img src="favicon.png" style="height:46px;width:auto;object-fit:contain;" alt="HiddenCheats">
+          </a>
+
+          <div class="theme-spacer--hr ipsResponsive_showDesktop"></div>
+
+          <nav class="theme-navbar ipsResponsive_showDesktop">
+            <ul style="display:flex;align-items:center;gap:14px;margin:0;padding:0;list-style:none;">
+              <li><a href="index.html" class="nav-chams-link">Store</a></li>
+              <li><a href="valorant.html" class="nav-chams-link">DMA</a></li>
+              <li><a href="forums.html" class="nav-chams-link">Forums</a></li>
+              <li><a href="status.html" class="nav-chams-link">Status</a></li>
+            </ul>
+          </nav>
+        </div>
+
+        <ul id="elUserNav" class="ipsList_inline ipsResponsive_showDesktop" style="display:flex;align-items:center;gap:14px;margin:0;padding:0;list-style:none;">
+          <li>
+            <button id="elSearchTrigger" type="button" onclick="window.openSearchModal()" aria-label="Search" class="chams-search-btn">
+              <svg width="17" height="17" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M17.5 17.5L13.875 13.875M15.8333 9.16667C15.8333 12.8486 12.8486 15.8333 9.16667 15.8333C5.48477 15.8333 2.5 12.8486 2.5 9.16667C2.5 5.48477 5.48477 2.5 9.16667 2.5C12.8486 2.5 15.8333 5.48477 15.8333 9.16667Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+            </button>
+          </li>
+          <li>
+            <button class="cCartTrigger" type="button" onclick="window.openCart()" aria-label="Cart">
+              <i class="fa-solid fa-cart-shopping" style="color:#b937e2;font-size:13px;"></i>
+              <span>Cart</span>
+              <span class="cart-badge" style="background:linear-gradient(135deg,#b937e2,#7d44ed);color:#ffffff;font-size:10px;font-weight:900;padding:1px 6px;border-radius:999px;display:none;">0</span>
+            </button>
+          </li>
+          <li class="auth-nav-container" style="position:relative;"></li>
+        </ul>
+      </div>
+    </header>
+  </div>
+
+  <main class="settings-container" style="margin-top:2.5rem;">
+    <div style="margin-bottom:28px;">
+      <h1 style="font-size:28px;font-weight:900;color:#ffffff;margin:0 0 6px;">Account Settings</h1>
+      <p style="font-size:14px;color:#94a3b8;margin:0;">Manage your profile, connected Discord account, and active license keys.</p>
+    </div>
+
+    <div class="settings-grid">
+      <aside class="settings-nav">
+        <a href="javascript:void(0)" onclick="switchTab('keys')" id="nav-tab-keys" class="settings-nav-item is-active">
+          <i class="fa-solid fa-key" style="width:18px;"></i>
+          <span>My License Keys</span>
+        </a>
+        <a href="javascript:void(0)" onclick="switchTab('discord')" id="nav-tab-discord" class="settings-nav-item">
+          <i class="fa-brands fa-discord" style="width:18px;"></i>
+          <span>Connected Accounts</span>
+        </a>
+        <a href="javascript:void(0)" onclick="switchTab('profile')" id="nav-tab-profile" class="settings-nav-item">
+          <i class="fa-solid fa-user" style="width:18px;"></i>
+          <span>Profile & Overview</span>
+        </a>
+        <a href="javascript:void(0)" onclick="switchTab('security')" id="nav-tab-security" class="settings-nav-item">
+          <i class="fa-solid fa-shield-halved" style="width:18px;"></i>
+          <span>Security & Password</span>
+        </a>
+        <a href="javascript:void(0)" onclick="switchTab('billing')" id="nav-tab-billing" class="settings-nav-item">
+          <i class="fa-solid fa-wallet" style="width:18px;"></i>
+          <span>Billing & Balance</span>
+        </a>
+      </aside>
+
+      <section class="settings-panel">
+
+        <div id="tab-content-keys" class="tab-pane">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:12px;">
+            <div>
+              <h2 style="font-size:20px;font-weight:800;color:#ffffff;margin:0;">My License Keys</h2>
+              <p style="font-size:13px;color:#94a3b8;margin:4px 0 0;">Manage your active subscriptions, loader downloads, and HWID locks.</p>
+            </div>
+            <a href="https://discord.gg/hiddencheats" target="_blank" class="st-btn-save" style="text-decoration:none;">
+              <i class="fa-solid fa-download"></i>
+              <span>Download Loader</span>
+            </a>
+          </div>
+
+          <div id="licenses-container" style="display:flex;flex-direction:column;gap:16px;">
+            <div class="key-row">
+              <div style="display:flex;flex-direction:column;gap:4px;">
+                <div style="display:flex;align-items:center;gap:10px;">
+                  <span style="font-size:16px;font-weight:800;color:#ffffff;">Private - Arc Raiders</span>
+                  <span style="background:rgba(16,185,129,0.15);color:#34d399;font-size:11px;font-weight:800;padding:2px 8px;border-radius:999px;border:1px solid rgba(16,185,129,0.3);">ACTIVE</span>
+                </div>
+                <div style="font-size:12px;color:#94a3b8;">Plan: <b style="color:#ffffff;">30 Day Key</b> • Expires in: <span style="color:#34d399;font-weight:700;">29 Days 14 Hours</span></div>
+              </div>
+
+              <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+                <div style="background:#11131b;border:1px dashed #9041ea;border-radius:8px;padding:8px 14px;display:flex;align-items:center;gap:12px;">
+                  <code style="color:#f43f5e;font-family:monospace;font-size:14px;font-weight:800;letter-spacing:1px;">HIDDEN-ARC-8492-XK91-2041</code>
+                  <button onclick="navigator.clipboard.writeText('HIDDEN-ARC-8492-XK91-2041'); this.textContent='Copied!';" style="background:linear-gradient(135deg,#b937e2,#7d44ed);color:#fff;border:none;padding:5px 12px;border-radius:6px;font-size:11px;font-weight:800;cursor:pointer;">
+                    Copy
+                  </button>
+                </div>
+                <button onclick="this.textContent='Reset Done!'; this.disabled=true;" style="background:#202432;border:1px solid rgba(255,255,255,0.1);color:#cbd5e1;padding:8px 14px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;">
+                  <i class="fa-solid fa-arrows-rotate"></i> Reset HWID
+                </button>
+              </div>
+            </div>
+
+            <div class="key-row">
+              <div style="display:flex;flex-direction:column;gap:4px;">
+                <div style="display:flex;align-items:center;gap:10px;">
+                  <span style="font-size:16px;font-weight:800;color:#ffffff;">SVO DMA - Valorant</span>
+                  <span style="background:rgba(16,185,129,0.15);color:#34d399;font-size:11px;font-weight:800;padding:2px 8px;border-radius:999px;border:1px solid rgba(16,185,129,0.3);">ACTIVE</span>
+                </div>
+                <div style="font-size:12px;color:#94a3b8;">Plan: <b style="color:#ffffff;">7 Day Key</b> • Expires in: <span style="color:#34d399;font-weight:700;">6 Days 8 Hours</span></div>
+              </div>
+
+              <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+                <div style="background:#11131b;border:1px dashed #9041ea;border-radius:8px;padding:8px 14px;display:flex;align-items:center;gap:12px;">
+                  <code style="color:#f43f5e;font-family:monospace;font-size:14px;font-weight:800;letter-spacing:1px;">HIDDEN-VAL-5829-DMA1-9942</code>
+                  <button onclick="navigator.clipboard.writeText('HIDDEN-VAL-5829-DMA1-9942'); this.textContent='Copied!';" style="background:linear-gradient(135deg,#b937e2,#7d44ed);color:#fff;border:none;padding:5px 12px;border-radius:6px;font-size:11px;font-weight:800;cursor:pointer;">
+                    Copy
+                  </button>
+                </div>
+                <button onclick="this.textContent='Reset Done!'; this.disabled=true;" style="background:#202432;border:1px solid rgba(255,255,255,0.1);color:#cbd5e1;padding:8px 14px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;">
+                  <i class="fa-solid fa-arrows-rotate"></i> Reset HWID
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="tab-content-discord" class="tab-pane" style="display:none;">
+          <h2 style="font-size:20px;font-weight:800;color:#ffffff;margin:0 0 6px;">Connected Accounts</h2>
+          <p style="font-size:13px;color:#94a3b8;margin:0 0 24px;">Link your Discord account to synchronize roles, access customer channels, and receive automatic key delivery.</p>
+
+          <div class="discord-connect-box">
+            <div style="display:flex;align-items:center;gap:16px;">
+              <div style="width:52px;height:52px;border-radius:14px;background:#5865F2;display:flex;align-items:center;justify-content:center;color:#ffffff;font-size:26px;flex-shrink:0;">
+                <i class="fa-brands fa-discord"></i>
+              </div>
+              <div>
+                <div style="display:flex;align-items:center;gap:8px;">
+                  <span style="font-size:17px;font-weight:800;color:#ffffff;">yvko2#0001</span>
+                  <span style="background:rgba(16,185,129,0.2);color:#34d399;font-size:10px;font-weight:800;padding:2px 8px;border-radius:999px;">CONNECTED</span>
+                </div>
+                <div style="font-size:12px;color:#94a3b8;margin-top:3px;">ID: 849201948201948201 • Synced Roles: <b style="color:#cbd5e1;">Customer, VIP Member</b></div>
+              </div>
+            </div>
+
+            <div style="display:flex;gap:10px;">
+              <button onclick="alert('Discord roles re-synced successfully!')" style="background:#252a38;border:1px solid rgba(255,255,255,0.1);color:#ffffff;padding:10px 16px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;">
+                <i class="fa-solid fa-rotate"></i> Sync Roles
+              </button>
+              <button onclick="alert('Discord disconnected')" style="background:rgba(239,68,68,0.12);border:1px solid #ef4444;color:#ef4444;padding:10px 16px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;">
+                Disconnect
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div id="tab-content-profile" class="tab-pane" style="display:none;">
+          <h2 style="font-size:20px;font-weight:800;color:#ffffff;margin:0 0 6px;">Profile & Overview</h2>
+          <p style="font-size:13px;color:#94a3b8;margin:0 0 24px;">Manage your account details and public forum appearance.</p>
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+            <div>
+              <label class="st-label">Username</label>
+              <input type="text" class="st-input" value="yvko2">
+            </div>
+            <div>
+              <label class="st-label">Email Address</label>
+              <input type="email" class="st-input" value="yvko2@gmail.com">
+            </div>
+            <div>
+              <label class="st-label">Member Group</label>
+              <input type="text" class="st-input" value="Members" disabled style="opacity:0.6;cursor:not-allowed;">
+            </div>
+            <div>
+              <label class="st-label">Account Created</label>
+              <input type="text" class="st-input" value="15 hours ago" disabled style="opacity:0.6;cursor:not-allowed;">
+            </div>
+          </div>
+
+          <div style="margin-top:24px;">
+            <button type="button" class="st-btn-save" onclick="alert('Profile updated!')">
+              <i class="fa-solid fa-check"></i> Save Profile Changes
+            </button>
+          </div>
+        </div>
+
+        <div id="tab-content-security" class="tab-pane" style="display:none;">
+          <h2 style="font-size:20px;font-weight:800;color:#ffffff;margin:0 0 6px;">Security & Password</h2>
+          <p style="font-size:13px;color:#94a3b8;margin:0 0 24px;">Protect your account with robust credentials and multi-factor authentication.</p>
+
+          <div style="display:flex;flex-direction:column;gap:16px;max-width:460px;">
+            <div>
+              <label class="st-label">Current Password</label>
+              <input type="password" class="st-input" placeholder="••••••••••••">
+            </div>
+            <div>
+              <label class="st-label">New Password</label>
+              <input type="password" class="st-input" placeholder="Enter new password">
+            </div>
+            <div>
+              <label class="st-label">Confirm New Password</label>
+              <input type="password" class="st-input" placeholder="Confirm new password">
+            </div>
+            <div>
+              <button type="button" class="st-btn-save" onclick="alert('Password updated successfully!')">
+                Update Password
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div id="tab-content-billing" class="tab-pane" style="display:none;">
+          <h2 style="font-size:20px;font-weight:800;color:#ffffff;margin:0 0 6px;">Billing & Wallet Balance</h2>
+          <p style="font-size:13px;color:#94a3b8;margin:0 0 24px;">Add funds to your account wallet for 1-click instant cheat renewals.</p>
+
+          <div style="background:#181b24;border:1px solid rgba(255,255,255,0.06);border-radius:14px;padding:24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;">
+            <div>
+              <div style="font-size:12px;color:#8896a6;font-weight:700;text-transform:uppercase;">Current Store Balance</div>
+              <div style="font-size:32px;font-weight:900;color:#a855f7;margin-top:4px;">$0.00</div>
+            </div>
+            <div style="display:flex;gap:10px;">
+              <button onclick="alert('Redirecting to deposit gateway...')" class="st-btn-save">
+                <i class="fa-solid fa-plus"></i> Add Funds
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </section>
+    </div>
+  </main>
+
+  <footer id="cFooter">
+    <div class="ipsLayout_container" style="max-width:1560px;margin:0 auto;padding:60px 40px 30px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;">
+        <div style="display:flex;align-items:center;gap:16px;">
+          <img src="favicon.png" style="height:40px;width:auto;" alt="HiddenCheats">
+          <span style="font-size:13px;color:#94a3b8;">&copy; 2026 HiddenCheats. All Rights Reserved.</span>
+        </div>
+        <div style="display:flex;gap:20px;">
+          <a href="index.html" style="color:#94a3b8;font-size:13px;text-decoration:none;">Store</a>
+          <a href="forums.html" style="color:#94a3b8;font-size:13px;text-decoration:none;">Forums</a>
+          <a href="status.html" style="color:#94a3b8;font-size:13px;text-decoration:none;">Status</a>
+          <a href="https://discord.gg/hiddencheats" target="_blank" style="color:#94a3b8;font-size:13px;text-decoration:none;">Discord</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function switchTab(tabId) {
+      document.querySelectorAll('.settings-nav-item').forEach(el => el.classList.remove('is-active'));
+      document.querySelectorAll('.tab-pane').forEach(el => el.style.display = 'none');
+      const activeNav = document.getElementById('nav-tab-' + tabId);
+      const activePane = document.getElementById('tab-content-' + tabId);
+      if (activeNav) activeNav.classList.add('is-active');
+      if (activePane) activePane.style.display = 'block';
+      if (history.pushState) {
+        history.pushState(null, null, '#' + tabId);
+      }
+    }
+    window.addEventListener('DOMContentLoaded', function() {
+      const hash = window.location.hash.replace('#', '');
+      if (hash && document.getElementById('tab-content-' + hash)) {
+        switchTab(hash);
+      }
+    });
+  </script>
+  <script src="assets/js/store.js"></script>
+</body>
+</html>

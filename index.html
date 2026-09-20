@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr" class="dark">
+<head>
+  <meta charset="utf-8">
+  <title>HiddenCheats — Undetected Cheats &amp; Hacks for PC Games</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="HiddenCheats delivers premium high-quality, reliable products for amazing prices with top notch customer support.">
+  <meta name="theme-color" content="#07080c">
+  <link rel="icon" type="image/png" href="favicon.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <link rel="stylesheet" href="assets/css/framework.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
+  <link rel="stylesheet" href="assets/css/core.css">
+  <link rel="stylesheet" href="assets/css/core_responsive.css">
+  <link rel="stylesheet" href="assets/css/nexus.css">
+  <link rel="stylesheet" href="assets/css/store.css">
+  <link rel="stylesheet" href="assets/css/store_responsive.css">
+  <link rel="stylesheet" href="assets/css/custom.css?v=2.2">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: '#9041ea',
+            brandDark: '#07080c'
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --theme-brand_primary: 224, 36, 188;
+      --theme-brand_secondary: 255, 82, 190;
+      --theme-brand_gradient: linear-gradient(135deg, rgb(224, 36, 188), rgb(255, 82, 190));
+      --theme-area_background: 20, 22, 27;
+      --theme-page_background: 20, 22, 27;
+      --theme-area_background_dark: 20, 22, 27;
+      --theme-area_background_light: 28, 30, 37;
+      --theme-area_background_lighter: 38, 40, 51;
+      --theme-area_background_veryLight: 46, 49, 63;
+      --header-top--height: 86px;
+      --header-hero--height: 600px;
+      --border-radius: 8px;
+      --container--width: 1560px;
+    }
+
+    * {
+      font-family: 'Roboto', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    body {
+      background-color: #14161b !important;
+      color: #ffffff;
+      font-family: 'Roboto', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+      overflow-x: hidden;
+    }
+
+    .gradient-text {
+      color: #b937e2;
+      background: linear-gradient(135deg, #b937e2 0%, #7d44ed 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: none;
+    }
+
+    .theme-main--header {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 3rem;
+      background: #14161b;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .theme-header__image {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .theme-header__image > video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 85% 62%;
+    }
+
+    .theme-header__overlay {
+      position: absolute;
+      inset: 0;
+      background: 
+        linear-gradient(to right, #14161b 0%, rgba(20, 22, 27, 0.95) 35%, rgba(20, 22, 27, 0.42) 68%, rgba(20, 22, 27, 0.8) 100%),
+        linear-gradient(to top, #14161b 0%, transparent 25%),
+        linear-gradient(to bottom, rgba(20, 22, 27, 0.5) 0%, transparent 20%);
+    }
+
+    .theme-anno--top {
+      position: relative;
+      z-index: 25;
+      background: #18191d;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .anno-buy-btn {
+      background: linear-gradient(135deg, #b937e2 0%, #7d44ed 100%);
+      color: #ffffff !important;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      padding: 5px 14px;
+      border-radius: 6px;
+      margin-left: 10px;
+      text-decoration: none;
+      display: inline-block;
+      box-shadow: 0 2px 10px rgba(125, 68, 237, 0.35);
+      transition: all 0.2s ease;
+    }
+
+    .anno-buy-btn:hover {
+      filter: brightness(1.15);
+      transform: translateY(-1px);
+    }
+
+    #theme-header {
+      background: #191a20;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      height: 90px;
+      width: 100%;
+      position: relative;
+      z-index: 20;
+    }
+
+    .theme-spacer--hr {
+      border-right: 1px solid rgba(255, 255, 255, 0.14);
+      height: 32px;
+      width: 0px;
+      display: block;
+      margin: 0 24px;
+    }
+
+    .nav-chams-link {
+      color: #ffffff !important;
+      font-size: 15px;
+      font-weight: 500;
+      text-decoration: none;
+      padding: 0 1.25em;
+      border-radius: 0.5em;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 40px;
+      line-height: 1;
+      position: relative;
+      z-index: 1;
+    }
+
+    .nav-chams-link:after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      height: 40px;
+      border-radius: 0.5em;
+      transition: all 0.3s ease;
+      z-index: -1;
+      background: transparent;
+    }
+
+    .nav-chams-link:not(.active-nav):hover {
+      color: #c930d6 !important;
+    }
+
+    .nav-chams-link:not(.active-nav):hover:after {
+      background: rgba(201, 48, 214, 0.25);
+    }
+
+    .nav-chams-link.active-nav {
+      color: #ffffff !important;
+      font-weight: 500;
+    }
+
+    .nav-chams-link.active-nav:after {
+      background: linear-gradient(135deg, #c930d6 0%, #6a4cf7 100%);
+      box-shadow: 0 3px 10px rgba(201, 48, 214, 0.30);
+    }
+
+    .nav-chams-link.active-nav:hover:after {
+      filter: brightness(1.1);
+    }
+
+    .chams-search-btn {
+      background: #27262e;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #ffffff;
+      width: 42px;
+      height: 42px;
+      border-radius: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .chams-search-btn:hover {
+      border-color: #9041ea;
+      background: #302f3a;
+    }
+
+    .cCartTrigger {
+      background: #27262e;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #ffffff;
+      height: 38px;
+      padding: 0 14px;
+      border-radius: 8px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 700;
+      transition: all 0.2s ease;
+    }
+
+    .cCartTrigger:hover {
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .chams-signin-btn {
+      background: none;
+      border: none;
+      color: #94a3b8;
+      font-size: 14px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      padding: 0 4px;
+      transition: color 0.15s ease;
+    }
+
+    .chams-signin-btn:hover {
+      color: #ffffff;
+    }
+
+    .chams-signup-btn {
+      background: #27262e;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #ffffff;
+      font-size: 14px;
+      font-weight: 700;
+      height: 42px;
+      padding: 0 24px;
+      border-radius: 9px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1.2;
+    }
+
+    .chams-signup-btn:hover {
+      background: linear-gradient(135deg, #b937e2 0%, #7d44ed 100%) !important;
+      border-color: transparent !important;
+      box-shadow: 0 4px 14px rgba(125, 68, 237, 0.35);
+      transform: translateY(-1px);
+    }
+
+    .auth-submit-btn:hover {
+      filter: brightness(1.1);
+      transform: translateY(-1px);
+    }
+
+    .cSearch_product_row:hover {
+      background: #202432 !important;
+      border-color: rgba(185, 55, 226, 0.4) !important;
+    }
+
+    .cSearch_product_row:hover .cSearch_row_arrow {
+      color: #ffffff !important;
+      transform: translateX(3px);
+    }
+
+    .cSearch_quickItem:hover {
+      background: #202432 !important;
+      border-color: rgba(185, 55, 226, 0.4) !important;
+    }
+
+    .theme-header--hero {
+      position: relative;
+      height: 600px;
+      min-height: 600px;
+      display: flex;
+      align-items: center;
+      z-index: 10;
+      padding: 0;
+    }
+
+    .theme-header--hero::after {
+      content: "\f06d";
+      position: absolute;
+      font-family: "Font Awesome 6 Free", "Font Awesome 6 Pro", "FontAwesome";
+      font-weight: 900;
+      font-size: 14px;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transform: translateX(-50%);
+      left: 50%;
+      bottom: -16px;
+      border-radius: 10px;
+      color: #ffffff;
+      background: linear-gradient(135deg, #b937e2, #7d44ed);
+      box-shadow: none;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      z-index: 15;
+    }
+
+    .theme-header--hero > .ipsLayout_container {
+      position: relative;
+      z-index: 2;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      width: 100%;
+    }
+
+    .headerHero_title {
+      color: #ffffff;
+      font-size: clamp(38px, 4.4vw, 56px);
+      margin: 0;
+      line-height: 1.12;
+      font-weight: 800 !important;
+      letter-spacing: -0.5px;
+    }
+
+    .headerHero_desc {
+      margin: 1.25em 0 0;
+      font-size: 16px;
+      line-height: 1.6;
+      color: #94a3b8;
+      max-width: 500px;
+      font-weight: 400;
+    }
+
+    .heroButtons {
+      display: flex;
+      align-items: center;
+      gap: 1.5em;
+      margin: 2.25em 0 0;
+    }
+
+    .headerHero_button {
+      padding: 13px 28px;
+      line-height: 1.2;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .heroButton_primary {
+      background: linear-gradient(135deg, #b937e2 0%, #7d44ed 100%);
+      color: #ffffff !important;
+      box-shadow: none;
+    }
+    .heroButton_primary:hover {
+      filter: brightness(1.08);
+      transform: translateY(-2px);
+    }
+
+    .heroButton_secondary {
+      background: #20222a;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #ffffff !important;
+    }
+    .heroButton_secondary:hover {
+      background: rgb(36, 37, 42);
+      transform: translateY(-2px);
+      color: #ffffff !important;
+    }
+
+    .headerHero_rated {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .headerHero_rated--title {
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 11px;
+      line-height: 18px;
+      letter-spacing: 1.5px;
+      color: #64748b;
+    }
+
+    .headerHero_rated--stars {
+      height: 26px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .cNexusGames_header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 2.8rem;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .cNexusGames_header--title {
+      margin: 0;
+      color: #ffffff;
+      font-size: 24px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .cNexusGames_header--title > i {
+      color: #b937e2;
+      text-shadow: 0 0 40px rgba(185, 55, 226, 0.6);
+    }
+
+    .cNexusGames_header--desc {
+      margin: 0.35rem 0 0;
+      font-size: 15px;
+      color: #94a3b8;
+    }
+
+    .cNexusGames_blocks {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+      padding: 0;
+      margin: 0;
+      gap: 1.8rem;
+      list-style: none;
+    }
+
+    .cNexusGame_block {
+      position: relative;
+      display: flex;
+      width: 100%;
+    }
+
+    .cNexusGame_block--ref {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      background: #191b22;
+      border: 1px solid rgba(255, 255, 255, 0.07);
+    }
+
+    .cNexusGame_block--ref:hover {
+      border-color: rgba(185, 55, 226, 0.4);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5), 0 0 30px rgba(185, 55, 226, 0.15);
+    }
+
+    .cNexusGame_block--image {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px 12px 0 0;
+      background: #1d2028;
+      height: 180px;
+      max-height: 180px;
+    }
+
+    .cNexusGame_block--image > img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: inherit;
+      transition: transform 0.45s ease;
+    }
+
+    .cNexusGame_block--ref:hover .cNexusGame_block--image > img {
+      transform: scale(1.06);
+    }
+
+    .cNexusGame_block--data {
+      background: rgba(25, 27, 34, 0.88);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      padding: 1.5rem 1.6rem;
+      margin-top: -0.75rem;
+      position: relative;
+      border-radius: 0 0 12px 12px;
+      z-index: 2;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .blockData_content--top {
+      display: flex;
+      flex-direction: column;
+      margin: 0 0 1.25rem;
+      padding: 0 0 1.15rem;
+      position: relative;
+      width: 100%;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .cNexusGame_block--title {
+      margin: 0 0 0.5rem;
+      color: #ffffff;
+      width: 100%;
+      font-size: 15px;
+      line-height: 1.2;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-weight: 700;
+    }
+
+    .cNexusGame_block--data .blockData_list {
+      display: flex;
+      align-items: center;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      color: #8b92a2;
+      font-size: 13px;
+    }
+
+    .cNexusGame_block--data .blockData_list > .hr {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: #525866;
+      margin: 0 0.75rem;
+    }
+
+    .cNexusGame_block--data .blockData_list .inDelivery {
+      color: #47ce26;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .cNexusGame_block--data .blockData_list .inDelivery > b {
+      font-weight: 600;
+    }
+
+    .blockData_content--bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .cNexusGame_block--price > .from {
+      color: #8b92a2;
+      font-weight: 600;
+      font-size: 11px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin: 0 0 0.35rem;
+      line-height: 1;
+    }
+
+    .cNexusGame_block--price > .price {
+      color: #ffffff;
+      font-size: 19px;
+      line-height: 1;
+      font-weight: 800;
+    }
+
+    .theme-button__primary {
+      padding: 10px 18px;
+      position: relative;
+      line-height: 1;
+      background: #252833;
+      border-radius: 8px;
+      font-size: 13px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+      color: #aeb1bf;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      text-decoration: none;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      cursor: pointer;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .theme-button__primary::after {
+      content: "\f061";
+      font-family: "Font Awesome 6 Free", "Font Awesome 6 Sharp", sans-serif;
+      font-weight: 900;
+      font-size: 11px;
+    }
+
+    .theme-button__primary::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      z-index: -1;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+      background: linear-gradient(135deg, #b937e2 0%, #7d44ed 100%);
+    }
+
+    .cNexusGame_block--ref:hover .theme-button__primary,
+    .theme-button__primary:hover {
+      background: transparent;
+      color: #ffffff;
+      border-color: transparent;
+    }
+
+    .cNexusGame_block--ref:hover .theme-button__primary::before,
+    .theme-button__primary:hover::before {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .cDiscord > a {
+      background: #9041ea !important;
+      color: #ffffff !important;
+      transition: all 0.2s ease;
+    }
+
+    .cDiscord > a:hover {
+      background: #ffffff !important;
+      color: #07080c !important;
+      box-shadow: none !important;
+    }
+
+    .cSearchSubmit {
+      background: #ffffff !important;
+      color: #0c0f16 !important;
+    }
+
+    .cSearchSubmit:hover {
+      background: #e2e8f0 !important;
+    }
+
+    #cFooter {
+      background: linear-gradient(to top, #0f1116, #14161b) !important;
+      border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+      margin-top: 3rem !important;
+    }
+
+    #cFooter:before {
+      background: linear-gradient(to left, rgba(144, 65, 234, 0), #9041ea, rgba(144, 65, 234, 0)) !important;
+    }
+
+    .cFooter_bottom {
+      background: #0b0d11 !important;
+    }
+
+    @media screen and (max-width: 979px) {
+      .theme-anno--top, .theme-spacer--hr {
+        display: none !important;
+      }
+      .theme-main--header {
+        margin-bottom: 2rem;
+      }
+      .theme-header--hero {
+        margin: 0;
+        padding: 0;
+        height: 520px;
+        min-height: 520px;
+      }
+      .theme-header--hero > .ipsLayout_container {
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+        padding: 0 20px !important;
+      }
+      .theme-header__image > video {
+        object-position: 72% 50% !important;
+        opacity: 0.4;
+      }
+      .theme-header__overlay {
+        background: radial-gradient(circle at center, rgba(20, 22, 27, 0.72) 0%, rgba(20, 22, 27, 0.96) 100%),
+                    linear-gradient(to top, #14161b 0%, transparent 40%) !important;
+      }
+      .headerHero_title {
+        font-size: 32px !important;
+        text-align: center;
+      }
+      .headerHero_desc {
+        font-size: 14px !important;
+        max-width: 320px;
+        text-align: center;
+        margin: 1rem auto 0 !important;
+      }
+      .heroButtons {
+        flex-direction: column;
+        width: 100%;
+        max-width: 290px;
+        gap: 12px;
+        margin: 1.5rem auto 0 !important;
+      }
+      .headerHero_button {
+        width: 100%;
+        padding: 12px 20px;
+        justify-content: center;
+      }
+      .headerHero_rated {
+        align-items: center;
+        margin-top: 1.5rem !important;
+      }
+    }
+  </style>
+</head>
+<body class="ipsApp ipsApp_front ipsJS_has ipsClearfix">
+
+  <div class="theme-main--header">
+    <div class="theme-anno--top">
+    <div class="ipsLayout_container" style="max-width:1560px;margin:0 auto;padding:0 40px;height:100%;display:flex;align-items:center;justify-content:center;">
+      <div style="display:flex;align-items:center;gap:10px;font-size:13px;font-weight:600;color:#f1f5f9;">
+        <span style="background:linear-gradient(135deg,#b937e2,#7d44ed);width:20px;height:20px;border-radius:6px;display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:10px;font-weight:900;box-shadow:0 2px 8px rgba(125,68,237,0.4);">
+          <i class="fa-solid fa-dollar-sign"></i>
+        </span>
+        <span>WARDOGS Products Added!</span>
+        <a href="index.html#products" class="anno-buy-btn">BUY NOW</a>
+      </div>
+    </div>
+  </div>
+
+    <header id="theme-header">
+    <div class="ipsLayout_container" style="display:flex;align-items:center;justify-content:space-between;width:100%;max-width:1560px;margin:0 auto;padding:0 40px;height:100%;">
+      <div style="display:flex;align-items:center;">
+        <a href="index.html" id="elLogo" accesskey="1" style="display:inline-flex;align-items:center;text-decoration:none;">
+          <img src="favicon.png" style="height:44px;width:auto;object-fit:contain;" alt="HiddenCheats">
+        </a>
+
+        <div class="theme-spacer--hr ipsResponsive_showDesktop"></div>
+
+        <nav class="theme-navbar ipsResponsive_showDesktop">
+          <ul style="display:flex;align-items:center;gap:14px;margin:0;padding:0;list-style:none;">
+            <li>
+              <a href="index.html" class="nav-chams-link">Store</a>
+            </li>
+            <li>
+              <a href="index.html#products" class="nav-chams-link">DMA</a>
+            </li>
+            <li>
+              <a href="forums.html" class="nav-chams-link">Forums</a>
+            </li>
+            <li>
+              <a href="status.html" class="nav-chams-link">Status</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+
+      <ul id="elUserNav" class="ipsList_inline ipsResponsive_showDesktop" style="display:flex;align-items:center;gap:14px;margin:0;padding:0;list-style:none;">
+        <li>
+          <button id="elSearchTrigger" type="button" onclick="window.openSearchModal()" aria-label="Search" class="chams-search-btn">
+            <svg width="17" height="17" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M17.5 17.5L13.875 13.875M15.8333 9.16667C15.8333 12.8486 12.8486 15.8333 9.16667 15.8333C5.48477 15.8333 2.5 12.8486 2.5 9.16667C2.5 5.48477 5.48477 2.5 9.16667 2.5C12.8486 2.5 15.8333 5.48477 15.8333 9.16667Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </button>
+        </li>
+        <li>
+          <button class="cCartTrigger" type="button" onclick="window.openCart()" aria-label="Cart" >
+            <i class="fa-solid fa-cart-shopping" style="color:#b937e2;font-size:13px;"></i>
+            <span>Cart</span>
+            <span class="cart-badge" style="background:linear-gradient(135deg,#b937e2,#7d44ed);color:#ffffff;font-size:10px;font-weight:900;padding:1px 6px;border-radius:999px;display:none;">0</span>
+          </button>
+        </li>
+        <li class="auth-nav-container" style="position:relative;">
+          <div style="display:flex;align-items:center;gap:14px;">
+            <button type="button" onclick="window.openAuthModal('signin')" class="chams-signin-btn">
+              <span>Existing user? Sign In</span>
+              <i class="fa-solid fa-caret-down" style="font-size:11px;opacity:0.75;"></i>
+            </button>
+            <button type="button" onclick="window.openAuthModal('signup')" class="chams-signup-btn">
+              Sign Up
+            </button>
+          </div>
+        </li>
+      </ul>
+
+      <ul class="ipsMobileHamburger ipsList_reset ipsResponsive_hideDesktop" style="display:flex;align-items:center;gap:10px;">
+        <li>
+          <button type="button" onclick="window.openSearchModal()" aria-label="Search" class="chams-search-btn" style="width:34px;height:34px;">
+            <svg width="15" height="15" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M17.5 17.5L13.875 13.875M15.8333 9.16667C15.8333 12.8486 12.8486 15.8333 9.16667 15.8333C5.48477 15.8333 2.5 12.8486 2.5 9.16667C2.5 5.48477 5.48477 2.5 9.16667 2.5C12.8486 2.5 15.8333 5.48477 15.8333 9.16667Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </button>
+        </li>
+        <li>
+          <a href="javascript:void(0)" onclick="toggleMobileDrawer()" style="color:#fff;font-size:20px;padding:4px;"><i class="fa fa-navicon"></i></a>
+        </li>
+      </ul>
+    </div>
+  </header>
+
+    <div id="elMobileDrawer" style="position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.85);z-index:9999;backdrop-filter:blur(10px);display:none;">
+      <div style="background:#0c0f16;width:280px;height:100%;padding:24px;border-right:1px solid rgba(255,255,255,0.1);display:flex;flex-direction:column;gap:16px;">
+        <div style="display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.08);padding-bottom:16px;">
+          <div style="display:flex;align-items:center;gap:10px;">
+          <img src="favicon.png" style="height:32px;width:auto;" alt="HiddenCheats">
+        </div>
+          <button onclick="toggleMobileDrawer()" style="background:none;border:none;color:#fff;font-size:20px;cursor:pointer;"><i class="fa fa-times"></i></button>
+        </div>
+        <nav style="display:flex;flex-direction:column;gap:12px;margin-top:10px;">
+          <a href="index.html" onclick="toggleMobileDrawer()" style="color:#fff;font-size:16px;font-weight:600;text-decoration:none;display:flex;align-items:center;gap:12px;padding:8px 0;"><i class="fa-solid fa-store" style="color: #9041ea;"></i> Store</a>
+          <a href="#products" onclick="toggleMobileDrawer(); window.openCheatConfig && window.openCheatConfig('valorant', 'valorant-dma');" style="color:#fff;font-size:16px;font-weight:600;text-decoration:none;display:flex;align-items:center;gap:12px;padding:8px 0;"><i class="fa-solid fa-microchip" style="color: #9041ea;"></i> DMA</a>
+          <a href="javascript:void(0)" onclick="toggleMobileDrawer(); window.openSearchModal();" style="color:#fff;font-size:16px;font-weight:600;text-decoration:none;display:flex;align-items:center;gap:12px;padding:8px 0;"><i class="fa-solid fa-magnifying-glass" style="color: #9041ea;"></i> Search</a>
+          <a href="javascript:void(0)" onclick="toggleMobileDrawer(); window.openCart();" style="color:#fff;font-size:16px;font-weight:600;text-decoration:none;display:flex;align-items:center;gap:12px;padding:8px 0;"><i class="fa-solid fa-cart-shopping" style="color: #9041ea;"></i> Cart <span class="cart-badge" style="background:#9041ea;color:#ffffff;font-size:10px;font-weight:900;padding:1px 6px;border-radius:999px;display:none;">0</span></a>
+          <a href="forums.html" onclick="toggleMobileDrawer()" style="color:#fff;font-size:16px;font-weight:600;text-decoration:none;display:flex;align-items:center;gap:12px;padding:8px 0;"><i class="fa-brands fa-wpforms" style="color: #9041ea;"></i> Forums</a>
+          <a href="status.html" onclick="toggleMobileDrawer()" style="color:#fff;font-size:16px;font-weight:600;text-decoration:none;display:flex;align-items:center;gap:12px;padding:8px 0;"><i class="fa-solid fa-list-check" style="color: #9041ea;"></i> Status</a>
+          <a href="javascript:void(0)" onclick="toggleMobileDrawer(); window.openAuthModal('signin');" style="color:#fff;font-size:16px;font-weight:600;text-decoration:none;display:flex;align-items:center;gap:12px;padding:8px 0;"><i class="fa-solid fa-user" style="color: #9041ea;"></i> Sign In</a>
+          <a href="javascript:void(0)" onclick="toggleMobileDrawer(); window.openAuthModal('signup');" style="color:#fff;font-size:16px;font-weight:600;text-decoration:none;display:flex;align-items:center;gap:12px;padding:8px 0;"><i class="fa-solid fa-user-plus" style="color: #9041ea;"></i> Sign Up</a>
+          <a href="https://discord.gg/hiddencheats" target="_blank" style="color:#fff;font-size:16px;font-weight:600;text-decoration:none;display:flex;align-items:center;gap:12px;padding:8px 0;"><i class="fa-brands fa-discord" style="color: #9041ea;"></i> Discord</a>
+        </nav>
+        <div style="margin-top:auto;border-top:1px solid rgba(255,255,255,0.08);padding-top:16px;">
+          <a href="https://discord.gg/hiddencheats" target="_blank" class="theme-button__primary" style="width:100%;justify-content:center;">
+            <i class="fa-brands fa-discord"></i> Join Discord
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="theme-header--hero">
+      <div class="theme-header__image">
+        <video playsinline autoplay loop muted preload="auto">
+          <source src="assets/video/hero_alone_pink.mp4" type="video/mp4">
+        </video>
+        <div class="theme-header__overlay"></div>
+      </div>
+      <div class="ipsLayout_container" style="max-width:1560px;margin:0 auto;padding:0 40px;">
+        <h1 class="headerHero_title">
+          Exclusive Cheats<br> <span class="gradient-text">Unrivaled Power</span>
+        </h1>
+        <p class="headerHero_desc">
+          Exclusive cheats for your favorite games, offering premium features and reliable performance to level up your gameplay.
+        </p>
+        <div class="heroButtons" style="display:flex;align-items:center;gap:16px;margin-top:24px;">
+          <a href="#products" class="headerHero_button heroButton_primary">
+            Visit Store
+          </a>
+          <a href="#products" class="headerHero_button heroButton_secondary">
+            DMA Products
+          </a>
+        </div>
+        <div class="headerHero_rated" style="margin-top:2.5rem;">
+          <div class="headerHero_rated--title">HIGHLY RATED (5.0 OUT OF 5)</div>
+          <div style="display:flex;gap:4px;margin-top:4px;">
+            <span style="width:24px;height:24px;background:#00b67a;border-radius:4px;display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:12px;"><i class="fa-solid fa-star"></i></span>
+            <span style="width:24px;height:24px;background:#00b67a;border-radius:4px;display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:12px;"><i class="fa-solid fa-star"></i></span>
+            <span style="width:24px;height:24px;background:#00b67a;border-radius:4px;display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:12px;"><i class="fa-solid fa-star"></i></span>
+            <span style="width:24px;height:24px;background:#00b67a;border-radius:4px;display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:12px;"><i class="fa-solid fa-star"></i></span>
+            <span style="width:24px;height:24px;background:#00b67a;border-radius:4px;display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:12px;"><i class="fa-solid fa-star"></i></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main id="ipsLayout_body" class="ipsLayout_container" style="max-width:1560px;margin:0 auto;padding:0 40px;">
+    <div id="ipsLayout_contentArea">
+      <div id="ipsLayout_contentWrapper">
+
+        <div class="l-section" id="products" style="margin-top: 3.5rem;">
+          <div class="ipsLayout_container">
+            <div class="cNexusGames is-popular">
+              <div class="cNexusGames_header">
+                <div>
+                  <h2 class="cNexusGames_header--title">
+                    <i class="fa-solid fa-fire-flame-curved"></i> <span class="gradient-text">Popular</span> Cheats
+                  </h2>
+                  <p class="cNexusGames_header--desc">A wide range of exclusive cheats for your favorite games.</p>
+                </div>
+                <a href="#products" class="theme-button__primary">View All Cheats</a>
+              </div>
+              
+              <ul class="cNexusGames_blocks gsap--js--animate">
+                <li class="cNexusGame_block gsap-fadeup">
+                  <a href="arc.html" class="cNexusGame_block--ref">
+                    <div class="cNexusGame_block--image">
+                      <img src="assets/images/nexus/arc_raiders.webp" alt="Arc Raiders" loading="lazy">
+                    </div>
+                    <div class="cNexusGame_block--data">
+                      <div class="blockData_content--top">
+                        <h3 class="cNexusGame_block--title">Arc Raiders</h3>
+                        <ul class="blockData_list">
+                          <li>1 Product</li>
+                          <li class="hr"></li>
+                          <li class="inDelivery"><i class="fa-solid fa-bolt"></i> <b>Instant Delivery</b></li>
+                        </ul>
+                      </div>
+                      <div class="blockData_content--bottom">
+                        <div class="cNexusGame_block--price">
+                          <div class="from">From</div>
+                          <div class="price">$6.00</div>
+                        </div>
+                        <div class="theme-button__primary">View More</div>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+                <li class="cNexusGame_block gsap-fadeup">
+                  <a href="r6.html" class="cNexusGame_block--ref">
+                    <div class="cNexusGame_block--image">
+                      <img src="assets/images/nexus/R6S.webp" alt="Rainbow Six Siege" loading="lazy">
+                    </div>
+                    <div class="cNexusGame_block--data">
+                      <div class="blockData_content--top">
+                        <h3 class="cNexusGame_block--title">Rainbow Six Siege</h3>
+                        <ul class="blockData_list">
+                          <li>1 Product</li>
+                          <li class="hr"></li>
+                          <li class="inDelivery"><i class="fa-solid fa-bolt"></i> <b>Instant Delivery</b></li>
+                        </ul>
+                      </div>
+                      <div class="blockData_content--bottom">
+                        <div class="cNexusGame_block--price">
+                          <div class="from">From</div>
+                          <div class="price">$6.00</div>
+                        </div>
+                        <div class="theme-button__primary">View More</div>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+                <li class="cNexusGame_block gsap-fadeup">
+                  <a href="apex.html" class="cNexusGame_block--ref">
+                    <div class="cNexusGame_block--image">
+                      <img src="assets/images/nexus/Apex.webp" alt="Apex Legends" loading="lazy">
+                    </div>
+                    <div class="cNexusGame_block--data">
+                      <div class="blockData_content--top">
+                        <h3 class="cNexusGame_block--title">Apex Legends</h3>
+                        <ul class="blockData_list">
+                          <li>1 Product</li>
+                          <li class="hr"></li>
+                          <li class="inDelivery"><i class="fa-solid fa-bolt"></i> <b>Instant Delivery</b></li>
+                        </ul>
+                      </div>
+                      <div class="blockData_content--bottom">
+                        <div class="cNexusGame_block--price">
+                          <div class="from">From</div>
+                          <div class="price">$6.00</div>
+                        </div>
+                        <div class="theme-button__primary">View More</div>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+                <li class="cNexusGame_block gsap-fadeup">
+                  <a href="cod.html" class="cNexusGame_block--ref">
+                    <div class="cNexusGame_block--image">
+                      <img src="assets/images/nexus/cod24.webp" alt="Call of Duty" loading="lazy">
+                    </div>
+                    <div class="cNexusGame_block--data">
+                      <div class="blockData_content--top">
+                        <h3 class="cNexusGame_block--title">Call of Duty</h3>
+                        <ul class="blockData_list">
+                          <li>1 Product</li>
+                          <li class="hr"></li>
+                          <li class="inDelivery"><i class="fa-solid fa-bolt"></i> <b>Instant Delivery</b></li>
+                        </ul>
+                      </div>
+                      <div class="blockData_content--bottom">
+                        <div class="cNexusGame_block--price">
+                          <div class="from">From</div>
+                          <div class="price">$6.00</div>
+                        </div>
+                        <div class="theme-button__primary">View More</div>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+                <li class="cNexusGame_block gsap-fadeup">
+                  <a href="fortnite.html" class="cNexusGame_block--ref">
+                    <div class="cNexusGame_block--image">
+                      <img src="assets/images/nexus/Fortnite.webp" alt="Fortnite" loading="lazy">
+                    </div>
+                    <div class="cNexusGame_block--data">
+                      <div class="blockData_content--top">
+                        <h3 class="cNexusGame_block--title">Fortnite</h3>
+                        <ul class="blockData_list">
+                          <li>1 Product</li>
+                          <li class="hr"></li>
+                          <li class="inDelivery"><i class="fa-solid fa-bolt"></i> <b>Instant Delivery</b></li>
+                        </ul>
+                      </div>
+                      <div class="blockData_content--bottom">
+                        <div class="cNexusGame_block--price">
+                          <div class="from">From</div>
+                          <div class="price">$6.00</div>
+                        </div>
+                        <div class="theme-button__primary">View More</div>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+                <li class="cNexusGame_block gsap-fadeup">
+                  <a href="rust.html" class="cNexusGame_block--ref">
+                    <div class="cNexusGame_block--image">
+                      <img src="assets/images/nexus/Rust.webp" alt="Rust" loading="lazy">
+                    </div>
+                    <div class="cNexusGame_block--data">
+                      <div class="blockData_content--top">
+                        <h3 class="cNexusGame_block--title">Rust</h3>
+                        <ul class="blockData_list">
+                          <li>1 Product</li>
+                          <li class="hr"></li>
+                          <li class="inDelivery"><i class="fa-solid fa-bolt"></i> <b>Instant Delivery</b></li>
+                        </ul>
+                      </div>
+                      <div class="blockData_content--bottom">
+                        <div class="cNexusGame_block--price">
+                          <div class="from">From</div>
+                          <div class="price">$7.00</div>
+                        </div>
+                        <div class="theme-button__primary">View More</div>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+                <li class="cNexusGame_block gsap-fadeup">
+                  <a href="valorant.html" class="cNexusGame_block--ref">
+                    <div class="cNexusGame_block--image">
+                      <img src="assets/images/nexus/Valo.webp" alt="Valorant" loading="lazy">
+                    </div>
+                    <div class="cNexusGame_block--data">
+                      <div class="blockData_content--top">
+                        <h3 class="cNexusGame_block--title">Valorant</h3>
+                        <ul class="blockData_list">
+                          <li>1 Product</li>
+                          <li class="hr"></li>
+                          <li class="inDelivery"><i class="fa-solid fa-bolt"></i> <b>Instant Delivery</b></li>
+                        </ul>
+                      </div>
+                      <div class="blockData_content--bottom">
+                        <div class="cNexusGame_block--price">
+                          <div class="from">From</div>
+                          <div class="price">$12.99</div>
+                        </div>
+                        <div class="theme-button__primary">View More</div>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <footer id="cFooter">
+    <div class="ipsLayout_container" style="max-width:1560px;margin:0 auto;padding:70px 40px;">
+      <div class="cFooter_wrapper">
+        <div class="cFooter_about">
+          <a href="index.html" class="elFooter_logo" style="display:inline-flex;align-items:center;text-decoration:none;margin-bottom:14px;">
+            <img src="favicon.png" alt="HiddenCheats" style="height:38px;width:auto;object-fit:contain;">
+          </a>
+          <p>HiddenCheats sets the benchmark for elite performance with our products. Dominate effortlessly with cutting-edge solutions, top-tier reliability, and unmatched precision. Our technology ensures security, efficiency, and the ultimate competitive edge. Choose HiddenCheats for power, innovation, and absolute control every time.</p>
+        </div>
+        <div class="cFooter_nav">
+          <ul class="ipsDataList ipsDataList_reducedSpacing">
+            <li class="listTitle">Supported Games</li>
+            <li><a href="#products">Apex Legends</a></li>
+            <li><a href="#products">Rainbow Six Siege</a></li>
+            <li><a href="#products">Valorant</a></li>
+            <li><a href="#products">Fortnite</a></li>
+            <li><a href="#products">Rust</a></li>
+            <li><a href="#products">Arc Raiders</a></li>
+          </ul>
+          <ul class="ipsDataList ipsDataList_reducedSpacing">
+            <li class="listTitle">&nbsp;</li>
+            <li><a href="#products">Call of Duty</a></li>
+            <li><a href="#products">HWID Spoofer</a></li>
+            <li><a href="#products">Wardogs</a></li>
+          </ul>
+          <ul class="ipsDataList ipsDataList_reducedSpacing">
+            <li class="listTitle">Important Links</li>
+            <li><a href="https://discord.gg/hiddencheats" target="_blank">Support</a></li>
+            <li><a href="#products">Products</a></li>
+            <li><a href="status.html">Status</a></li>
+            <li><a href="forums.html">Forums</a></li>
+            <li><a href="https://discord.gg/hiddencheats" target="_blank">Discord Community</a></li>
+          </ul>
+          <ul class="ipsDataList ipsDataList_reducedSpacing">
+            <li class="listTitle">&nbsp;</li>
+            <li><a href="javascript:void(0)">Terms of Service</a></li>
+            <li><a href="javascript:void(0)">Refund Policy</a></li>
+            <li><a href="javascript:void(0)">Privacy Policy</a></li>
+            <li style="margin-top:14px;color:#8896a6;font-size:12px;">For all other inquiries, contact: support@hiddencheats.net</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="cFooter_bottom">
+      <div class="ipsLayout_container" style="max-width:1560px;margin:0 auto;padding:0 40px;display:flex;justify-content:space-between;align-items:center;">
+        <ul id="elFooterLinks" style="display:flex;gap:18px;list-style:none;padding:0;margin:0;font-size:12px;color:#8896a6;">
+          <li><a href="javascript:void(0)" style="color:#8896a6;text-decoration:none;">Theme</a></li>
+          <li><a href="https://discord.gg/hiddencheats" target="_blank" style="color:#8896a6;text-decoration:none;">Contact Us</a></li>
+          <li><a href="javascript:void(0)" style="color:#8896a6;text-decoration:none;">Cookies</a></li>
+        </ul>
+        <p id="elCopyright" style="margin:0;font-size:11px;color:#606f7b;letter-spacing:1px;font-weight:600;">
+          POWERED BY INVISION COMMUNITY
+        </p>
+        <div class="copyright" style="font-size:12px;color:#8896a6;font-weight:700;">
+          &copy; <span style="color:#9041ea;">HIDDENCHEATS.COM</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function toggleMobileDrawer() {
+      const drawer = document.getElementById('elMobileDrawer');
+      if (drawer.style.display === 'none' || drawer.style.display === '') {
+        drawer.style.display = 'block';
+      } else {
+        drawer.style.display = 'none';
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      gsap.registerPlugin(ScrollTrigger);
+      const mm = gsap.matchMedia();
+      mm.add("(min-width: 980px)", () => {
+        gsap.defaults({ ease: "power3.out" });
+
+        gsap.to('.headerHero_title', { opacity: 1, y: 0, duration: 1.4, ease: 'expo.out', delay: 0.4 });
+        gsap.to('.headerHero_desc',  { opacity: 1, y: 0, duration: 1.2, delay: 0.2 });
+        gsap.to('.heroButtons',      { opacity: 1, scale: 1, duration: 1.1, ease: 'back.out(1.7)', delay: 0.6 });
+        gsap.to('.headerHero_rated', { opacity: 1, x: 0, duration: 1.2, delay: 0.2 });
+        gsap.to('.cNexusGames_header', { opacity: 1, y: 0, duration: 1.3, delay: 0.3 });
+
+        document.querySelectorAll(".gsap--js--animate .gsap-fadeup").forEach((el, i) => {
+          gsap.to(el, {
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            delay: (i % 4) * 0.15,
+            scrollTrigger: {
+              trigger: el,
+              start: "top 90%",
+              toggleActions: "play none none none",
+              once: true
+            }
+          });
+        });
+
+        window.addEventListener('load', () => ScrollTrigger.refresh());
+      });
+
+      mm.add("(max-width: 979px)", () => {
+        gsap.set([
+          '.headerHero_title', '.headerHero_desc', '.heroButtons',
+          '.headerHero_rated', '.cNexusGames_header',
+          '.gsap--js--animate .gsap-fadeup'
+        ], { clearProps: "all", opacity: 1, x: 0, y: 0, scale: 1 });
+      });
+
+      mm.add("(prefers-reduced-motion: reduce)", () => {
+        ScrollTrigger.getAll().forEach(t => t.kill());
+        gsap.killTweensOf("*");
+        gsap.set("*", { clearProps: "all" });
+      });
+    });
+  </script>
+  <script src="assets/js/store.js"></script>
+</body>
+</html>

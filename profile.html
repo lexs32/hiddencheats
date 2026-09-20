@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>yvko2's Profile - HiddenCheats</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/core.css">
+  <link rel="stylesheet" href="assets/css/framework.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
+  <link rel="stylesheet" href="assets/css/custom.css?v=2.2">
+  <style>
+    body {
+      background: #0f1117;
+      color: #cbd5e1;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+    }
+    #theme-header {
+      background: #191a20;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      height: 90px;
+      width: 100%;
+      position: relative;
+      z-index: 20;
+    }
+    .theme-spacer--hr {
+      border-right: 1px solid rgba(255, 255, 255, 0.14);
+      height: 32px;
+      width: 0px;
+      display: block;
+      margin: 0 24px;
+    }
+    .nav-chams-link {
+      color: #ffffff !important;
+      font-size: 15px;
+      font-weight: 500;
+      text-decoration: none;
+      padding: 0 1.25em;
+      border-radius: 0.5em;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 40px;
+      position: relative;
+      z-index: 1;
+    }
+    .nav-chams-link:hover {
+      color: #c930d6 !important;
+    }
+    .chams-search-btn {
+      background: #27262e;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #ffffff;
+      width: 42px;
+      height: 42px;
+      border-radius: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .chams-search-btn:hover {
+      background: #33323c;
+    }
+    .cCartTrigger {
+      background: #27262e;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #ffffff;
+      height: 42px;
+      padding: 0 16px;
+      border-radius: 9px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .cCartTrigger:hover {
+      background: #33323c;
+    }
+    #cFooter {
+      background: linear-gradient(to top, #0f1116, #14161b) !important;
+      border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+      margin-top: 4rem !important;
+    }
+    #cFooter:before {
+      background: linear-gradient(to left, rgba(144, 65, 234, 0), #9041ea, rgba(144, 65, 234, 0)) !important;
+    }
+    .cFooter_bottom {
+      background: #0b0d11 !important;
+    }
+  </style>
+</head>
+<body class="ipsApp ipsApp_front ipsClearfix">
+
+  <div class="theme-main--header">
+    <header id="theme-header">
+      <div class="ipsLayout_container" style="display:flex;align-items:center;justify-content:space-between;width:100%;max-width:1560px;margin:0 auto;padding:0 40px;height:100%;">
+        <div style="display:flex;align-items:center;">
+          <a href="index.html" id="elLogo" style="display:inline-flex;align-items:center;text-decoration:none;">
+            <img src="favicon.png" style="height:46px;width:auto;object-fit:contain;" alt="HiddenCheats">
+          </a>
+
+          <div class="theme-spacer--hr ipsResponsive_showDesktop"></div>
+
+          <nav class="theme-navbar ipsResponsive_showDesktop">
+            <ul style="display:flex;align-items:center;gap:14px;margin:0;padding:0;list-style:none;">
+              <li><a href="index.html" class="nav-chams-link">Store</a></li>
+              <li><a href="valorant.html" class="nav-chams-link">DMA</a></li>
+              <li><a href="forums.html" class="nav-chams-link">Forums</a></li>
+              <li><a href="status.html" class="nav-chams-link">Status</a></li>
+            </ul>
+          </nav>
+        </div>
+
+        <ul id="elUserNav" class="ipsList_inline ipsResponsive_showDesktop" style="display:flex;align-items:center;gap:14px;margin:0;padding:0;list-style:none;">
+          <li>
+            <button id="elSearchTrigger" type="button" onclick="window.openSearchModal()" aria-label="Search" class="chams-search-btn">
+              <svg width="17" height="17" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M17.5 17.5L13.875 13.875M15.8333 9.16667C15.8333 12.8486 12.8486 15.8333 9.16667 15.8333C5.48477 15.8333 2.5 12.8486 2.5 9.16667C2.5 5.48477 5.48477 2.5 9.16667 2.5C12.8486 2.5 15.8333 5.48477 15.8333 9.16667Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+            </button>
+          </li>
+          <li>
+            <button class="cCartTrigger" type="button" onclick="window.openCart()" aria-label="Cart">
+              <i class="fa-solid fa-cart-shopping" style="color:#b937e2;font-size:13px;"></i>
+              <span>Cart</span>
+              <span class="cart-badge" style="background:linear-gradient(135deg,#b937e2,#7d44ed);color:#ffffff;font-size:10px;font-weight:900;padding:1px 6px;border-radius:999px;display:none;">0</span>
+            </button>
+          </li>
+          <li class="auth-nav-container" style="position:relative;"></li>
+        </ul>
+      </div>
+    </header>
+  </div>
+
+  <main class="inv-profile-container" style="margin-top:2.5rem;">
+    <div class="inv-profile-header">
+      <div class="inv-cover">
+        <div class="inv-cover-actions">
+          <a href="settings.html" class="inv-cover-btn">
+            <i class="fa-solid fa-gear"></i>
+            <span>Account Settings</span>
+          </a>
+          <a href="settings.html" class="inv-cover-btn">
+            <i class="fa-solid fa-pencil"></i>
+            <span>Edit Profile</span>
+          </a>
+          <div class="inv-cover-btn" style="cursor:pointer;">
+            <i class="fa-solid fa-camera"></i>
+            <span>Cover Photo</span>
+            <i class="fa-solid fa-caret-down" style="font-size:10px;margin-left:2px;"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="inv-user-strip">
+        <div class="inv-avatar-holder">
+          <img src="assets/images/avatar.svg" alt="yvko2">
+        </div>
+        <div class="inv-avatar-cam" title="Change Avatar">
+          <i class="fa-solid fa-camera"></i>
+        </div>
+
+        <div style="display:flex;align-items:center;gap:36px;flex-wrap:wrap;">
+          <div class="inv-name-badge">
+            <div class="inv-username">yvko2</div>
+            <div class="inv-usertag">Members</div>
+          </div>
+
+          <div class="inv-stats-row">
+            <div class="inv-stat-col">
+              <span class="lbl">POSTS</span>
+              <span class="val">0</span>
+            </div>
+            <div class="inv-stat-col">
+              <span class="lbl">JOINED</span>
+              <span class="val">15 hours ago</span>
+            </div>
+            <div class="inv-stat-col">
+              <span class="lbl">LAST VISITED</span>
+              <span class="val"><span class="inv-online-dot"></span> Just now</span>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <a href="javascript:void(0)" class="inv-activity-btn">
+            <i class="fa-regular fa-newspaper"></i>
+            <span>See my activity</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="inv-body-grid">
+      <div class="inv-sidebar">
+        <div class="inv-card">
+          <div class="inv-card-title" style="text-align:center;">REPUTATION</div>
+          <div class="inv-rep-num">0</div>
+          <div class="inv-rep-lbl">Neutral</div>
+          <a href="javascript:void(0)" class="inv-rep-link">See reputation activity <i class="fa-solid fa-caret-right"></i></a>
+        </div>
+
+        <div class="inv-card inv-warn-card">
+          <div class="inv-warn-icon">
+            <i class="fa-regular fa-circle-dot"></i>
+          </div>
+          <div>
+            <div style="font-size:14px;font-weight:700;color:#ffffff;">0 warning points</div>
+            <div style="font-size:11px;color:#8896a6;margin-top:2px;">No restrictions being applied</div>
+          </div>
+        </div>
+
+        <div class="inv-card">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+            <span style="font-size:13px;font-weight:700;color:#ffffff;">0 Followers</span>
+            <span style="font-size:12px;color:#8896a6;cursor:pointer;">Options <i class="fa-solid fa-caret-down"></i></span>
+          </div>
+          <div style="font-size:12px;color:#8896a6;padding:12px 0;">No followers</div>
+        </div>
+
+        <div class="inv-card">
+          <div class="inv-card-title">Recent Profile Visitors</div>
+          <div style="font-size:12px;color:#8896a6;padding:6px 0;">No recent profile visitors</div>
+        </div>
+      </div>
+
+      <div class="inv-main-area">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center;">
+          <div style="width:50px;height:50px;border-radius:50%;background:#1e222e;display:flex;align-items:center;justify-content:center;color:#94a3b8;font-size:20px;">
+            <i class="fa-regular fa-comment-dots"></i>
+          </div>
+          <span style="color:#94a3b8;font-size:15px;font-weight:500;">yvko2 has no recent activity to show</span>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer id="cFooter">
+    <div class="ipsLayout_container" style="max-width:1560px;margin:0 auto;padding:60px 40px 30px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;">
+        <div style="display:flex;align-items:center;gap:16px;">
+          <img src="favicon.png" style="height:40px;width:auto;" alt="HiddenCheats">
+          <span style="font-size:13px;color:#94a3b8;">&copy; 2026 HiddenCheats. All Rights Reserved.</span>
+        </div>
+        <div style="display:flex;gap:20px;">
+          <a href="index.html" style="color:#94a3b8;font-size:13px;text-decoration:none;">Store</a>
+          <a href="forums.html" style="color:#94a3b8;font-size:13px;text-decoration:none;">Forums</a>
+          <a href="status.html" style="color:#94a3b8;font-size:13px;text-decoration:none;">Status</a>
+          <a href="https://discord.gg/hiddencheats" target="_blank" style="color:#94a3b8;font-size:13px;text-decoration:none;">Discord</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/store.js"></script>
+</body>
+</html>
