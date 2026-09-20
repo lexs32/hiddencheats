@@ -807,6 +807,63 @@
         }
       });
     }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      gsap.registerPlugin(ScrollTrigger);
+      const mm = gsap.matchMedia();
+
+      mm.add("(min-width: 980px)", () => {
+        gsap.defaults({ ease: "power3.out" });
+
+        gsap.from('.theme-anno--top', { opacity: 0, y: -25, duration: 0.8, ease: 'power2.out', delay: 0.1 });
+        gsap.from('#theme-header', { opacity: 0, y: -30, duration: 0.9, ease: 'power2.out', delay: 0.2 });
+        gsap.from('section h1, section p', { opacity: 0, y: 30, duration: 1.1, ease: 'expo.out', stagger: 0.1, delay: 0.3 });
+        gsap.from('#statusFilter', { opacity: 0, scale: 0.95, duration: 0.9, delay: 0.45 });
+
+        document.querySelectorAll(".game-group").forEach((el, i) => {
+          gsap.from(el, {
+            y: 40,
+            opacity: 0,
+            duration: 0.8,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: el,
+              start: "top 92%",
+              toggleActions: "play none none none",
+              once: true
+            }
+          });
+        });
+
+        window.addEventListener('load', () => ScrollTrigger.refresh());
+      });
+
+      mm.add("(max-width: 979px)", () => {
+        gsap.defaults({ ease: "power3.out" });
+
+        gsap.from('section h1', { opacity: 0, y: 25, duration: 0.9, ease: 'expo.out', delay: 0.2 });
+
+        document.querySelectorAll(".game-group").forEach((el, i) => {
+          gsap.from(el, {
+            y: 30,
+            opacity: 0,
+            duration: 0.7,
+            scrollTrigger: {
+              trigger: el,
+              start: "top 92%",
+              toggleActions: "play none none none",
+              once: true
+            }
+          });
+        });
+      });
+
+      mm.add("(prefers-reduced-motion: reduce)", () => {
+        ScrollTrigger.getAll().forEach(t => t.kill());
+        gsap.killTweensOf("*");
+        gsap.set("*", { clearProps: "all" });
+      });
+    });
   </script>
   <script src="assets/js/store.js"></script>
 </body>
