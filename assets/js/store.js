@@ -30,36 +30,6 @@
         }
       ]
     },
-    r6: {
-      id: 'r6',
-      title: 'Rainbow Six Siege',
-      icon: 'fa-gamepad',
-      banner: 'assets/images/nexus/R6S.webp',
-      cheats: [
-        {
-          id: 'private-r6',
-          name: 'Private - Rainbow Six Siege',
-          image: 'boxes/r6.png',
-          status: 'Undetected',
-          tag: 'Private Internal Suite',
-          minPrice: 6.00,
-          features: [
-            'Private Ring0 Kernel Driver Architecture',
-            'Full Player Glow & Chams with VisCheck',
-            'Silent Aimbot & Recoil Normalizer',
-            'All Gadgets, Traps & Drones ESP',
-            'Cav ESP Always Active in Matches',
-            'BattlEye & QB Multi-Layer Bypass'
-          ],
-          requirements: 'Windows 10 / 11 • Intel & AMD • BattlEye Undetected',
-          variants: [
-            { id: 'r6-priv-1d', name: '1 Day Key', price: 6.00 },
-            { id: 'r6-priv-7d', name: '7 Day Key', price: 25.00 },
-            { id: 'r6-priv-30d', name: '30 Day Key', price: 50.00 }
-          ]
-        }
-      ]
-    },
     apex: {
       id: 'apex',
       title: 'Apex Legends',
@@ -146,66 +116,6 @@
             { id: 'fort-priv-1d', name: '1 Day Key', price: 6.00 },
             { id: 'fort-priv-7d', name: '7 Day Key', price: 22.00 },
             { id: 'fort-priv-30d', name: '30 Day Key', price: 45.00 }
-          ]
-        }
-      ]
-    },
-    rust: {
-      id: 'rust',
-      title: 'Rust',
-      icon: 'fa-shield',
-      banner: 'assets/images/nexus/Rust.webp',
-      cheats: [
-        {
-          id: 'private-rust',
-          name: 'Private - Rust',
-          image: 'boxes/rust.png',
-          status: 'Undetected',
-          tag: 'Private Hypervisor Suite',
-          minPrice: 7.00,
-          features: [
-            'Ring0 Hypervisor Stealth Bypass',
-            'Silent Aim & Instant Hit Target Lock',
-            'Full Player, Sleepers, Scientist & NPC ESP',
-            'Ores, Crates, Stashes, Traps & Tool Cupboard ESP',
-            'Automatic Weapon Recoil & Sway Removal',
-            'EAC & Cerberus Continuous Protection'
-          ],
-          requirements: 'Windows 10 / 11 • Intel & AMD • Cerberus Safe',
-          variants: [
-            { id: 'rust-priv-1d', name: '1 Day Key', price: 7.00 },
-            { id: 'rust-priv-7d', name: '7 Day Key', price: 28.00 },
-            { id: 'rust-priv-30d', name: '30 Day Key', price: 55.00 }
-          ]
-        }
-      ]
-    },
-    valorant: {
-      id: 'valorant',
-      title: 'Valorant',
-      icon: 'fa-bullseye',
-      banner: 'assets/images/nexus/Valo.webp',
-      cheats: [
-        {
-          id: 'svo-dma-val',
-          name: 'SVO DMA - Valorant',
-          image: 'boxes/valorant.png',
-          status: 'Undetected',
-          tag: 'Direct Memory Access (DMA)',
-          minPrice: 12.99,
-          features: [
-            '100% 2-PC Direct Memory Access Architecture',
-            'Physical Hardware Memory Reading (0 Game-PC Footprint)',
-            '2D Radar & Secondary Monitor Overlay',
-            'Custom Fuser Video Overlay Support',
-            'Arduino / KMBox B+ Pro Aimbot Integration',
-            'Vanguard 100% Undetected Firmware'
-          ],
-          requirements: '2nd PC/Laptop • Supported DMA Board • Screamer/Enigma/CaptainDMA Compatible',
-          variants: [
-            { id: 'val-svo-1d', name: '1 Day Key', price: 12.99 },
-            { id: 'val-svo-7d', name: '7 Day Key', price: 39.99 },
-            { id: 'val-svo-30d', name: '30 Day Key', price: 79.99 }
           ]
         }
       ]
@@ -900,14 +810,9 @@
   function initCatalogCardTriggers() {
     const mapping = {
       'arc': ['arc', 'arc raiders', 'arc_raiders'],
-      'r6': ['r6', 'rainbow', 'siege'],
       'apex': ['apex', 'apex legends'],
       'cod': ['cod', 'call of duty', 'warzone'],
-      'rust': ['rust'],
-      'fortnite': ['fortnite'],
-      'spoofer': ['spoofer', 'hwid'],
-      'valorant': ['valorant'],
-      'wardogs': ['wardogs']
+      'fortnite': ['fortnite']
     };
 
     const cards = document.querySelectorAll('#products a, .cNexusGames_list a, [data-game-trigger]');
@@ -1026,15 +931,10 @@
     if (!container) return;
 
     const allProducts = [
-      { gameKey: 'cod', cheatId: 'cod-engine', name: 'EFT Next Cheat Pro 1 Day', price: 7.99, stock: 26, image: 'assets/images/bearcheats/1103360.webp' },
-      { gameKey: 'r6', cheatId: 'ancient-r6', name: 'R6 Ancient 1 Day', price: 5.99, stock: 11, image: 'assets/images/bearcheats/1103375.webp' },
-      { gameKey: 'rust', cheatId: 'monarch-rust', name: 'Rust Monarch External 1 Day', price: 6.99, stock: 2, image: 'assets/images/bearcheats/1103383.webp' },
-      { gameKey: 'arc', cheatId: 'ancient-arc-raiders', name: 'Ancient - ARC Raiders', price: 5.99, stock: 42, image: 'assets/images/bearcheats/1103375.webp' },
-      { gameKey: 'apex', cheatId: 'apex-ignite', name: 'Apex Ignite 1 Day', price: 6.99, stock: 18, image: 'assets/images/bearcheats/1103385.webp' },
-      { gameKey: 'fortnite', cheatId: 'fn-nova', name: 'Fortnite Nova 1 Day', price: 5.99, stock: 30, image: 'assets/images/bearcheats/1103405.webp' },
-      { gameKey: 'wardogs', cheatId: 'wardogs-suite', name: 'Wardogs Tactical Engine', price: 9.99, stock: 15, image: 'assets/images/bearcheats/1100040.webp' },
-      { gameKey: 'valorant', cheatId: 'valorant-dma', name: 'Valorant DMA VIP', price: 12.99, stock: 8, image: 'assets/images/bearcheats/1100367.webp' },
-      { gameKey: 'spoofer', cheatId: 'verse-spoofer', name: 'Verse Perm Spoofer', price: 24.00, stock: 50, image: 'assets/images/bearcheats/1108017.webp' }
+      { gameKey: 'arc', cheatId: 'private-arc', name: 'Ancient - ARC Raiders', price: 6.00, stock: 42, image: 'assets/images/bearcheats/1103375.webp' },
+      { gameKey: 'apex', cheatId: 'private-apex', name: 'Krush - Apex Legends', price: 6.00, stock: 38, image: 'assets/images/bearcheats/1103383.webp' },
+      { gameKey: 'cod', cheatId: 'private-cod', name: 'Private - Call of Duty', price: 6.00, stock: 29, image: 'assets/images/bearcheats/1100366.webp' },
+      { gameKey: 'fortnite', cheatId: 'private-fortnite', name: 'Nebula - Fortnite', price: 6.00, stock: 55, image: 'assets/images/bearcheats/1100362.webp' }
     ];
 
     let filtered = allProducts;
@@ -1733,6 +1633,8 @@
   window.updateProductTotalPrice = updateProductTotalPrice;
   window.addProductToCart = addProductToCart;
   window.instantCheckoutProduct = instantCheckoutProduct;
+  window.addToCart = addToCart;
+  window.showToast = showToast;
   window.loginWithDiscord = loginWithDiscord;
   window.toggleAuthPassVisibility = toggleAuthPassVisibility;
   window.syncProfilePage = syncProfilePage;

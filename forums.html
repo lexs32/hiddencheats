@@ -310,18 +310,6 @@
 </head>
 <body class="ipsApp ipsApp_front min-h-screen flex flex-col bg-[#14161b]">
 
-  <div class="theme-anno--top">
-    <div class="ipsLayout_container" style="max-width:1560px;margin:0 auto;padding:0 40px;height:100%;display:flex;align-items:center;justify-content:center;">
-      <div style="display:flex;align-items:center;gap:10px;font-size:13px;font-weight:600;color:#f1f5f9;">
-        <span style="background:linear-gradient(135deg,#b937e2,#7d44ed);width:20px;height:20px;border-radius:6px;display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:10px;font-weight:900;box-shadow:0 2px 8px rgba(125,68,237,0.4);">
-          <i class="fa-solid fa-dollar-sign"></i>
-        </span>
-        <span>WARDOGS Products Added!</span>
-        <a href="index.html#products" class="anno-buy-btn">BUY NOW</a>
-      </div>
-    </div>
-  </div>
-
   <header id="theme-header">
     <div class="ipsLayout_container" style="display:flex;align-items:center;justify-content:space-between;width:100%;max-width:1560px;margin:0 auto;padding:0 40px;height:100%;">
       <div style="display:flex;align-items:center;">
@@ -541,18 +529,16 @@
         <div class="cFooter_nav">
           <ul class="ipsDataList ipsDataList_reducedSpacing">
             <li class="listTitle">Supported Games</li>
-            <li><a href="index.html#products">Apex Legends</a></li>
-            <li><a href="index.html#products">Rainbow Six Siege</a></li>
-            <li><a href="index.html#products">Valorant</a></li>
-            <li><a href="index.html#products">Fortnite</a></li>
-            <li><a href="index.html#products">Rust</a></li>
-            <li><a href="index.html#products">Arc Raiders</a></li>
+            <li><a href="arc.html">Arc Raiders</a></li>
+            <li><a href="apex.html">Apex Legends</a></li>
+            <li><a href="cod.html">Call of Duty</a></li>
+            <li><a href="fortnite.html">Fortnite</a></li>
           </ul>
           <ul class="ipsDataList ipsDataList_reducedSpacing">
             <li class="listTitle">&nbsp;</li>
-            <li><a href="index.html#products">Call of Duty</a></li>
-            <li><a href="index.html#products">HWID Spoofer</a></li>
-            <li><a href="index.html#products">Wardogs</a></li>
+            <li><a href="status.html">Cheat Status</a></li>
+            <li><a href="forums.html">Product Guides</a></li>
+            <li><a href="https://discord.gg/hiddencheats" target="_blank">24/7 Support</a></li>
           </ul>
           <ul class="ipsDataList ipsDataList_reducedSpacing">
             <li class="listTitle">Important Links</li>
@@ -575,15 +561,12 @@
     <div class="cFooter_bottom">
       <div class="ipsLayout_container" style="max-width:1560px;margin:0 auto;padding:0 40px;display:flex;justify-content:space-between;align-items:center;">
         <ul id="elFooterLinks" style="display:flex;gap:18px;list-style:none;padding:0;margin:0;font-size:12px;color:#8896a6;">
-          <li><a href="javascript:void(0)" style="color:#8896a6;text-decoration:none;">Theme</a></li>
-          <li><a href="https://discord.gg/hiddencheats" target="_blank" style="color:#8896a6;text-decoration:none;">Contact Us</a></li>
-          <li><a href="javascript:void(0)" style="color:#8896a6;text-decoration:none;">Cookies</a></li>
+          <li><a href="status.html">System Status</a></li>
+          <li><a href="forums.html">Guides &amp; Tutorials</a></li>
+          <li><a href="https://discord.gg/hiddencheats" target="_blank">Discord</a></li>
         </ul>
-        <p id="elCopyright" style="margin:0;font-size:11px;color:#606f7b;letter-spacing:1px;font-weight:600;">
-          POWERED BY INVISION COMMUNITY
-        </p>
-        <div class="copyright" style="font-size:12px;color:#8896a6;font-weight:700;">
-          &copy; <span style="color:#9041ea;">HIDDENCHEATS.COM</span>
+        <div style="font-size:12px;color:#8896a6;">
+          &copy; 2026 HiddenCheats. All rights reserved.
         </div>
       </div>
     </div>
@@ -606,8 +589,7 @@
       mm.add("(min-width: 980px)", () => {
         gsap.defaults({ ease: "power3.out" });
 
-        gsap.from('.theme-anno--top', { opacity: 0, y: -25, duration: 0.8, ease: 'power2.out', delay: 0.1 });
-        gsap.from('#theme-header', { opacity: 0, y: -30, duration: 0.9, ease: 'power2.out', delay: 0.2 });
+        gsap.from('#theme-header', { opacity: 0, y: -30, duration: 0.9, ease: 'power2.out', delay: 0.1 });
         gsap.from('main h1, main p', { opacity: 0, y: 30, duration: 1.1, ease: 'expo.out', stagger: 0.1, delay: 0.3 });
 
         document.querySelectorAll(".thread-row").forEach((el, i) => {

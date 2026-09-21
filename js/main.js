@@ -5,15 +5,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const searchResults = document.getElementById('search-results');
 
   const gamesData = [
-    { name: 'ARC RAIDERS', category: 'Shooter', status: 'Undetected', link: '#products', img: 'assets/images/games/arc_raiders.webp' },
-    { name: 'APEX LEGENDS', category: 'Battle Royale', status: 'Undetected', link: '#products', img: 'assets/images/games/apex.png' },
-    { name: 'CALL OF DUTY: WARZONE / BO6', category: 'FPS', status: 'Undetected', link: '#products', img: 'assets/images/games/cod.png' },
-    { name: 'FORTNITE', category: 'Battle Royale', status: 'Undetected', link: '#products', img: 'assets/images/games/fortnite.webp' },
-    { name: 'RAINBOW SIX SIEGE', category: 'Tactical FPS', status: 'Undetected', link: '#products', img: 'assets/images/games/r6.webp' },
-    { name: 'RUST', category: 'Survival', status: 'Undetected', link: '#products', img: 'assets/images/games/rust.webp' },
-    { name: 'HWID SPOOFER V2', category: 'Utility / Bypass', status: 'Undetected', link: '#products', img: 'assets/images/games/spoofer.png' },
-    { name: 'VALORANT PRIVATE', category: 'Tactical FPS', status: 'Undetected', link: '#products', img: 'assets/images/games/valorant.png' },
-    { name: 'WARDOGS', category: 'Shooter', status: 'Undetected', link: '#products', img: 'assets/images/games/wardogs.png' }
+    { name: 'ARC RAIDERS', category: 'Shooter', status: 'Undetected', link: 'arc.html', img: 'assets/images/games/arc_raiders.webp' },
+    { name: 'APEX LEGENDS', category: 'Battle Royale', status: 'Undetected', link: 'apex.html', img: 'assets/images/games/apex.png' },
+    { name: 'CALL OF DUTY: WARZONE / BO6', category: 'FPS', status: 'Undetected', link: 'cod.html', img: 'assets/images/games/cod.png' },
+    { name: 'FORTNITE', category: 'Battle Royale', status: 'Undetected', link: 'fortnite.html', img: 'assets/images/games/fortnite.webp' }
   ];
 
   function openSearch() {

@@ -979,78 +979,11 @@
       }
     }
 
-    .bc-product-section{background:#14161f;border:1px solid rgba(255,255,255,0.08);border-radius:20px;padding:36px;margin:2rem 0 4rem;display:grid !important;grid-template-columns:1.05fr 1fr;gap:40px;box-shadow:0 24px 60px rgba(0,0,0,0.6);position:relative;overflow:hidden;}
-    .bc-product-section:before{content:"";position:absolute;top:-120px;left:-120px;width:320px;height:320px;background:radial-gradient(circle,rgba(185,55,226,0.15) 0%,transparent 70%);pointer-events:none;}
-    .bc-product-left{display:flex !important;flex-direction:column !important;gap:22px !important;width:100% !important;}
-    .bc-box-frame{position:relative !important;background:radial-gradient(circle at center,#1b1c26 0%,#0d0f14 100%) !important;border:1px solid rgba(255,255,255,0.1) !important;border-radius:18px !important;overflow:hidden !important;aspect-ratio:16 / 9 !important;width:100% !important;display:flex !important;align-items:center !important;justify-content:center !important;box-shadow:0 14px 40px rgba(0,0,0,0.55) !important;}
-    .bc-box-frame img{width:100% !important;height:100% !important;object-fit:cover !important;display:block !important;transition:transform 0.4s cubic-bezier(0.16,1,0.3,1) !important;}
-    .bc-box-frame:hover img{transform:scale(1.025) !important;}
-    .bc-status-pill{position:absolute !important;top:16px !important;left:16px !important;z-index:10 !important;background:rgba(16,185,129,0.18) !important;border:1px solid rgba(16,185,129,0.4) !important;color:#34d399 !important;font-size:11px !important;font-weight:800 !important;letter-spacing:0.5px !important;text-transform:uppercase !important;padding:5px 12px !important;border-radius:999px !important;display:inline-flex !important;align-items:center !important;gap:7px !important;backdrop-filter:blur(8px) !important;-webkit-backdrop-filter:blur(8px) !important;}
-    .bc-pulse-dot{width:7px !important;height:7px !important;border-radius:50% !important;background:#10b981 !important;box-shadow:0 0 10px #10b981 !important;animation:bcPulse 2s infinite !important;}
-    @keyframes bcPulse{0%{box-shadow:0 0 0 0 rgba(16,185,129,0.7);}70%{box-shadow:0 0 0 8px rgba(16,185,129,0);}100%{box-shadow:0 0 0 0 rgba(16,185,129,0);}}
-    .bc-specs-card{background:#181b24 !important;border:1px solid rgba(255,255,255,0.06) !important;border-radius:14px !important;padding:18px 20px !important;}
-    .bc-specs-title{font-size:12px !important;text-transform:uppercase !important;letter-spacing:1px !important;color:#8896a6 !important;font-weight:800 !important;margin:0 0 12px !important;display:flex !important;align-items:center !important;gap:8px !important;}
-    .bc-specs-list{display:grid !important;grid-template-columns:1fr 1fr !important;gap:10px !important;list-style:none !important;padding:0 !important;margin:0 !important;}
-    .bc-specs-item{background:#12141c !important;border:1px solid rgba(255,255,255,0.04) !important;border-radius:8px !important;padding:10px 12px !important;display:flex !important;flex-direction:column !important;gap:3px !important;}
-    .bc-specs-item .lbl{font-size:11px !important;color:#8896a6 !important;font-weight:600 !important;}
-    .bc-specs-item .val{font-size:12px !important;color:#ffffff !important;font-weight:700 !important;}
-    .bc-features-card{background:#181b24 !important;border:1px solid rgba(255,255,255,0.06) !important;border-radius:14px !important;padding:20px !important;}
-    .bc-features-list{list-style:none !important;padding:0 !important;margin:0 !important;display:flex !important;flex-direction:column !important;gap:10px !important;}
-    .bc-features-list li{display:flex !important;align-items:center !important;gap:10px !important;font-size:13px !important;color:#cbd5e1 !important;}
-    .bc-features-list li i{color:#b937e2 !important;font-size:13px !important;flex-shrink:0 !important;}
-    .bc-product-right{display:flex !important;flex-direction:column !important;justify-content:space-between !important;gap:20px !important;}
-    .bc-header-group{display:flex !important;flex-direction:column !important;gap:8px !important;}
-    .bc-cat-tag{font-size:12px !important;font-weight:800 !important;letter-spacing:1px !important;color:#b937e2 !important;text-transform:uppercase !important;display:inline-flex !important;align-items:center !important;gap:6px !important;}
-    .bc-title{font-size:32px !important;font-weight:900 !important;color:#ffffff !important;margin:0 !important;line-height:1.2 !important;}
-    .bc-subtitle{font-size:14px !important;color:#94a3b8 !important;margin:0 !important;line-height:1.5 !important;}
-    .bc-variants-wrap{display:flex !important;flex-direction:column !important;gap:10px !important;}
-    .bc-variants-label{font-size:13px !important;font-weight:800 !important;color:#ffffff !important;text-transform:uppercase !important;letter-spacing:0.5px !important;}
-    .bc-variants-grid{display:grid !important;grid-template-columns:repeat(auto-fit,minmax(130px,1fr)) !important;gap:10px !important;}
-    .bc-variant-btn{background:#181b24 !important;border:1.5px solid rgba(255,255,255,0.08) !important;border-radius:12px !important;padding:14px !important;text-align:left !important;cursor:pointer !important;transition:all 0.2s ease !important;display:flex !important;flex-direction:column !important;gap:6px !important;}
-    .bc-variant-btn:hover{border-color:rgba(185,55,226,0.5) !important;background:#1e2230 !important;}
-    .bc-variant-btn.is-active{background:rgba(144,65,234,0.12) !important;border-color:#9041ea !important;box-shadow:0 0 20px rgba(144,65,234,0.25) !important;}
-    .bc-variant-btn .v-top{display:flex !important;align-items:center !important;justify-content:space-between !important;}
-    .bc-variant-btn .v-name{font-size:13px !important;font-weight:700 !important;color:#cbd5e1 !important;}
-    .bc-variant-btn.is-active .v-name{color:#ffffff !important;}
-    .bc-variant-btn .v-price{font-size:18px !important;font-weight:900 !important;color:#ffffff !important;}
-    .bc-variant-btn.is-active .v-price{color:#b937e2 !important;}
-    .bc-qty-price-row{display:flex !important;align-items:center !important;justify-content:space-between !important;background:#181b24 !important;border:1px solid rgba(255,255,255,0.08) !important;border-radius:12px !important;padding:14px 18px !important;}
-    .bc-qty-control{display:flex !important;align-items:center !important;gap:12px !important;}
-    .bc-qty-btn{width:32px !important;height:32px !important;border-radius:8px !important;background:#252936 !important;border:1px solid rgba(255,255,255,0.08) !important;color:#ffffff !important;font-size:15px !important;font-weight:700 !important;cursor:pointer !important;display:inline-flex !important;align-items:center !important;justify-content:center !important;transition:background 0.2s ease !important;}
-    .bc-qty-btn:hover{background:#323748 !important;}
-    .bc-qty-val{font-size:16px !important;font-weight:800 !important;color:#ffffff !important;min-width:24px !important;text-align:center !important;}
-    .bc-price-display{text-align:right !important;}
-    .bc-price-lbl{font-size:11px !important;color:#8896a6 !important;font-weight:700 !important;text-transform:uppercase !important;}
-    .bc-price-amount{font-size:26px !important;font-weight:900 !important;color:#b937e2 !important;margin-top:2px !important;line-height:1 !important;}
-    .bc-actions-row{display:flex !important;gap:14px !important;}
-    .bc-add-btn{flex:1 !important;background:#1a1d27 !important;border:1px solid rgba(255,255,255,0.14) !important;color:#ffffff !important;padding:14px 20px !important;border-radius:12px !important;font-weight:700 !important;font-size:14px !important;cursor:pointer !important;display:inline-flex !important;align-items:center !important;justify-content:center !important;gap:10px !important;transition:all 0.2s ease !important;}
-    .bc-add-btn:hover{background:#232734 !important;border-color:rgba(255,255,255,0.25) !important;}
-    .bc-checkout-btn{flex:1.3 !important;background:linear-gradient(135deg,#b937e2,#7d44ed) !important;border:none !important;color:#ffffff !important;padding:14px 20px !important;border-radius:12px !important;font-weight:800 !important;font-size:14px !important;cursor:pointer !important;display:inline-flex !important;align-items:center !important;justify-content:center !important;gap:10px !important;box-shadow:0 4px 20px rgba(185,55,226,0.35) !important;transition:all 0.2s ease !important;}
-    .bc-checkout-btn:hover{filter:brightness(1.15) !important;transform:translateY(-1px) !important;box-shadow:0 6px 25px rgba(185,55,226,0.5) !important;}
-    .bc-trust-strip{display:flex !important;align-items:center !important;justify-content:space-between !important;border-top:1px solid rgba(255,255,255,0.06) !important;padding-top:16px !important;font-size:11px !important;color:#8896a6 !important;}
-    .bc-trust-strip span{display:inline-flex !important;align-items:center !important;gap:6px !important;}
-    @media screen and (max-width:980px){
-      .bc-product-section{grid-template-columns:1fr !important;padding:20px !important;}
-      .bc-actions-row{flex-direction:column !important;}
-      .bc-specs-list{grid-template-columns:1fr !important;}
-    }
   </style>
 </head>
 <body class="ipsApp ipsApp_front ipsJS_has ipsClearfix">
 
   <div class="theme-main--header">
-    <div class="theme-anno--top">
-    <div class="ipsLayout_container" style="max-width:1560px;margin:0 auto;padding:0 40px;height:100%;display:flex;align-items:center;justify-content:center;">
-      <div style="display:flex;align-items:center;gap:10px;font-size:13px;font-weight:600;color:#f1f5f9;">
-        <span style="background:linear-gradient(135deg,#b937e2,#7d44ed);width:20px;height:20px;border-radius:6px;display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:10px;font-weight:900;box-shadow:0 2px 8px rgba(125,68,237,0.4);">
-          <i class="fa-solid fa-dollar-sign"></i>
-        </span>
-        <span>WARDOGS Products Added!</span>
-        <a href="index.html#products" class="anno-buy-btn">BUY NOW</a>
-      </div>
-    </div>
-  </div>
-
     <header id="theme-header">
     <div class="ipsLayout_container" style="display:flex;align-items:center;justify-content:space-between;width:100%;max-width:1560px;margin:0 auto;padding:0 40px;height:100%;">
       <div style="display:flex;align-items:center;">
@@ -1209,88 +1142,132 @@
     </nav>
 
     <div id="product-section" class="bc-product-section">
-      <div class="bc-product-left">
-        <div class="bc-box-frame">
-          <span class="bc-status-pill"><span class="bc-pulse-dot"></span> Undetected</span>
-          <img src="boxes/apex.png" alt="Private - Apex Legends">
+      <div class="bc-product-card">
+        <div class="bc-media-col">
+          <div class="bc-preview-frame">
+            <img id="bcPreviewImg" src="assets/images/bearcheats/1103383.webp" alt="Krush - Apex Legends Preview" loading="lazy">
+            <div class="bc-page-counter" id="bcPageCounter">1/2</div>
+          </div>
+          <div class="bc-thumbs-row">
+            <div class="bc-thumb active" onclick="switchMediaPreview('assets/images/bearcheats/1103383.webp', '1/2', this)">
+              <img src="assets/images/bearcheats/1103383.webp" alt="Menu Preview">
+            </div>
+            <div class="bc-thumb" onclick="switchMediaPreview('boxes/apex.png', '2/2', this)">
+              <img src="boxes/apex.png" alt="Box Art">
+            </div>
+          </div>
         </div>
 
-        <div class="bc-specs-card">
-          <div class="bc-specs-title"><i class="fa-solid fa-microchip" style="color:#b937e2;"></i> System Compatibility</div>
-          <ul class="bc-specs-list">
-            <li class="bc-specs-item"><span class="lbl">Operating System</span><span class="val">Windows 10 & 11 (All)</span></li>
-            <li class="bc-specs-item"><span class="lbl">Processors</span><span class="val">Intel & AMD</span></li>
-            <li class="bc-specs-item"><span class="lbl">Anti-Cheat</span><span class="val">EAC Undetected</span></li>
-            <li class="bc-specs-item"><span class="lbl">HWID Spoofer</span><span class="val">Built-in Included</span></li>
-          </ul>
-        </div>
+        <div class="bc-info-col">
+          <h1 class="bc-title" id="bcProductTitle">KRUSH - APEX LEGENDS</h1>
+          <div>
+            <div class="bc-undetected-badge">
+              <i class="fa-regular fa-circle-check"></i> UNDETECTED
+            </div>
+          </div>
 
-        <div class="bc-features-card">
-          <div class="bc-specs-title"><i class="fa-solid fa-list-check" style="color:#b937e2;"></i> Key Features Included</div>
-          <ul class="bc-features-list">
-            <li><i class="fa-solid fa-circle-check"></i> <span>Private Kernel Ring0 Memory Protection</span></li>
-            <li><i class="fa-solid fa-circle-check"></i> <span>Dynamic Glow ESP with Armor Tier Colors</span></li>
-            <li><i class="fa-solid fa-circle-check"></i> <span>Vector Aim Assist with Bullet Prediction</span></li>
-            <li><i class="fa-solid fa-circle-check"></i> <span>Smooth Recoil Control System (RCS)</span></li>
-            <li><i class="fa-solid fa-circle-check"></i> <span>Loot, Deathbox & Distance Filter</span></li>
-            <li><i class="fa-solid fa-circle-check"></i> <span>Streamproof Overlay & EAC Bypass</span></li>
-          </ul>
+          <div class="bc-row-total-qty">
+            <div class="bc-total-group">
+              <span class="bc-subhead">Total</span>
+              <span class="bc-total-val" id="bcTotalAmount">$6.00</span>
+            </div>
+            <div class="bc-qty-group">
+              <span class="bc-subhead">Quantity</span>
+              <div class="bc-stepper">
+                <button type="button" class="bc-step-btn minus" onclick="stepQty(-1)">-</button>
+                <span class="bc-step-num" id="bcQtyVal">1</span>
+                <button type="button" class="bc-step-btn plus" onclick="stepQty(1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="bc-variant-group">
+            <span class="bc-subhead">Variant</span>
+            <div class="bc-variants-grid" id="bcVariantsGrid">
+              <button type="button" class="bc-variant-btn active" onclick="pickVariant(this, 6.00, '1 DAY KEY')">
+                <div class="bc-v-line">
+                  <span class="bc-v-title">1 DAY KEY</span>
+                  <span class="bc-v-stock">IN STOCK</span>
+                </div>
+                <div class="bc-v-price">$6.00</div>
+              </button>
+              <button type="button" class="bc-variant-btn inactive" onclick="pickVariant(this, 20.00, '7 DAYS')">
+                <div class="bc-v-line">
+                  <span class="bc-v-title">7 DAYS</span>
+                  <span class="bc-v-stock">IN STOCK</span>
+                </div>
+                <div class="bc-v-price">$20.00</div>
+              </button>
+              <button type="button" class="bc-variant-btn inactive" onclick="pickVariant(this, 40.00, '30 DAYS')">
+                <div class="bc-v-line">
+                  <span class="bc-v-title">30 DAYS</span>
+                  <span class="bc-v-stock">IN STOCK</span>
+                </div>
+                <div class="bc-v-price">$40.00</div>
+              </button>
+            </div>
+          </div>
+
+          <div class="bc-actions-row">
+            <button type="button" class="bc-btn-cart" onclick="addCurrentProductToCart(false)">
+              <i class="fa-solid fa-cart-shopping"></i> Add to Cart
+            </button>
+            <button type="button" class="bc-btn-buy" onclick="addCurrentProductToCart(true)">
+              Buy Now &gt;&gt;
+            </button>
+          </div>
         </div>
       </div>
 
-      <div class="bc-product-right">
-        <div class="bc-header-group">
-          <div class="bc-cat-tag"><i class="fa-solid fa-crosshairs"></i> Apex Legends Cheats</div>
-          <h1 class="bc-title">Private - Apex Legends</h1>
-          <p class="bc-subtitle">Undetected, feature-packed Apex Legends cheats updated for the latest patch with instantaneous key delivery.</p>
+      <div class="bc-notice-box">
+        <div class="bc-notice-hdr">
+          <i class="fa-solid fa-triangle-exclamation"></i> NOTICE
         </div>
-
-        <div class="bc-variants-wrap">
-          <div class="bc-variants-label">Select License Duration:</div>
-          <div class="bc-variants-grid">
-            <button type="button" class="bc-variant-btn is-active" onclick="window.selectVariant(this, 0, 6.00, '1 Day Key')">
-              <div class="v-top"><span class="v-name">1 Day Key</span><i class="fa-solid fa-circle-check" style="color:#b937e2;"></i></div>
-              <div class="v-price">$6.00</div>
-            </button>
-            <button type="button" class="bc-variant-btn" onclick="window.selectVariant(this, 1, 20.00, '7 Day Key')">
-              <div class="v-top"><span class="v-name">7 Day Key</span></div>
-              <div class="v-price">$20.00</div>
-            </button>
-            <button type="button" class="bc-variant-btn" onclick="window.selectVariant(this, 2, 40.00, '30 Day Key')">
-              <div class="v-top"><span class="v-name">30 Day Key</span></div>
-              <div class="v-price">$40.00</div>
-            </button>
-          </div>
+        <div class="bc-notice-text">
+          This product natively supports Windows 10 and Windows 11 (all versions including 23H2 &amp; 24H2). Intel and AMD CPUs are fully supported. Ring-0 hypervisor architecture ensures 100% Easy Anti-Cheat detection immunity.
         </div>
+      </div>
 
-        <div class="bc-qty-price-row">
-          <div class="bc-qty-control">
-            <span style="font-size:12px;font-weight:700;color:#8896a6;text-transform:uppercase;margin-right:4px;">Qty:</span>
-            <button type="button" class="bc-qty-btn" onclick="window.modifyProductQty(-1)">-</button>
-            <span id="bc-qty-display" class="bc-qty-val">1</span>
-            <button type="button" class="bc-qty-btn" onclick="window.modifyProductQty(1)">+</button>
-          </div>
-          <div class="bc-price-display">
-            <div class="bc-price-lbl">Total Price (USD)</div>
-            <div id="bc-total-price" class="bc-price-amount">$6.00</div>
-          </div>
+      <div class="bc-reqs-box">
+        <div class="bc-reqs-title">REQUIREMENTS</div>
+        <ul class="bc-dot-list">
+          <li class="bc-dot-item"><span class="bc-dot-bullet"></span> Supported CPU: Intel &amp; AMD Processors</li>
+          <li class="bc-dot-item"><span class="bc-dot-bullet"></span> Supported OS: Windows 10 &amp; Windows 11 (All Builds)</li>
+          <li class="bc-dot-item"><span class="bc-dot-bullet"></span> Anti-Cheat Status: UNDETECTED (Ring-0 EAC Safe)</li>
+          <li class="bc-dot-item"><span class="bc-dot-bullet"></span> Streamproof: OBS &amp; Discord Invisible</li>
+        </ul>
+      </div>
+
+      <div class="bc-features-grid">
+        <div class="bc-feat-card">
+          <div class="col-title">COMBAT &amp; AIMBOT</div>
+          <div class="col-desc">Precision targeting with organic humanized mouse smoothing and ballistic bullet drop calculation.</div>
+          <ul class="bc-dot-list">
+            <li class="bc-dot-item"><span class="bc-dot-bullet"></span> Silent Vector Aim Assist</li>
+            <li class="bc-dot-item"><span class="bc-dot-bullet"></span> Recoil Control System (RCS) &amp; Sway Normalizer</li>
+            <li class="bc-dot-item"><span class="bc-dot-bullet"></span> FOV Circle Slider (0° - 360°)</li>
+            <li class="bc-dot-item"><span class="bc-dot-bullet"></span> Target Bones (Head, Neck, Chest, Pelvis)</li>
+          </ul>
         </div>
-
-        <div class="bc-actions-row">
-          <button type="button" class="bc-add-btn" onclick="window.addProductToCart()">
-            <i class="fa-solid fa-cart-shopping" style="color:#b937e2;"></i>
-            <span>Add to Cart</span>
-          </button>
-          <button type="button" class="bc-checkout-btn" onclick="window.instantCheckoutProduct()">
-            <i class="fa-solid fa-bolt"></i>
-            <span>Instant Checkout</span>
-          </button>
+        <div class="bc-feat-card">
+          <div class="col-title">PLAYER &amp; GLOW VISUALS</div>
+          <div class="col-desc">Ultra-responsive DirectX overlay with color-coded armor tier glow, health, and skeleton ESP.</div>
+          <ul class="bc-dot-list">
+            <li class="bc-dot-item"><span class="bc-dot-bullet"></span> 2D / 3D Player Bounding Boxes</li>
+            <li class="bc-dot-item"><span class="bc-dot-bullet"></span> Armor Tier &amp; Shield Glow ESP</li>
+            <li class="bc-dot-item"><span class="bc-dot-bullet"></span> Visible Check &amp; Health/Shield Bars</li>
+            <li class="bc-dot-item"><span class="bc-dot-bullet"></span> Skeleton Bones &amp; Distance Clamping</li>
+          </ul>
         </div>
-
-        <div class="bc-trust-strip">
-          <span><i class="fa-solid fa-bolt" style="color:#b937e2;"></i> Instant Delivery</span>
-          <span><i class="fa-solid fa-shield-halved" style="color:#b937e2;"></i> Ring0 EAC Safe</span>
-          <span><i class="fa-solid fa-headset" style="color:#b937e2;"></i> 24/7 Discord Support</span>
+        <div class="bc-feat-card">
+          <div class="col-title">TACTICAL RADAR &amp; LOOT</div>
+          <div class="col-desc">Comprehensive battlefield scanner, high-tier weapon/item radar, and unlinked kernel stealth.</div>
+          <ul class="bc-dot-list">
+            <li class="bc-dot-item"><span class="bc-dot-bullet"></span> Deathbox, Care Package &amp; Item ESP</li>
+            <li class="bc-dot-item"><span class="bc-dot-bullet"></span> Weapon Attachments &amp; Battery Filters</li>
+            <li class="bc-dot-item"><span class="bc-dot-bullet"></span> Streamproof OBS &amp; Discord Capture Safe</li>
+            <li class="bc-dot-item"><span class="bc-dot-bullet"></span> Instant Key Dispatch &amp; 24/7 Support</li>
+          </ul>
         </div>
       </div>
     </div>
@@ -1359,18 +1336,16 @@
         <div class="cFooter_nav">
           <ul class="ipsDataList ipsDataList_reducedSpacing">
             <li class="listTitle">Supported Games</li>
+            <li><a href="arc.html">Arc Raiders</a></li>
             <li><a href="apex.html">Apex Legends</a></li>
-            <li><a href="index.html#products">Rainbow Six Siege</a></li>
-            <li><a href="index.html#products">Valorant</a></li>
-            <li><a href="index.html#products">Fortnite</a></li>
-            <li><a href="index.html#products">Rust</a></li>
-            <li><a href="index.html#products">Arc Raiders</a></li>
+            <li><a href="cod.html">Call of Duty</a></li>
+            <li><a href="fortnite.html">Fortnite</a></li>
           </ul>
           <ul class="ipsDataList ipsDataList_reducedSpacing">
             <li class="listTitle">&nbsp;</li>
-            <li><a href="index.html#products">Call of Duty</a></li>
-            <li><a href="index.html#products">HWID Spoofer</a></li>
-            <li><a href="index.html#products">Wardogs</a></li>
+            <li><a href="index.html#products">All Cheats</a></li>
+            <li><a href="status.html">Cheat Status</a></li>
+            <li><a href="https://discord.gg/hiddencheats" target="_blank">Discord VIP</a></li>
           </ul>
           <ul class="ipsDataList ipsDataList_reducedSpacing">
             <li class="listTitle">Important Links</li>
@@ -1408,6 +1383,66 @@
   </footer>
 
   <script>
+    let currentQty = 1;
+    let selectedPrice = 6.00;
+    let selectedVariantName = '1 DAY KEY';
+
+    function switchMediaPreview(src, counter, thumbEl) {
+      const preview = document.getElementById('bcPreviewImg');
+      const pageCounter = document.getElementById('bcPageCounter');
+      if (preview) preview.src = src;
+      if (pageCounter) pageCounter.textContent = counter;
+      document.querySelectorAll('.bc-thumb').forEach(t => t.classList.remove('active'));
+      if (thumbEl) thumbEl.classList.add('active');
+    }
+
+    function stepQty(delta) {
+      currentQty = Math.max(1, Math.min(20, currentQty + delta));
+      const valEl = document.getElementById('bcQtyVal');
+      if (valEl) valEl.textContent = currentQty;
+      updateTotal();
+    }
+
+    function pickVariant(btn, price, name) {
+      selectedPrice = price;
+      selectedVariantName = name;
+      document.querySelectorAll('.bc-variant-btn').forEach(b => {
+        b.className = 'bc-variant-btn inactive';
+      });
+      btn.className = 'bc-variant-btn active';
+      updateTotal();
+    }
+
+    function updateTotal() {
+      const totalEl = document.getElementById('bcTotalAmount');
+      if (totalEl) totalEl.textContent = '$' + (selectedPrice * currentQty).toFixed(2);
+    }
+
+    function addCurrentProductToCart(instantCheckout = false) {
+      const title = document.getElementById('bcProductTitle')?.textContent.trim() || 'KRUSH - APEX LEGENDS';
+      const previewImg = document.getElementById('bcPreviewImg')?.getAttribute('src') || 'assets/images/bearcheats/1103383.webp';
+      if (window.addToCart) {
+        window.addToCart({
+          id: 'apex-krush',
+          name: title,
+          game: 'Apex Legends',
+          image: previewImg,
+          variantId: selectedVariantName.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
+          variantName: selectedVariantName,
+          price: selectedPrice,
+          quantity: currentQty
+        });
+        if (window.showToast) {
+          window.showToast('Added to Cart', `${currentQty}x ${title} (${selectedVariantName})`);
+        }
+        if (instantCheckout) {
+          if (window.proceedCheckout) window.proceedCheckout();
+        } else {
+          if (window.openCart) window.openCart();
+        }
+      }
+    }
+
     function toggleMobileDrawer() {
       const drawer = document.getElementById('elMobileDrawer');
       if (drawer.style.display === 'none' || drawer.style.display === '') {
@@ -1423,8 +1458,7 @@
       mm.add("(min-width: 980px)", () => {
         gsap.defaults({ ease: "power3.out" });
 
-        gsap.from('.theme-anno--top', { opacity: 0, y: -25, duration: 0.8, ease: 'power2.out', delay: 0.1 });
-        gsap.from('#theme-header', { opacity: 0, y: -30, duration: 0.9, ease: 'power2.out', delay: 0.2 });
+        gsap.from('#theme-header', { opacity: 0, y: -30, duration: 0.9, ease: 'power2.out', delay: 0.1 });
         gsap.from('.headerHero_title', { opacity: 0, y: 45, duration: 1.3, ease: 'expo.out', delay: 0.3 });
         gsap.from('.headerHero_desc', { opacity: 0, y: 35, duration: 1.2, delay: 0.45 });
         gsap.from('.heroButtons', { opacity: 0, scale: 0.88, y: 20, duration: 1.1, ease: 'back.out(1.7)', delay: 0.6 });

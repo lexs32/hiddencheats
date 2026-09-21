@@ -1004,18 +1004,6 @@
 <body class="ipsApp ipsApp_front ipsJS_has ipsClearfix">
 
   <div class="theme-main--header">
-    <div class="theme-anno--top">
-    <div class="ipsLayout_container" style="max-width:1560px;margin:0 auto;padding:0 40px;height:100%;display:flex;align-items:center;justify-content:center;">
-      <div style="display:flex;align-items:center;gap:10px;font-size:13px;font-weight:600;color:#f1f5f9;">
-        <span style="background:linear-gradient(135deg,#b937e2,#7d44ed);width:20px;height:20px;border-radius:6px;display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:10px;font-weight:900;box-shadow:0 2px 8px rgba(125,68,237,0.4);">
-          <i class="fa-solid fa-dollar-sign"></i>
-        </span>
-        <span>WARDOGS Products Added!</span>
-        <a href="index.html#products" class="anno-buy-btn">BUY NOW</a>
-      </div>
-    </div>
-  </div>
-
     <header id="theme-header">
     <div class="ipsLayout_container" style="display:flex;align-items:center;justify-content:space-between;width:100%;max-width:1560px;margin:0 auto;padding:0 40px;height:100%;">
       <div style="display:flex;align-items:center;">
@@ -1174,88 +1162,132 @@
     </nav>
 
     <div id="product-section" class="bc-product-section">
-      <div class="bc-product-left">
-        <div class="bc-box-frame">
-          <span class="bc-status-pill"><span class="bc-pulse-dot"></span> Undetected</span>
-          <img src="boxes/arc.png" alt="Private - Arc Raiders">
+      <div class="bc-product-card">
+        <div class="bc-media-col">
+          <div class="bc-preview-frame">
+            <img id="bcPreviewImg" src="assets/images/bearcheats/1103375.webp" alt="Ancient - Arc Raiders Preview" loading="lazy">
+            <div class="bc-page-counter" id="bcPageCounter">1/2</div>
+          </div>
+          <div class="bc-thumbs-row">
+            <div class="bc-thumb active" onclick="switchMediaPreview('assets/images/bearcheats/1103375.webp', '1/2', this)">
+              <img src="assets/images/bearcheats/1103375.webp" alt="Menu Preview">
+            </div>
+            <div class="bc-thumb" onclick="switchMediaPreview('boxes/arc.png', '2/2', this)">
+              <img src="boxes/arc.png" alt="Box Art">
+            </div>
+          </div>
         </div>
 
-        <div class="bc-specs-card">
-          <div class="bc-specs-title"><i class="fa-solid fa-microchip" style="color:#b937e2;"></i> System Compatibility</div>
-          <ul class="bc-specs-list">
-            <li class="bc-specs-item"><span class="lbl">Operating System</span><span class="val">Windows 10 & 11 (All)</span></li>
-            <li class="bc-specs-item"><span class="lbl">Processors</span><span class="val">Intel & AMD</span></li>
-            <li class="bc-specs-item"><span class="lbl">Anti-Cheat</span><span class="val">EAC Undetected</span></li>
-            <li class="bc-specs-item"><span class="lbl">HWID Spoofer</span><span class="val">Built-in Included</span></li>
-          </ul>
-        </div>
+        <div class="bc-info-col">
+          <h1 class="bc-title" id="bcProductTitle">ANCIENT - ARC RAIDERS</h1>
+          <div>
+            <div class="bc-undetected-badge">
+              <i class="fa-regular fa-circle-check"></i> UNDETECTED
+            </div>
+          </div>
 
-        <div class="bc-features-card">
-          <div class="bc-specs-title"><i class="fa-solid fa-list-check" style="color:#b937e2;"></i> Key Features Included</div>
-          <ul class="bc-features-list">
-            <li><i class="fa-solid fa-circle-check"></i> <span>Undetected Kernel Memory Driver (Ring 0)</span></li>
-            <li><i class="fa-solid fa-circle-check"></i> <span>2D/3D Box & Skeleton Bone ESP</span></li>
-            <li><i class="fa-solid fa-circle-check"></i> <span>Smooth Memory Aimbot with FOV Slider</span></li>
-            <li><i class="fa-solid fa-circle-check"></i> <span>Full Loot, Chest & Drone ESP Filter</span></li>
-            <li><i class="fa-solid fa-circle-check"></i> <span>No Recoil & Sway Compensation</span></li>
-            <li><i class="fa-solid fa-circle-check"></i> <span>Streamproof Overlay & EAC Bypass</span></li>
-          </ul>
+          <div class="bc-row-total-qty">
+            <div class="bc-total-group">
+              <span class="bc-subhead">Total</span>
+              <span class="bc-total-val" id="bcTotalAmount">$6.00</span>
+            </div>
+            <div class="bc-qty-group">
+              <span class="bc-subhead">Quantity</span>
+              <div class="bc-stepper">
+                <button type="button" class="bc-step-btn minus" onclick="stepQty(-1)">-</button>
+                <span class="bc-step-num" id="bcQtyVal">1</span>
+                <button type="button" class="bc-step-btn plus" onclick="stepQty(1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="bc-variant-group">
+            <span class="bc-subhead">Variant</span>
+            <div class="bc-variants-grid" id="bcVariantsGrid">
+              <button type="button" class="bc-variant-btn active" onclick="pickVariant(this, 6.00, '1 DAY KEY')">
+                <div class="bc-v-line">
+                  <span class="bc-v-title">1 DAY KEY</span>
+                  <span class="bc-v-stock">IN STOCK</span>
+                </div>
+                <div class="bc-v-price">$6.00</div>
+              </button>
+              <button type="button" class="bc-variant-btn inactive" onclick="pickVariant(this, 20.00, '7 DAYS')">
+                <div class="bc-v-line">
+                  <span class="bc-v-title">7 DAYS</span>
+                  <span class="bc-v-stock">IN STOCK</span>
+                </div>
+                <div class="bc-v-price">$20.00</div>
+              </button>
+              <button type="button" class="bc-variant-btn inactive" onclick="pickVariant(this, 40.00, '30 DAYS')">
+                <div class="bc-v-line">
+                  <span class="bc-v-title">30 DAYS</span>
+                  <span class="bc-v-stock">IN STOCK</span>
+                </div>
+                <div class="bc-v-price">$40.00</div>
+              </button>
+            </div>
+          </div>
+
+          <div class="bc-actions-row">
+            <button type="button" class="bc-btn-cart" onclick="addCurrentProductToCart(false)">
+              <i class="fa-solid fa-cart-shopping"></i> Add to Cart
+            </button>
+            <button type="button" class="bc-btn-buy" onclick="addCurrentProductToCart(true)">
+              Buy Now &gt;&gt;
+            </button>
+          </div>
         </div>
       </div>
 
-      <div class="bc-product-right">
-        <div class="bc-header-group">
-          <div class="bc-cat-tag"><i class="fa-solid fa-crosshairs"></i> Arc Raiders Cheats</div>
-          <h1 class="bc-title">Private - Arc Raiders</h1>
-          <p class="bc-subtitle">Undetected, feature-packed Arc Raiders cheats updated for the latest patch with instantaneous key delivery.</p>
+      <div class="bc-notice-box">
+        <div class="bc-notice-hdr">
+          <i class="fa-solid fa-triangle-exclamation"></i> NOTICE
         </div>
-
-        <div class="bc-variants-wrap">
-          <div class="bc-variants-label">Select License Duration:</div>
-          <div class="bc-variants-grid">
-            <button type="button" class="bc-variant-btn is-active" onclick="window.selectVariant(this, 0, 6.00, '1 Day Key')">
-              <div class="v-top"><span class="v-name">1 Day Key</span><i class="fa-solid fa-circle-check" style="color:#b937e2;"></i></div>
-              <div class="v-price">$6.00</div>
-            </button>
-            <button type="button" class="bc-variant-btn" onclick="window.selectVariant(this, 1, 20.00, '7 Day Key')">
-              <div class="v-top"><span class="v-name">7 Day Key</span></div>
-              <div class="v-price">$20.00</div>
-            </button>
-            <button type="button" class="bc-variant-btn" onclick="window.selectVariant(this, 2, 40.00, '30 Day Key')">
-              <div class="v-top"><span class="v-name">30 Day Key</span></div>
-              <div class="v-price">$40.00</div>
-            </button>
-          </div>
+        <div class="bc-notice-text">
+          This product natively supports Windows 10 and Windows 11 (all versions including 23H2 &amp; 24H2). Intel and AMD CPUs are fully supported. Ring-0 hypervisor architecture ensures 100% Easy Anti-Cheat detection immunity.
         </div>
+      </div>
 
-        <div class="bc-qty-price-row">
-          <div class="bc-qty-control">
-            <span style="font-size:12px;font-weight:700;color:#8896a6;text-transform:uppercase;margin-right:4px;">Qty:</span>
-            <button type="button" class="bc-qty-btn" onclick="window.modifyProductQty(-1)">-</button>
-            <span id="bc-qty-display" class="bc-qty-val">1</span>
-            <button type="button" class="bc-qty-btn" onclick="window.modifyProductQty(1)">+</button>
-          </div>
-          <div class="bc-price-display">
-            <div class="bc-price-lbl">Total Price (USD)</div>
-            <div id="bc-total-price" class="bc-price-amount">$6.00</div>
-          </div>
+      <div class="bc-reqs-box">
+        <div class="bc-reqs-title">REQUIREMENTS</div>
+        <ul class="bc-dot-list">
+          <li class="bc-dot-item"><span class="bc-dot-bullet"></span> Supported CPU: Intel &amp; AMD Processors</li>
+          <li class="bc-dot-item"><span class="bc-dot-bullet"></span> Supported OS: Windows 10 &amp; Windows 11 (All Builds)</li>
+          <li class="bc-dot-item"><span class="bc-dot-bullet"></span> Anti-Cheat Status: UNDETECTED (Ring-0 EAC Safe)</li>
+          <li class="bc-dot-item"><span class="bc-dot-bullet"></span> Streamproof: OBS &amp; Discord Invisible</li>
+        </ul>
+      </div>
+
+      <div class="bc-features-grid">
+        <div class="bc-feat-card">
+          <div class="col-title">COMBAT &amp; AIMBOT</div>
+          <div class="col-desc">Precision targeting with organic humanized mouse smoothing and ballistic prediction.</div>
+          <ul class="bc-dot-list">
+            <li class="bc-dot-item"><span class="bc-dot-bullet"></span> Silent Vector Aim Assist</li>
+            <li class="bc-dot-item"><span class="bc-dot-bullet"></span> Zero Recoil &amp; Sway Normalizer</li>
+            <li class="bc-dot-item"><span class="bc-dot-bullet"></span> FOV Circle Slider (0° - 360°)</li>
+            <li class="bc-dot-item"><span class="bc-dot-bullet"></span> Bone Target Prioritization</li>
+          </ul>
         </div>
-
-        <div class="bc-actions-row">
-          <button type="button" class="bc-add-btn" onclick="window.addProductToCart()">
-            <i class="fa-solid fa-cart-shopping" style="color:#b937e2;"></i>
-            <span>Add to Cart</span>
-          </button>
-          <button type="button" class="bc-checkout-btn" onclick="window.instantCheckoutProduct()">
-            <i class="fa-solid fa-bolt"></i>
-            <span>Instant Checkout</span>
-          </button>
+        <div class="bc-feat-card">
+          <div class="col-title">PLAYER &amp; DRONE VISUALS</div>
+          <div class="col-desc">Ultra-responsive DirectX overlay with color-coded distance, health, and skeleton ESP.</div>
+          <ul class="bc-dot-list">
+            <li class="bc-dot-item"><span class="bc-dot-bullet"></span> 2D / 3D Bounding Boxes</li>
+            <li class="bc-dot-item"><span class="bc-dot-bullet"></span> Player Skeleton Bones &amp; Head Dot</li>
+            <li class="bc-dot-item"><span class="bc-dot-bullet"></span> ARC Drones &amp; Security Turrets</li>
+            <li class="bc-dot-item"><span class="bc-dot-bullet"></span> Visible Check &amp; Distance Clamping</li>
+          </ul>
         </div>
-
-        <div class="bc-trust-strip">
-          <span><i class="fa-solid fa-bolt" style="color:#b937e2;"></i> Instant Delivery</span>
-          <span><i class="fa-solid fa-shield-halved" style="color:#b937e2;"></i> Ring0 EAC Safe</span>
-          <span><i class="fa-solid fa-headset" style="color:#b937e2;"></i> 24/7 Discord Support</span>
+        <div class="bc-feat-card">
+          <div class="col-title">TACTICAL RADAR &amp; LOOT</div>
+          <div class="col-desc">Real-time resource radar, high-tier loot scanner, and unlinked kernel stealth.</div>
+          <ul class="bc-dot-list">
+            <li class="bc-dot-item"><span class="bc-dot-bullet"></span> Rare Containers &amp; Weapon Crates</li>
+            <li class="bc-dot-item"><span class="bc-dot-bullet"></span> Crafting Resource &amp; Quest Item Filter</li>
+            <li class="bc-dot-item"><span class="bc-dot-bullet"></span> Streamproof Overlay Capture Safe</li>
+            <li class="bc-dot-item"><span class="bc-dot-bullet"></span> Instant Key Dispatch &amp; 24/7 Support</li>
+          </ul>
         </div>
       </div>
     </div>
@@ -1312,18 +1344,16 @@
         <div class="cFooter_nav">
           <ul class="ipsDataList ipsDataList_reducedSpacing">
             <li class="listTitle">Supported Games</li>
-            <li><a href="apex.html">Apex Legends</a></li>
-            <li><a href="r6.html">Rainbow Six Siege</a></li>
-            <li><a href="valorant.html">Valorant</a></li>
-            <li><a href="fortnite.html">Fortnite</a></li>
-            <li><a href="rust.html">Rust</a></li>
             <li><a href="arc.html">Arc Raiders</a></li>
+            <li><a href="apex.html">Apex Legends</a></li>
+            <li><a href="cod.html">Call of Duty</a></li>
+            <li><a href="fortnite.html">Fortnite</a></li>
           </ul>
           <ul class="ipsDataList ipsDataList_reducedSpacing">
             <li class="listTitle">&nbsp;</li>
-            <li><a href="cod.html">Call of Duty</a></li>
-            <li><a href="index.html#products">Store</a></li>
-            <li><a href="status.html">Live Status</a></li>
+            <li><a href="status.html">Cheat Status</a></li>
+            <li><a href="forums.html">Product Guides</a></li>
+            <li><a href="https://discord.gg/hiddencheats" target="_blank">24/7 Support</a></li>
           </ul>
           <ul class="ipsDataList ipsDataList_reducedSpacing">
             <li class="listTitle">Important Links</li>
@@ -1346,21 +1376,78 @@
     <div class="cFooter_bottom">
       <div class="ipsLayout_container" style="max-width:1560px;margin:0 auto;padding:0 40px;display:flex;justify-content:space-between;align-items:center;">
         <ul id="elFooterLinks" style="display:flex;gap:18px;list-style:none;padding:0;margin:0;font-size:12px;color:#8896a6;">
-          <li><a href="javascript:void(0)" style="color:#8896a6;text-decoration:none;">Theme</a></li>
-          <li><a href="https://discord.gg/hiddencheats" target="_blank" style="color:#8896a6;text-decoration:none;">Contact Us</a></li>
-          <li><a href="javascript:void(0)" style="color:#8896a6;text-decoration:none;">Cookies</a></li>
+          <li><a href="status.html">System Status</a></li>
+          <li><a href="forums.html">Guides &amp; Tutorials</a></li>
+          <li><a href="https://discord.gg/hiddencheats" target="_blank">Discord</a></li>
         </ul>
-        <p id="elCopyright" style="margin:0;font-size:11px;color:#606f7b;letter-spacing:1px;font-weight:600;">
-          POWERED BY INVISION COMMUNITY
-        </p>
-        <div class="copyright" style="font-size:12px;color:#8896a6;font-weight:700;">
-          &copy; <span style="color:#9041ea;">HIDDENCHEATS.COM</span>
+        <div style="font-size:12px;color:#8896a6;">
+          &copy; 2026 HiddenCheats. All rights reserved.
         </div>
       </div>
     </div>
   </footer>
 
   <script>
+    let currentQty = 1;
+    let selectedPrice = 6.00;
+    let selectedVariantName = '1 DAY KEY';
+
+    function switchMediaPreview(src, counter, thumbEl) {
+      const preview = document.getElementById('bcPreviewImg');
+      const pageCounter = document.getElementById('bcPageCounter');
+      if (preview) preview.src = src;
+      if (pageCounter) pageCounter.textContent = counter;
+      document.querySelectorAll('.bc-thumb').forEach(t => t.classList.remove('active'));
+      if (thumbEl) thumbEl.classList.add('active');
+    }
+
+    function stepQty(delta) {
+      currentQty = Math.max(1, Math.min(20, currentQty + delta));
+      const valEl = document.getElementById('bcQtyVal');
+      if (valEl) valEl.textContent = currentQty;
+      updateTotal();
+    }
+
+    function pickVariant(btn, price, name) {
+      selectedPrice = price;
+      selectedVariantName = name;
+      document.querySelectorAll('.bc-variant-btn').forEach(b => {
+        b.className = 'bc-variant-btn inactive';
+      });
+      btn.className = 'bc-variant-btn active';
+      updateTotal();
+    }
+
+    function updateTotal() {
+      const totalEl = document.getElementById('bcTotalAmount');
+      if (totalEl) totalEl.textContent = '$' + (selectedPrice * currentQty).toFixed(2);
+    }
+
+    function addCurrentProductToCart(instantCheckout = false) {
+      const title = document.getElementById('bcProductTitle')?.textContent.trim() || 'ANCIENT - ARC RAIDERS';
+      const previewImg = document.getElementById('bcPreviewImg')?.getAttribute('src') || 'assets/images/bearcheats/1103375.webp';
+      if (window.addToCart) {
+        window.addToCart({
+          id: 'arc-ancient',
+          name: title,
+          game: 'Arc Raiders',
+          image: previewImg,
+          variantId: selectedVariantName.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
+          variantName: selectedVariantName,
+          price: selectedPrice,
+          quantity: currentQty
+        });
+        if (window.showToast) {
+          window.showToast('Added to Cart', `${currentQty}x ${title} (${selectedVariantName})`);
+        }
+        if (instantCheckout) {
+          if (window.proceedCheckout) window.proceedCheckout();
+        } else {
+          if (window.openCart) window.openCart();
+        }
+      }
+    }
+
     function toggleMobileDrawer() {
       const drawer = document.getElementById('elMobileDrawer');
       if (drawer.style.display === 'none' || drawer.style.display === '') {
@@ -1376,8 +1463,7 @@
       mm.add("(min-width: 980px)", () => {
         gsap.defaults({ ease: "power3.out" });
 
-        gsap.from('.theme-anno--top', { opacity: 0, y: -25, duration: 0.8, ease: 'power2.out', delay: 0.1 });
-        gsap.from('#theme-header', { opacity: 0, y: -30, duration: 0.9, ease: 'power2.out', delay: 0.2 });
+        gsap.from('#theme-header', { opacity: 0, y: -30, duration: 0.9, ease: 'power2.out', delay: 0.1 });
         gsap.from('.headerHero_title', { opacity: 0, y: 45, duration: 1.3, ease: 'expo.out', delay: 0.3 });
         gsap.from('.headerHero_desc', { opacity: 0, y: 35, duration: 1.2, delay: 0.45 });
         gsap.from('.heroButtons', { opacity: 0, scale: 0.88, y: 20, duration: 1.1, ease: 'back.out(1.7)', delay: 0.6 });
