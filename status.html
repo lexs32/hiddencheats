@@ -28,9 +28,10 @@
       --bg-card: #151821;
       --bg-card-alt: #1a1d28;
       --border-subtle: rgba(255, 255, 255, 0.07);
-      --accent-orange: #df923e;
-      --accent-orange-bright: #f59e0b;
-      --brand-gradient: linear-gradient(135deg, #df923e 0%, #f59e0b 100%);
+      --accent-purple: #9041ea;
+      --accent-purple-light: #b937e2;
+      --accent-purple-deep: #7d44ed;
+      --brand-gradient: linear-gradient(135deg, #b937e2 0%, #7d44ed 100%);
       --status-green: #34d399;
       --status-green-bg: rgba(52, 211, 153, 0.12);
       --status-green-border: rgba(52, 211, 153, 0.3);
@@ -47,6 +48,25 @@
       margin: 0;
       padding: 0;
       min-height: 100vh;
+    }
+
+    @media (max-width: 979px) {
+      .ipsResponsive_showDesktop {
+        display: none !important;
+      }
+      .ipsResponsive_hideDesktop {
+        display: flex !important;
+      }
+      #theme-header .ipsLayout_container {
+        padding: 0 16px !important;
+      }
+    }
+
+    @media (min-width: 980px) {
+      .ipsResponsive_hideDesktop,
+      .ipsMobileHamburger {
+        display: none !important;
+      }
     }
 
     /* Navbar styling */
@@ -181,7 +201,7 @@
     .status-hero {
       position: relative;
       padding: 48px 0 24px;
-      background: radial-gradient(circle at 50% 0%, rgba(223, 146, 62, 0.08) 0%, transparent 65%);
+      background: radial-gradient(circle at 50% 0%, rgba(185, 55, 226, 0.1) 0%, transparent 65%);
     }
 
     .status-banner-card {
@@ -196,7 +216,7 @@
       height: 52px;
       object-fit: contain;
       flex-shrink: 0;
-      filter: drop-shadow(0 4px 12px rgba(223, 146, 62, 0.2));
+      filter: drop-shadow(0 4px 12px rgba(185, 55, 226, 0.25));
     }
 
     .status-banner-title {
@@ -231,11 +251,11 @@
     }
 
     .status-banner-subtitle a:hover {
-      color: var(--accent-orange-bright);
+      color: #b937e2;
     }
 
     .pulse-icon {
-      color: var(--accent-orange);
+      color: #b937e2;
       font-size: 14px;
       animation: pulse-beat 1.8s infinite;
     }
@@ -295,14 +315,14 @@
     .filter-pill:hover {
       color: #ffffff;
       background: #232736;
-      border-color: rgba(223, 146, 62, 0.35);
+      border-color: rgba(185, 55, 226, 0.4);
     }
 
     .filter-pill.active {
-      background: var(--brand-gradient);
-      color: #0b0c10 !important;
+      background: linear-gradient(135deg, #b937e2 0%, #7d44ed 100%);
+      color: #ffffff !important;
       border-color: transparent;
-      box-shadow: 0 4px 14px rgba(223, 146, 62, 0.3);
+      box-shadow: 0 4px 14px rgba(185, 55, 226, 0.4);
     }
 
     /* Status Groups & Items */
@@ -382,8 +402,8 @@
     }
 
     .status-btn-purchase {
-      background: var(--brand-gradient);
-      color: #0b0c10 !important;
+      background: linear-gradient(135deg, #b937e2 0%, #7d44ed 100%);
+      color: #ffffff !important;
       font-size: 13px;
       font-weight: 800;
       letter-spacing: 0.3px;
@@ -395,13 +415,13 @@
       align-items: center;
       justify-content: center;
       transition: all 0.2s ease;
-      box-shadow: 0 2px 10px rgba(223, 146, 62, 0.25);
+      box-shadow: 0 2px 10px rgba(125, 68, 237, 0.35);
     }
 
     .status-btn-purchase:hover {
-      filter: brightness(1.1);
+      filter: brightness(1.15);
       transform: translateY(-1px);
-      box-shadow: 0 4px 16px rgba(223, 146, 62, 0.4);
+      box-shadow: 0 4px 16px rgba(185, 55, 226, 0.5);
     }
 
     /* Footer */
@@ -469,9 +489,9 @@
         </li>
         <li>
           <button class="cCartTrigger" type="button" onclick="window.openCart()" aria-label="Cart">
-            <i class="fa-solid fa-cart-shopping" style="color:#df923e;font-size:13px;"></i>
+            <i class="fa-solid fa-cart-shopping" style="color:#b937e2;font-size:13px;"></i>
             <span>Cart</span>
-            <span class="cart-badge" style="background:var(--brand-gradient);color:#000;font-size:10px;font-weight:900;padding:1px 6px;border-radius:999px;display:none;">0</span>
+            <span class="cart-badge" style="background:var(--brand-gradient);color:#fff;font-size:10px;font-weight:900;padding:1px 6px;border-radius:999px;display:none;">0</span>
           </button>
         </li>
         <li class="auth-nav-container" style="position:relative;">
@@ -513,17 +533,17 @@
         <button onclick="toggleMobileDrawer()" style="background:none;border:none;color:#fff;font-size:20px;cursor:pointer;"><i class="fa fa-times"></i></button>
       </div>
       <nav style="display:flex;flex-direction:column;gap:10px;margin-top:10px;">
-        <a href="index.html" onclick="toggleMobileDrawer()" style="color:#fff;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;text-decoration:none;display:flex;align-items:center;gap:12px;padding:8px 0;"><i class="fa-solid fa-store" style="color: #df923e;font-size:14px;"></i> Store</a>
-        <a href="status.html" onclick="toggleMobileDrawer()" style="color:#df923e;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;text-decoration:none;display:flex;align-items:center;gap:12px;padding:8px 0;"><i class="fa-solid fa-signal" style="color: #df923e;font-size:14px;"></i> Status</a>
-        <a href="reviews.html" onclick="toggleMobileDrawer()" style="color:#fff;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;text-decoration:none;display:flex;align-items:center;gap:12px;padding:8px 0;"><i class="fa-solid fa-comments" style="color: #df923e;font-size:14px;"></i> Reviews</a>
-        <a href="javascript:void(0)" onclick="toggleMobileDrawer(); window.openSearchModal();" style="color:#fff;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;text-decoration:none;display:flex;align-items:center;gap:12px;padding:8px 0;"><i class="fa-solid fa-magnifying-glass" style="color: #df923e;font-size:14px;"></i> Search</a>
-        <a href="javascript:void(0)" onclick="toggleMobileDrawer(); window.openCart();" style="color:#fff;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;text-decoration:none;display:flex;align-items:center;gap:12px;padding:8px 0;"><i class="fa-solid fa-cart-shopping" style="color: #df923e;font-size:14px;"></i> Cart</a>
-        <a href="javascript:void(0)" onclick="toggleMobileDrawer(); window.openAuthModal('signin');" style="color:#fff;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;text-decoration:none;display:flex;align-items:center;gap:12px;padding:8px 0;"><i class="fa-solid fa-user" style="color: #df923e;font-size:14px;"></i> Sign In</a>
-        <a href="javascript:void(0)" onclick="toggleMobileDrawer(); window.openAuthModal('signup');" style="color:#fff;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;text-decoration:none;display:flex;align-items:center;gap:12px;padding:8px 0;"><i class="fa-solid fa-user-plus" style="color: #df923e;font-size:14px;"></i> Sign Up</a>
-        <a href="https://discord.gg/hiddencheats" target="_blank" style="color:#fff;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;text-decoration:none;display:flex;align-items:center;gap:12px;padding:8px 0;"><i class="fa-brands fa-discord" style="color: #df923e;font-size:14px;"></i> Discord</a>
+        <a href="index.html" onclick="toggleMobileDrawer()" style="color:#fff;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;text-decoration:none;display:flex;align-items:center;gap:12px;padding:8px 0;"><i class="fa-solid fa-store" style="color: #b937e2;font-size:14px;"></i> Store</a>
+        <a href="status.html" onclick="toggleMobileDrawer()" style="color:#b937e2;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;text-decoration:none;display:flex;align-items:center;gap:12px;padding:8px 0;"><i class="fa-solid fa-signal" style="color: #b937e2;font-size:14px;"></i> Status</a>
+        <a href="reviews.html" onclick="toggleMobileDrawer()" style="color:#fff;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;text-decoration:none;display:flex;align-items:center;gap:12px;padding:8px 0;"><i class="fa-solid fa-comments" style="color: #b937e2;font-size:14px;"></i> Reviews</a>
+        <a href="javascript:void(0)" onclick="toggleMobileDrawer(); window.openSearchModal();" style="color:#fff;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;text-decoration:none;display:flex;align-items:center;gap:12px;padding:8px 0;"><i class="fa-solid fa-magnifying-glass" style="color: #b937e2;font-size:14px;"></i> Search</a>
+        <a href="javascript:void(0)" onclick="toggleMobileDrawer(); window.openCart();" style="color:#fff;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;text-decoration:none;display:flex;align-items:center;gap:12px;padding:8px 0;"><i class="fa-solid fa-cart-shopping" style="color: #b937e2;font-size:14px;"></i> Cart</a>
+        <a href="javascript:void(0)" onclick="toggleMobileDrawer(); window.openAuthModal('signin');" style="color:#fff;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;text-decoration:none;display:flex;align-items:center;gap:12px;padding:8px 0;"><i class="fa-solid fa-user" style="color: #b937e2;font-size:14px;"></i> Sign In</a>
+        <a href="javascript:void(0)" onclick="toggleMobileDrawer(); window.openAuthModal('signup');" style="color:#fff;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;text-decoration:none;display:flex;align-items:center;gap:12px;padding:8px 0;"><i class="fa-solid fa-user-plus" style="color: #b937e2;font-size:14px;"></i> Sign Up</a>
+        <a href="https://discord.gg/hiddencheats" target="_blank" style="color:#fff;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;text-decoration:none;display:flex;align-items:center;gap:12px;padding:8px 0;"><i class="fa-brands fa-discord" style="color: #b937e2;font-size:14px;"></i> Discord</a>
       </nav>
       <div style="margin-top:auto;border-top:1px solid rgba(255,255,255,0.08);padding-top:16px;">
-        <a href="https://discord.gg/hiddencheats" target="_blank" style="background:var(--brand-gradient);color:#0b0c10;font-weight:800;font-size:13px;width:100%;height:42px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;">
+        <a href="https://discord.gg/hiddencheats" target="_blank" style="background:var(--brand-gradient);color:#ffffff;font-weight:800;font-size:13px;width:100%;height:42px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;">
           <i class="fa-brands fa-discord"></i> Join Discord
         </a>
       </div>
@@ -883,7 +903,7 @@
           <li><a href="javascript:void(0)" style="color:#8896a6;text-decoration:none;">Cookies</a></li>
         </ul>
         <div class="copyright" style="font-size:12px;color:#8896a6;font-weight:700;">
-          &copy; <span style="color:#df923e;">HIDDENCHEATS.NET</span>
+          &copy; <span style="color:#b937e2;">HIDDENCHEATS.NET</span>
         </div>
       </div>
     </div>

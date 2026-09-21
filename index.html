@@ -533,16 +533,19 @@
       overflow: hidden;
       border-radius: 14px 14px 0 0;
       background: #1d2028;
-      height: 220px;
-      max-height: 220px;
+      aspect-ratio: 994 / 447;
+      height: auto;
+      max-height: none;
     }
 
     .cNexusGame_block--image > img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      object-position: center;
       border-radius: inherit;
       transition: transform 0.45s ease;
+      display: block;
     }
 
     .cNexusGame_block--ref:hover .cNexusGame_block--image > img {
