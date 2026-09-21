@@ -8,6 +8,17 @@
   display: flex;
   flex-direction: column;
   gap: 24px;
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+  position: relative;
+}
+
+.bc-product-section:before,
+.bc-product-section:after {
+  display: none !important;
+  content: none !important;
 }
 
 .bc-product-card {
@@ -42,7 +53,7 @@
 .bc-preview-frame img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
   display: block;
   background: #090b10;
   transition: transform 0.3s ease;

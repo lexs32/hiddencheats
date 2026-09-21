@@ -1145,16 +1145,7 @@
       <div class="bc-product-card">
         <div class="bc-media-col">
           <div class="bc-preview-frame">
-            <img id="bcPreviewImg" src="assets/images/bearcheats/1103383.webp" alt="Krush - Apex Legends Preview" loading="lazy">
-            <div class="bc-page-counter" id="bcPageCounter">1/2</div>
-          </div>
-          <div class="bc-thumbs-row">
-            <div class="bc-thumb active" onclick="switchMediaPreview('assets/images/bearcheats/1103383.webp', '1/2', this)">
-              <img src="assets/images/bearcheats/1103383.webp" alt="Menu Preview">
-            </div>
-            <div class="bc-thumb" onclick="switchMediaPreview('boxes/apex.png', '2/2', this)">
-              <img src="boxes/apex.png" alt="Box Art">
-            </div>
+            <img id="bcPreviewImg" src="boxes/apex.png" alt="Krush - Apex Legends" loading="lazy">
           </div>
         </div>
 
@@ -1420,7 +1411,7 @@
 
     function addCurrentProductToCart(instantCheckout = false) {
       const title = document.getElementById('bcProductTitle')?.textContent.trim() || 'KRUSH - APEX LEGENDS';
-      const previewImg = document.getElementById('bcPreviewImg')?.getAttribute('src') || 'assets/images/bearcheats/1103383.webp';
+      const previewImg = document.getElementById('bcPreviewImg')?.getAttribute('src') || 'boxes/apex.png';
       if (window.addToCart) {
         window.addToCart({
           id: 'apex-krush',

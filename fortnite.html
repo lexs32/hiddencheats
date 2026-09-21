@@ -1109,16 +1109,7 @@
       <div class="bc-product-card">
         <div class="bc-media-col">
           <div class="bc-preview-frame">
-            <img id="bcPreviewImg" src="assets/images/bearcheats/1100362.webp" alt="Nebula - Fortnite Preview" loading="lazy">
-            <div class="bc-page-counter" id="bcPageCounter">1/2</div>
-          </div>
-          <div class="bc-thumbs-row">
-            <div class="bc-thumb active" onclick="switchMediaPreview('assets/images/bearcheats/1100362.webp', '1/2', this)">
-              <img src="assets/images/bearcheats/1100362.webp" alt="Menu Preview">
-            </div>
-            <div class="bc-thumb" onclick="switchMediaPreview('boxes/fort.png', '2/2', this)">
-              <img src="boxes/fort.png" alt="Box Art">
-            </div>
+            <img id="bcPreviewImg" src="boxes/fort.png" alt="Nebula - Fortnite" loading="lazy">
           </div>
         </div>
 
@@ -1368,7 +1359,7 @@
 
     function addCurrentProductToCart(instantCheckout = false) {
       const title = document.getElementById('bcProductTitle')?.textContent.trim() || 'NEBULA - FORTNITE';
-      const previewImg = document.getElementById('bcPreviewImg')?.getAttribute('src') || 'assets/images/bearcheats/1100362.webp';
+      const previewImg = document.getElementById('bcPreviewImg')?.getAttribute('src') || 'boxes/fort.png';
       if (window.addToCart) {
         window.addToCart({
           id: 'fortnite-nebula',

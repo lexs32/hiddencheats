@@ -943,61 +943,7 @@
       }
     }
 
-    .bc-product-section{background:#14161f;border:1px solid rgba(255,255,255,0.08);border-radius:20px;padding:36px;margin:2rem 0 4rem;display:grid !important;grid-template-columns:1.05fr 1fr;gap:40px;box-shadow:0 24px 60px rgba(0,0,0,0.6);position:relative;overflow:hidden;}
-    .bc-product-section:before{content:"";position:absolute;top:-120px;left:-120px;width:320px;height:320px;background:radial-gradient(circle,rgba(185,55,226,0.15) 0%,transparent 70%);pointer-events:none;}
-    .bc-product-left{display:flex !important;flex-direction:column !important;gap:22px !important;width:100% !important;}
-    .bc-box-frame{position:relative !important;background:radial-gradient(circle at center,#1b1c26 0%,#0d0f14 100%) !important;border:1px solid rgba(255,255,255,0.1) !important;border-radius:18px !important;overflow:hidden !important;aspect-ratio:16 / 9 !important;width:100% !important;display:flex !important;align-items:center !important;justify-content:center !important;box-shadow:0 14px 40px rgba(0,0,0,0.55) !important;}
-    .bc-box-frame img{width:100% !important;height:100% !important;object-fit:cover !important;display:block !important;transition:transform 0.4s cubic-bezier(0.16,1,0.3,1) !important;}
-    .bc-box-frame:hover img{transform:scale(1.025) !important;}
-    .bc-status-pill{position:absolute !important;top:16px !important;left:16px !important;z-index:10 !important;background:rgba(16,185,129,0.18) !important;border:1px solid rgba(16,185,129,0.4) !important;color:#34d399 !important;font-size:11px !important;font-weight:800 !important;letter-spacing:0.5px !important;text-transform:uppercase !important;padding:5px 12px !important;border-radius:999px !important;display:inline-flex !important;align-items:center !important;gap:7px !important;backdrop-filter:blur(8px) !important;-webkit-backdrop-filter:blur(8px) !important;}
-    .bc-pulse-dot{width:7px !important;height:7px !important;border-radius:50% !important;background:#10b981 !important;box-shadow:0 0 10px #10b981 !important;animation:bcPulse 2s infinite !important;}
-    @keyframes bcPulse{0%{box-shadow:0 0 0 0 rgba(16,185,129,0.7);}70%{box-shadow:0 0 0 8px rgba(16,185,129,0);}100%{box-shadow:0 0 0 0 rgba(16,185,129,0);}}
-    .bc-specs-card{background:#181b24 !important;border:1px solid rgba(255,255,255,0.06) !important;border-radius:14px !important;padding:18px 20px !important;}
-    .bc-specs-title{font-size:12px !important;text-transform:uppercase !important;letter-spacing:1px !important;color:#8896a6 !important;font-weight:800 !important;margin:0 0 12px !important;display:flex !important;align-items:center !important;gap:8px !important;}
-    .bc-specs-list{display:grid !important;grid-template-columns:1fr 1fr !important;gap:10px !important;list-style:none !important;padding:0 !important;margin:0 !important;}
-    .bc-specs-item{background:#12141c !important;border:1px solid rgba(255,255,255,0.04) !important;border-radius:8px !important;padding:10px 12px !important;display:flex !important;flex-direction:column !important;gap:3px !important;}
-    .bc-specs-item .lbl{font-size:11px !important;color:#8896a6 !important;font-weight:600 !important;}
-    .bc-specs-item .val{font-size:12px !important;color:#ffffff !important;font-weight:700 !important;}
-    .bc-features-card{background:#181b24 !important;border:1px solid rgba(255,255,255,0.06) !important;border-radius:14px !important;padding:20px !important;}
-    .bc-features-list{list-style:none !important;padding:0 !important;margin:0 !important;display:flex !important;flex-direction:column !important;gap:10px !important;}
-    .bc-features-list li{display:flex !important;align-items:center !important;gap:10px !important;font-size:13px !important;color:#cbd5e1 !important;}
-    .bc-features-list li i{color:#b937e2 !important;font-size:13px !important;flex-shrink:0 !important;}
-    .bc-product-right{display:flex !important;flex-direction:column !important;justify-content:space-between !important;gap:20px !important;}
-    .bc-header-group{display:flex !important;flex-direction:column !important;gap:8px !important;}
-    .bc-cat-tag{font-size:12px !important;font-weight:800 !important;letter-spacing:1px !important;color:#b937e2 !important;text-transform:uppercase !important;display:inline-flex !important;align-items:center !important;gap:6px !important;}
-    .bc-title{font-size:32px !important;font-weight:900 !important;color:#ffffff !important;margin:0 !important;line-height:1.2 !important;}
-    .bc-subtitle{font-size:14px !important;color:#94a3b8 !important;margin:0 !important;line-height:1.5 !important;}
-    .bc-variants-wrap{display:flex !important;flex-direction:column !important;gap:10px !important;}
-    .bc-variants-label{font-size:13px !important;font-weight:800 !important;color:#ffffff !important;text-transform:uppercase !important;letter-spacing:0.5px !important;}
-    .bc-variants-grid{display:grid !important;grid-template-columns:repeat(auto-fit,minmax(130px,1fr)) !important;gap:10px !important;}
-    .bc-variant-btn{background:#181b24 !important;border:1.5px solid rgba(255,255,255,0.08) !important;border-radius:12px !important;padding:14px !important;text-align:left !important;cursor:pointer !important;transition:all 0.2s ease !important;display:flex !important;flex-direction:column !important;gap:6px !important;}
-    .bc-variant-btn:hover{border-color:rgba(185,55,226,0.5) !important;background:#1e2230 !important;}
-    .bc-variant-btn.is-active{background:rgba(144,65,234,0.12) !important;border-color:#9041ea !important;box-shadow:0 0 20px rgba(144,65,234,0.25) !important;}
-    .bc-variant-btn .v-top{display:flex !important;align-items:center !important;justify-content:space-between !important;}
-    .bc-variant-btn .v-name{font-size:13px !important;font-weight:700 !important;color:#cbd5e1 !important;}
-    .bc-variant-btn.is-active .v-name{color:#ffffff !important;}
-    .bc-variant-btn .v-price{font-size:18px !important;font-weight:900 !important;color:#ffffff !important;}
-    .bc-variant-btn.is-active .v-price{color:#b937e2 !important;}
-    .bc-qty-price-row{display:flex !important;align-items:center !important;justify-content:space-between !important;background:#181b24 !important;border:1px solid rgba(255,255,255,0.08) !important;border-radius:12px !important;padding:14px 18px !important;}
-    .bc-qty-control{display:flex !important;align-items:center !important;gap:12px !important;}
-    .bc-qty-btn{width:32px !important;height:32px !important;border-radius:8px !important;background:#252936 !important;border:1px solid rgba(255,255,255,0.08) !important;color:#ffffff !important;font-size:15px !important;font-weight:700 !important;cursor:pointer !important;display:inline-flex !important;align-items:center !important;justify-content:center !important;transition:background 0.2s ease !important;}
-    .bc-qty-btn:hover{background:#323748 !important;}
-    .bc-qty-val{font-size:16px !important;font-weight:800 !important;color:#ffffff !important;min-width:24px !important;text-align:center !important;}
-    .bc-price-display{text-align:right !important;}
-    .bc-price-lbl{font-size:11px !important;color:#8896a6 !important;font-weight:700 !important;text-transform:uppercase !important;}
-    .bc-price-amount{font-size:26px !important;font-weight:900 !important;color:#b937e2 !important;margin-top:2px !important;line-height:1 !important;}
-    .bc-actions-row{display:flex !important;gap:14px !important;}
-    .bc-add-btn{flex:1 !important;background:#1a1d27 !important;border:1px solid rgba(255,255,255,0.14) !important;color:#ffffff !important;padding:14px 20px !important;border-radius:12px !important;font-weight:700 !important;font-size:14px !important;cursor:pointer !important;display:inline-flex !important;align-items:center !important;justify-content:center !important;gap:10px !important;transition:all 0.2s ease !important;}
-    .bc-add-btn:hover{background:#232734 !important;border-color:rgba(255,255,255,0.25) !important;}
-    .bc-checkout-btn{flex:1.3 !important;background:linear-gradient(135deg,#b937e2,#7d44ed) !important;border:none !important;color:#ffffff !important;padding:14px 20px !important;border-radius:12px !important;font-weight:800 !important;font-size:14px !important;cursor:pointer !important;display:inline-flex !important;align-items:center !important;justify-content:center !important;gap:10px !important;box-shadow:0 4px 20px rgba(185,55,226,0.35) !important;transition:all 0.2s ease !important;}
-    .bc-checkout-btn:hover{filter:brightness(1.15) !important;transform:translateY(-1px) !important;box-shadow:0 6px 25px rgba(185,55,226,0.5) !important;}
-    .bc-trust-strip{display:flex !important;align-items:center !important;justify-content:space-between !important;border-top:1px solid rgba(255,255,255,0.06) !important;padding-top:16px !important;font-size:11px !important;color:#8896a6 !important;}
-    .bc-trust-strip span{display:inline-flex !important;align-items:center !important;gap:6px !important;}
-    @media screen and (max-width:980px){
-      .bc-product-section{grid-template-columns:1fr !important;padding:20px !important;}
-      .bc-actions-row{flex-direction:column !important;}
-      .bc-specs-list{grid-template-columns:1fr !important;}
-    }
+
   
   </style>
 </head>
@@ -1165,16 +1111,7 @@
       <div class="bc-product-card">
         <div class="bc-media-col">
           <div class="bc-preview-frame">
-            <img id="bcPreviewImg" src="assets/images/bearcheats/1103375.webp" alt="Ancient - Arc Raiders Preview" loading="lazy">
-            <div class="bc-page-counter" id="bcPageCounter">1/2</div>
-          </div>
-          <div class="bc-thumbs-row">
-            <div class="bc-thumb active" onclick="switchMediaPreview('assets/images/bearcheats/1103375.webp', '1/2', this)">
-              <img src="assets/images/bearcheats/1103375.webp" alt="Menu Preview">
-            </div>
-            <div class="bc-thumb" onclick="switchMediaPreview('boxes/arc.png', '2/2', this)">
-              <img src="boxes/arc.png" alt="Box Art">
-            </div>
+            <img id="bcPreviewImg" src="boxes/arc.png" alt="Ancient - Arc Raiders" loading="lazy">
           </div>
         </div>
 
@@ -1425,7 +1362,7 @@
 
     function addCurrentProductToCart(instantCheckout = false) {
       const title = document.getElementById('bcProductTitle')?.textContent.trim() || 'ANCIENT - ARC RAIDERS';
-      const previewImg = document.getElementById('bcPreviewImg')?.getAttribute('src') || 'assets/images/bearcheats/1103375.webp';
+      const previewImg = document.getElementById('bcPreviewImg')?.getAttribute('src') || 'boxes/arc.png';
       if (window.addToCart) {
         window.addToCart({
           id: 'arc-ancient',
