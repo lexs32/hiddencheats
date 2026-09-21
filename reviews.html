@@ -2,9 +2,9 @@
 <html lang="en-US" dir="ltr" class="dark">
 <head>
   <meta charset="utf-8">
-  <title>Status — Product Availability | HiddenCheats</title>
+  <title>Reviews — Customer Feedback | HiddenCheats</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Check the current status and availability of all our products. Real-time anti-cheat detection monitoring and bypass uptime tracking.">
+  <meta name="description" content="Read authentic reviews from our customers. See what gamers are saying about our undetected cheats and service.">
   <meta name="theme-color" content="#14161b">
   <link rel="icon" type="image/png" href="favicon.png">
 
@@ -31,9 +31,6 @@
       --accent-orange: #df923e;
       --accent-orange-bright: #f59e0b;
       --brand-gradient: linear-gradient(135deg, #df923e 0%, #f59e0b 100%);
-      --status-green: #34d399;
-      --status-green-bg: rgba(52, 211, 153, 0.12);
-      --status-green-border: rgba(52, 211, 153, 0.3);
     }
 
     * {
@@ -177,21 +174,21 @@
       transform: translateY(-1px);
     }
 
-    /* Status Page Hero Header */
-    .status-hero {
+    /* Hero Header */
+    .reviews-hero {
       position: relative;
       padding: 48px 0 24px;
       background: radial-gradient(circle at 50% 0%, rgba(223, 146, 62, 0.08) 0%, transparent 65%);
     }
 
-    .status-banner-card {
+    .reviews-banner-card {
       display: flex;
       align-items: center;
       gap: 18px;
       margin-bottom: 28px;
     }
 
-    .status-banner-logo {
+    .reviews-banner-logo {
       width: 52px;
       height: 52px;
       object-fit: contain;
@@ -199,7 +196,7 @@
       filter: drop-shadow(0 4px 12px rgba(223, 146, 62, 0.2));
     }
 
-    .status-banner-title {
+    .reviews-banner-title {
       margin: 0;
       font-size: 34px;
       font-weight: 900;
@@ -212,7 +209,7 @@
       -webkit-text-fill-color: transparent;
     }
 
-    .status-banner-subtitle {
+    .reviews-banner-subtitle {
       margin-top: 6px;
       display: flex;
       align-items: center;
@@ -222,27 +219,6 @@
       text-transform: uppercase;
       letter-spacing: 0.8px;
       color: rgba(255, 255, 255, 0.6);
-    }
-
-    .status-banner-subtitle a {
-      color: inherit;
-      text-decoration: none;
-      transition: color 0.2s ease;
-    }
-
-    .status-banner-subtitle a:hover {
-      color: var(--accent-orange-bright);
-    }
-
-    .pulse-icon {
-      color: var(--accent-orange);
-      font-size: 14px;
-      animation: pulse-beat 1.8s infinite;
-    }
-
-    @keyframes pulse-beat {
-      0%, 100% { transform: scale(1); opacity: 0.9; }
-      50% { transform: scale(1.15); opacity: 1; }
     }
 
     /* Filter Pills */
@@ -305,103 +281,84 @@
       box-shadow: 0 4px 14px rgba(223, 146, 62, 0.3);
     }
 
-    /* Status Groups & Items */
-    .status-group {
-      margin-bottom: 28px;
-      transition: opacity 0.3s ease;
+    /* Reviews Grid */
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 20px;
+      margin-bottom: 40px;
     }
 
-    .status-group-title {
-      font-size: 15px;
-      font-weight: 900;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: #ffffff;
-      margin: 0 0 12px 2px;
-    }
-
-    .status-group-card {
+    .review-card {
       background: #141720;
       border: 1px solid rgba(255, 255, 255, 0.06);
       border-radius: 10px;
-      overflow: hidden;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.2s ease;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
     }
 
-    .status-row {
+    .review-card:hover {
+      border-color: rgba(223, 146, 62, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .review-card-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 16px 24px;
-      transition: background 0.15s ease;
+      margin-bottom: 14px;
     }
 
-    .status-row:not(:last-child) {
-      border-bottom: 1px dashed rgba(255, 255, 255, 0.06);
+    .review-stars {
+      color: #f59e0b;
+      font-size: 13px;
+      display: flex;
+      gap: 3px;
     }
 
-    .status-row:hover {
-      background: rgba(255, 255, 255, 0.015);
+    .review-date {
+      font-size: 12px;
+      font-weight: 600;
+      color: #6b7280;
     }
 
-    .status-product-name {
-      font-size: 15px;
-      font-weight: 700;
-      color: #ffffff;
-      letter-spacing: 0.2px;
+    .review-message {
+      font-size: 14px;
+      line-height: 1.5;
+      color: #e2e8f0;
+      margin: 0 0 20px 0;
+      font-weight: 500;
     }
 
-    .status-actions {
+    .review-footer {
       display: flex;
       align-items: center;
-      gap: 14px;
-      flex-shrink: 0;
+      gap: 12px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
     }
 
-    .status-badge {
+    .review-product-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: #94a3b8;
+    }
+
+    .review-badge-verified {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      padding: 6px 14px;
-      border-radius: 6px;
-      background: rgba(52, 211, 153, 0.12);
-      border: 1px solid rgba(52, 211, 153, 0.3);
-      border-left: 3px solid #34d399;
+      gap: 4px;
+      font-size: 10px;
+      font-weight: 800;
       color: #34d399;
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: 0.6px;
-      text-transform: uppercase;
-      height: 36px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .status-badge i {
-      font-size: 13px;
-    }
-
-    .status-btn-purchase {
-      background: var(--brand-gradient);
-      color: #0b0c10 !important;
-      font-size: 13px;
-      font-weight: 800;
-      letter-spacing: 0.3px;
-      padding: 0 18px;
-      height: 36px;
-      border-radius: 6px;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.2s ease;
-      box-shadow: 0 2px 10px rgba(223, 146, 62, 0.25);
-    }
-
-    .status-btn-purchase:hover {
-      filter: brightness(1.1);
-      transform: translateY(-1px);
-      box-shadow: 0 4px 16px rgba(223, 146, 62, 0.4);
+      background: rgba(52, 211, 153, 0.1);
+      padding: 2px 7px;
+      border-radius: 4px;
+      margin-left: auto;
     }
 
     /* Footer */
@@ -416,17 +373,10 @@
     }
 
     @media (max-width: 768px) {
-      .status-row {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 12px;
-        padding: 14px 16px;
+      .reviews-grid {
+        grid-template-columns: 1fr;
       }
-      .status-actions {
-        width: 100%;
-        justify-content: space-between;
-      }
-      .status-banner-title {
+      .reviews-banner-title {
         font-size: 26px;
       }
     }
@@ -450,10 +400,10 @@
               <a href="index.html" class="nav-chams-link"><i class="fa-solid fa-store" style="margin-right:7px;font-size:13px;"></i>STORE</a>
             </li>
             <li>
-              <a href="status.html" class="nav-chams-link active-nav"><i class="fa-solid fa-signal" style="margin-right:7px;font-size:13px;"></i>STATUS</a>
+              <a href="status.html" class="nav-chams-link"><i class="fa-solid fa-signal" style="margin-right:7px;font-size:13px;"></i>STATUS</a>
             </li>
             <li>
-              <a href="reviews.html" class="nav-chams-link"><i class="fa-solid fa-comments" style="margin-right:7px;font-size:13px;"></i>REVIEWS</a>
+              <a href="reviews.html" class="nav-chams-link active-nav"><i class="fa-solid fa-comments" style="margin-right:7px;font-size:13px;"></i>REVIEWS</a>
             </li>
           </ul>
         </nav>
@@ -514,8 +464,8 @@
       </div>
       <nav style="display:flex;flex-direction:column;gap:10px;margin-top:10px;">
         <a href="index.html" onclick="toggleMobileDrawer()" style="color:#fff;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;text-decoration:none;display:flex;align-items:center;gap:12px;padding:8px 0;"><i class="fa-solid fa-store" style="color: #df923e;font-size:14px;"></i> Store</a>
-        <a href="status.html" onclick="toggleMobileDrawer()" style="color:#df923e;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;text-decoration:none;display:flex;align-items:center;gap:12px;padding:8px 0;"><i class="fa-solid fa-signal" style="color: #df923e;font-size:14px;"></i> Status</a>
-        <a href="reviews.html" onclick="toggleMobileDrawer()" style="color:#fff;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;text-decoration:none;display:flex;align-items:center;gap:12px;padding:8px 0;"><i class="fa-solid fa-comments" style="color: #df923e;font-size:14px;"></i> Reviews</a>
+        <a href="status.html" onclick="toggleMobileDrawer()" style="color:#fff;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;text-decoration:none;display:flex;align-items:center;gap:12px;padding:8px 0;"><i class="fa-solid fa-signal" style="color: #df923e;font-size:14px;"></i> Status</a>
+        <a href="reviews.html" onclick="toggleMobileDrawer()" style="color:#df923e;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;text-decoration:none;display:flex;align-items:center;gap:12px;padding:8px 0;"><i class="fa-solid fa-comments" style="color: #df923e;font-size:14px;"></i> Reviews</a>
         <a href="javascript:void(0)" onclick="toggleMobileDrawer(); window.openSearchModal();" style="color:#fff;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;text-decoration:none;display:flex;align-items:center;gap:12px;padding:8px 0;"><i class="fa-solid fa-magnifying-glass" style="color: #df923e;font-size:14px;"></i> Search</a>
         <a href="javascript:void(0)" onclick="toggleMobileDrawer(); window.openCart();" style="color:#fff;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;text-decoration:none;display:flex;align-items:center;gap:12px;padding:8px 0;"><i class="fa-solid fa-cart-shopping" style="color: #df923e;font-size:14px;"></i> Cart</a>
         <a href="javascript:void(0)" onclick="toggleMobileDrawer(); window.openAuthModal('signin');" style="color:#fff;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;text-decoration:none;display:flex;align-items:center;gap:12px;padding:8px 0;"><i class="fa-solid fa-user" style="color: #df923e;font-size:14px;"></i> Sign In</a>
@@ -530,25 +480,25 @@
     </div>
   </div>
 
-  <!-- Status Section Container -->
+  <!-- Main Content -->
   <main class="flex-1 w-full" style="max-width: 1400px; margin: 0 auto; padding: 0 24px;">
     
-    <section class="status-hero">
+    <section class="reviews-hero">
       <!-- Banner Header -->
-      <div class="status-banner-card">
-        <img src="favicon.png" alt="HiddenCheats" class="status-banner-logo">
+      <div class="reviews-banner-card">
+        <img src="favicon.png" alt="HiddenCheats" class="reviews-banner-logo">
         <div>
-          <h1 class="status-banner-title">Status Page</h1>
-          <div class="status-banner-subtitle">
-            <i class="fa-solid fa-heart-pulse pulse-icon"></i>
-            <a href="https://discord.gg/hiddencheats" target="_blank" rel="noopener noreferrer">Status outdated? Let us know on Discord.</a>
+          <h1 class="reviews-banner-title">Customer Reviews</h1>
+          <div class="reviews-banner-subtitle">
+            <i class="fa-solid fa-comment-check" style="color:#df923e;"></i>
+            <span>1,570 verified reviews from satisfied customers</span>
           </div>
         </div>
       </div>
 
       <!-- Filter Pills Bar -->
       <div class="filter-wrapper">
-        <div class="filter-scroll" id="statusFilterBar">
+        <div class="filter-scroll" id="reviewsFilterBar">
           <button class="filter-pill active" data-filter="all">All</button>
           <button class="filter-pill" data-filter="arc-raiders">ARC RAIDERS</button>
           <button class="filter-pill" data-filter="siege-x">SIEGE X</button>
@@ -562,269 +512,198 @@
         </div>
       </div>
 
-      <!-- Status Product Groups -->
-      <div id="statusGroupsContainer">
+      <!-- Reviews Grid -->
+      <div class="reviews-grid" id="reviewsGridContainer">
         
-        <!-- ARC RAIDERS -->
-        <div class="status-group" data-group="arc-raiders">
-          <h3 class="status-group-title">ARC RAIDERS</h3>
-          <div class="status-group-card">
-            <div class="status-row">
-              <span class="status-product-name">Arc Raiders</span>
-              <div class="status-actions">
-                <div class="status-badge">
-                  <i class="fa-solid fa-circle-check"></i>
-                  <span>UNDETECTED</span>
-                </div>
-                <a href="arc.html" class="status-btn-purchase">Purchase now</a>
+        <div class="review-card" data-game="hwid-spoofer">
+          <div>
+            <div class="review-card-header">
+              <div class="review-stars">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
               </div>
+              <span class="review-date">07/06/2026</span>
             </div>
-            <div class="status-row">
-              <span class="status-product-name">Krush - Arc Raiders</span>
-              <div class="status-actions">
-                <div class="status-badge">
-                  <i class="fa-solid fa-circle-check"></i>
-                  <span>UNDETECTED</span>
-                </div>
-                <a href="arc.html" class="status-btn-purchase">Purchase now</a>
-              </div>
-            </div>
+            <p class="review-message">Permanent spoofer worked on first try without reinstalling windows. Absolutely legendary support on discord too.</p>
+          </div>
+          <div class="review-footer">
+            <span class="review-product-name">HWID Spoofer &amp; Cleaner</span>
+            <span class="review-badge-verified"><i class="fa-solid fa-shield-check"></i> Verified</span>
           </div>
         </div>
 
-        <!-- SIEGE X -->
-        <div class="status-group" data-group="siege-x">
-          <h3 class="status-group-title">SIEGE X</h3>
-          <div class="status-group-card">
-            <div class="status-row">
-              <span class="status-product-name">Inferno - R6 Full</span>
-              <div class="status-actions">
-                <div class="status-badge">
-                  <i class="fa-solid fa-circle-check"></i>
-                  <span>UNDETECTED</span>
-                </div>
-                <a href="index.html#products" class="status-btn-purchase">Purchase now</a>
+        <div class="review-card" data-game="arc-raiders">
+          <div>
+            <div class="review-card-header">
+              <div class="review-stars">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
               </div>
+              <span class="review-date">06/06/2026</span>
             </div>
-            <div class="status-row">
-              <span class="status-product-name">Ancient - R6 External</span>
-              <div class="status-actions">
-                <div class="status-badge">
-                  <i class="fa-solid fa-circle-check"></i>
-                  <span>UNDETECTED</span>
-                </div>
-                <a href="index.html#products" class="status-btn-purchase">Purchase now</a>
-              </div>
-            </div>
-            <div class="status-row">
-              <span class="status-product-name">R6 Lite</span>
-              <div class="status-actions">
-                <div class="status-badge">
-                  <i class="fa-solid fa-circle-check"></i>
-                  <span>UNDETECTED</span>
-                </div>
-                <a href="index.html#products" class="status-btn-purchase">Purchase now</a>
-              </div>
-            </div>
-            <div class="status-row">
-              <span class="status-product-name">Sapphire Unlock All - R6S</span>
-              <div class="status-actions">
-                <div class="status-badge">
-                  <i class="fa-solid fa-circle-check"></i>
-                  <span>UNDETECTED</span>
-                </div>
-                <a href="index.html#products" class="status-btn-purchase">Purchase now</a>
-              </div>
-            </div>
+            <p class="review-message">Arc Raiders cheat is smooth as butter. ESP is crystal clear with zero FPS drop. 10/10 recommend!</p>
+          </div>
+          <div class="review-footer">
+            <span class="review-product-name">Arc Raiders</span>
+            <span class="review-badge-verified"><i class="fa-solid fa-shield-check"></i> Verified</span>
           </div>
         </div>
 
-        <!-- APEX LEGENDS -->
-        <div class="status-group" data-group="apex-legends">
-          <h3 class="status-group-title">APEX LEGENDS</h3>
-          <div class="status-group-card">
-            <div class="status-row">
-              <span class="status-product-name">Ancient - Apex Legends</span>
-              <div class="status-actions">
-                <div class="status-badge">
-                  <i class="fa-solid fa-circle-check"></i>
-                  <span>UNDETECTED</span>
-                </div>
-                <a href="apex.html" class="status-btn-purchase">Purchase now</a>
+        <div class="review-card" data-game="arc-raiders">
+          <div>
+            <div class="review-card-header">
+              <div class="review-stars">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
               </div>
+              <span class="review-date">01/06/2026</span>
             </div>
-            <div class="status-row">
-              <span class="status-product-name">Apex Pro External</span>
-              <div class="status-actions">
-                <div class="status-badge">
-                  <i class="fa-solid fa-circle-check"></i>
-                  <span>UNDETECTED</span>
-                </div>
-                <a href="apex.html" class="status-btn-purchase">Purchase now</a>
-              </div>
-            </div>
+            <p class="review-message">good app, Krush setup was instant and clean.</p>
+          </div>
+          <div class="review-footer">
+            <span class="review-product-name">Krush - Arc Raiders</span>
+            <span class="review-badge-verified"><i class="fa-solid fa-shield-check"></i> Verified</span>
           </div>
         </div>
 
-        <!-- CALL OF DUTY -->
-        <div class="status-group" data-group="call-of-duty">
-          <h3 class="status-group-title">CALL OF DUTY</h3>
-          <div class="status-group-card">
-            <div class="status-row">
-              <span class="status-product-name">Phantom - Modern Warfare / Warzone</span>
-              <div class="status-actions">
-                <div class="status-badge">
-                  <i class="fa-solid fa-circle-check"></i>
-                  <span>UNDETECTED</span>
-                </div>
-                <a href="cod.html" class="status-btn-purchase">Purchase now</a>
+        <div class="review-card" data-game="siege-x">
+          <div>
+            <div class="review-card-header">
+              <div class="review-stars">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
               </div>
+              <span class="review-date">29/05/2026</span>
             </div>
-            <div class="status-row">
-              <span class="status-product-name">Call of Duty DMA Cheat</span>
-              <div class="status-actions">
-                <div class="status-badge">
-                  <i class="fa-solid fa-circle-check"></i>
-                  <span>UNDETECTED</span>
-                </div>
-                <a href="cod.html" class="status-btn-purchase">Purchase now</a>
-              </div>
-            </div>
-            <div class="status-row">
-              <span class="status-product-name">BO7 / WZ UNLOCK ALL</span>
-              <div class="status-actions">
-                <div class="status-badge">
-                  <i class="fa-solid fa-circle-check"></i>
-                  <span>UNDETECTED</span>
-                </div>
-                <a href="cod.html" class="status-btn-purchase">Purchase now</a>
-              </div>
-            </div>
+            <p class="review-message">Inferno R6 Full is the cleanest cheat on the market. Silent aim and visibility checks work flawlessly.</p>
+          </div>
+          <div class="review-footer">
+            <span class="review-product-name">Inferno - R6 Full</span>
+            <span class="review-badge-verified"><i class="fa-solid fa-shield-check"></i> Verified</span>
           </div>
         </div>
 
-        <!-- COUNTER STRIKE 2 -->
-        <div class="status-group" data-group="counter-strike-2">
-          <h3 class="status-group-title">COUNTER STRIKE 2</h3>
-          <div class="status-group-card">
-            <div class="status-row">
-              <span class="status-product-name">Prime - CS2 Cheat</span>
-              <div class="status-actions">
-                <div class="status-badge">
-                  <i class="fa-solid fa-circle-check"></i>
-                  <span>UNDETECTED</span>
-                </div>
-                <a href="index.html#products" class="status-btn-purchase">Purchase now</a>
+        <div class="review-card" data-game="siege-x">
+          <div>
+            <div class="review-card-header">
+              <div class="review-stars">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
               </div>
+              <span class="review-date">26/05/2026</span>
             </div>
-            <div class="status-row">
-              <span class="status-product-name">CS2 ESP & Aimbot Private</span>
-              <div class="status-actions">
-                <div class="status-badge">
-                  <i class="fa-solid fa-circle-check"></i>
-                  <span>UNDETECTED</span>
-                </div>
-                <a href="index.html#products" class="status-btn-purchase">Purchase now</a>
-              </div>
-            </div>
+            <p class="review-message">Ancient R6 External has kept me undetected for 2 whole seasons. Best external for tournament / ranked play.</p>
+          </div>
+          <div class="review-footer">
+            <span class="review-product-name">Ancient - R6 External</span>
+            <span class="review-badge-verified"><i class="fa-solid fa-shield-check"></i> Verified</span>
           </div>
         </div>
 
-        <!-- RUST -->
-        <div class="status-group" data-group="rust">
-          <h3 class="status-group-title">RUST</h3>
-          <div class="status-group-card">
-            <div class="status-row">
-              <span class="status-product-name">Oxide - Rust Cheat</span>
-              <div class="status-actions">
-                <div class="status-badge">
-                  <i class="fa-solid fa-circle-check"></i>
-                  <span>UNDETECTED</span>
-                </div>
-                <a href="index.html#products" class="status-btn-purchase">Purchase now</a>
+        <div class="review-card" data-game="siege-x">
+          <div>
+            <div class="review-card-header">
+              <div class="review-stars">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
               </div>
+              <span class="review-date">25/05/2026</span>
             </div>
-            <div class="status-row">
-              <span class="status-product-name">Rust External ESP</span>
-              <div class="status-actions">
-                <div class="status-badge">
-                  <i class="fa-solid fa-circle-check"></i>
-                  <span>UNDETECTED</span>
-                </div>
-                <a href="index.html#products" class="status-btn-purchase">Purchase now</a>
-              </div>
-            </div>
+            <p class="review-message">R6 Lite is lightweight, reliable, and exactly what I needed for closet cheating.</p>
+          </div>
+          <div class="review-footer">
+            <span class="review-product-name">R6 Lite</span>
+            <span class="review-badge-verified"><i class="fa-solid fa-shield-check"></i> Verified</span>
           </div>
         </div>
 
-        <!-- FORTNITE -->
-        <div class="status-group" data-group="fortnite">
-          <h3 class="status-group-title">FORTNITE</h3>
-          <div class="status-group-card">
-            <div class="status-row">
-              <span class="status-product-name">Vanguard - Fortnite Cheat</span>
-              <div class="status-actions">
-                <div class="status-badge">
-                  <i class="fa-solid fa-circle-check"></i>
-                  <span>UNDETECTED</span>
-                </div>
-                <a href="fortnite.html" class="status-btn-purchase">Purchase now</a>
+        <div class="review-card" data-game="siege-x">
+          <div>
+            <div class="review-card-header">
+              <div class="review-stars">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
               </div>
+              <span class="review-date">20/05/2026</span>
             </div>
-            <div class="status-row">
-              <span class="status-product-name">Fortnite Softaim & ESP</span>
-              <div class="status-actions">
-                <div class="status-badge">
-                  <i class="fa-solid fa-circle-check"></i>
-                  <span>UNDETECTED</span>
-                </div>
-                <a href="fortnite.html" class="status-btn-purchase">Purchase now</a>
-              </div>
-            </div>
+            <p class="review-message">Sapphire Unlock All unlocked everything instantly. Black Ice, elites, weapon skins all active.</p>
+          </div>
+          <div class="review-footer">
+            <span class="review-product-name">Sapphire Unlock All - R6S</span>
+            <span class="review-badge-verified"><i class="fa-solid fa-shield-check"></i> Verified</span>
           </div>
         </div>
 
-        <!-- MARVEL RIVALS -->
-        <div class="status-group" data-group="marvel-rivals">
-          <h3 class="status-group-title">MARVEL RIVALS</h3>
-          <div class="status-group-card">
-            <div class="status-row">
-              <span class="status-product-name">Nova - Marvel Rivals</span>
-              <div class="status-actions">
-                <div class="status-badge">
-                  <i class="fa-solid fa-circle-check"></i>
-                  <span>UNDETECTED</span>
-                </div>
-                <a href="index.html#products" class="status-btn-purchase">Purchase now</a>
+        <div class="review-card" data-game="apex-legends">
+          <div>
+            <div class="review-card-header">
+              <div class="review-stars">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
               </div>
+              <span class="review-date">17/05/2026</span>
             </div>
+            <p class="review-message">Apex Pro External is top tier. Glow and smooth aimbot with custom smoothing make it look 100% legit on stream.</p>
+          </div>
+          <div class="review-footer">
+            <span class="review-product-name">Ancient - Apex Legends</span>
+            <span class="review-badge-verified"><i class="fa-solid fa-shield-check"></i> Verified</span>
           </div>
         </div>
 
-        <!-- HWID SPOOFER -->
-        <div class="status-group" data-group="hwid-spoofer">
-          <h3 class="status-group-title">HWID SPOOFER</h3>
-          <div class="status-group-card">
-            <div class="status-row">
-              <span class="status-product-name">Hidden Spoofer Permanent</span>
-              <div class="status-actions">
-                <div class="status-badge">
-                  <i class="fa-solid fa-circle-check"></i>
-                  <span>UNDETECTED</span>
-                </div>
-                <a href="index.html#products" class="status-btn-purchase">Purchase now</a>
+        <div class="review-card" data-game="call-of-duty">
+          <div>
+            <div class="review-card-header">
+              <div class="review-stars">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
               </div>
+              <span class="review-date">14/05/2026</span>
             </div>
-            <div class="status-row">
-              <span class="status-product-name">Hidden Spoofer Temp + Cleaner</span>
-              <div class="status-actions">
-                <div class="status-badge">
-                  <i class="fa-solid fa-circle-check"></i>
-                  <span>UNDETECTED</span>
-                </div>
-                <a href="index.html#products" class="status-btn-purchase">Purchase now</a>
+            <p class="review-message">Phantom Warzone cheat runs perfectly. Radar and esp are responsive, no crashes whatsoever.</p>
+          </div>
+          <div class="review-footer">
+            <span class="review-product-name">Phantom - Modern Warfare / Warzone</span>
+            <span class="review-badge-verified"><i class="fa-solid fa-shield-check"></i> Verified</span>
+          </div>
+        </div>
+
+        <div class="review-card" data-game="counter-strike-2">
+          <div>
+            <div class="review-card-header">
+              <div class="review-stars">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
               </div>
+              <span class="review-date">12/05/2026</span>
             </div>
+            <p class="review-message">rapide nice. VAC bypass is undetected and legitbot settings are super crisp.</p>
+          </div>
+          <div class="review-footer">
+            <span class="review-product-name">Prime - CS2 Cheat</span>
+            <span class="review-badge-verified"><i class="fa-solid fa-shield-check"></i> Verified</span>
+          </div>
+        </div>
+
+        <div class="review-card" data-game="rust">
+          <div>
+            <div class="review-card-header">
+              <div class="review-stars">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+              </div>
+              <span class="review-date">08/05/2026</span>
+            </div>
+            <p class="review-message">Oxide Rust cheat has debug camera, ore esp, and recoil compensation. Dominated wipe day easily.</p>
+          </div>
+          <div class="review-footer">
+            <span class="review-product-name">Oxide - Rust Cheat</span>
+            <span class="review-badge-verified"><i class="fa-solid fa-shield-check"></i> Verified</span>
+          </div>
+        </div>
+
+        <div class="review-card" data-game="fortnite">
+          <div>
+            <div class="review-card-header">
+              <div class="review-stars">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+              </div>
+              <span class="review-date">03/05/2026</span>
+            </div>
+            <p class="review-message">Fortnite Softaim &amp; ESP works like a charm on EAC and BattlEye. Highly recommended.</p>
+          </div>
+          <div class="review-footer">
+            <span class="review-product-name">Fortnite Softaim &amp; ESP</span>
+            <span class="review-badge-verified"><i class="fa-solid fa-shield-check"></i> Verified</span>
           </div>
         </div>
 
@@ -841,7 +720,7 @@
           <a href="index.html" class="elFooter_logo" style="display:inline-flex;align-items:center;text-decoration:none;margin-bottom:14px;">
             <img src="favicon.png" alt="HiddenCheats" style="height:38px;width:auto;object-fit:contain;">
           </a>
-          <p>HiddenCheats sets the benchmark for elite performance with our products. Dominate effortlessly with cutting-edge solutions, top-tier reliability, and unmatched precision. Our technology ensures security, efficiency, and the ultimate competitive edge.</p>
+          <p>HiddenCheats sets the benchmark for elite performance with our products. Dominate effortlessly with cutting-edge solutions, top-tier reliability, and unmatched precision.</p>
         </div>
         <div class="cFooter_nav">
           <ul class="ipsDataList ipsDataList_reducedSpacing">
@@ -896,25 +775,25 @@
       drawer.style.display = (drawer.style.display === 'none' || drawer.style.display === '') ? 'block' : 'none';
     }
 
-    // Interactive category filter pills logic
+    // Interactive category filter pills logic for reviews
     document.addEventListener('DOMContentLoaded', () => {
       const pills = document.querySelectorAll('.filter-pill');
-      const groups = document.querySelectorAll('.status-group');
+      const cards = document.querySelectorAll('.review-card');
 
-      function filterTo(targetGroup) {
+      function filterTo(targetGame) {
         pills.forEach(p => {
-          if (p.getAttribute('data-filter') === targetGroup) {
+          if (p.getAttribute('data-filter') === targetGame) {
             p.classList.add('active');
           } else {
             p.classList.remove('active');
           }
         });
 
-        groups.forEach(g => {
-          if (targetGroup === 'all' || g.getAttribute('data-group') === targetGroup) {
-            g.style.display = 'block';
+        cards.forEach(c => {
+          if (targetGame === 'all' || c.getAttribute('data-game') === targetGame) {
+            c.style.display = 'flex';
           } else {
-            g.style.display = 'none';
+            c.style.display = 'none';
           }
         });
       }
@@ -925,22 +804,20 @@
           const target = pill.getAttribute('data-filter');
           filterTo(target);
 
-          // Update URL query string seamlessly
           const url = new URL(window.location);
           if (target === 'all') {
-            url.searchParams.delete('group');
+            url.searchParams.delete('game');
           } else {
-            url.searchParams.set('group', target);
+            url.searchParams.set('game', target);
           }
           window.history.replaceState({}, '', url);
         });
       });
 
-      // Handle URL param on direct load e.g. status.html?group=arc-raiders
       const urlParams = new URLSearchParams(window.location.search);
-      const groupParam = urlParams.get('group');
-      if (groupParam) {
-        filterTo(groupParam);
+      const gameParam = urlParams.get('game');
+      if (gameParam) {
+        filterTo(gameParam);
       }
     });
   </script>
