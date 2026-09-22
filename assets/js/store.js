@@ -773,6 +773,31 @@
 
   function proceedCheckout() {
     if (cart.length === 0) return;
+
+    if (window.SHOPIFY_CONFIG && window.SHOPIFY_CONFIG.shopDomain) {
+      const shop = window.SHOPIFY_CONFIG.shopDomain.replace(/^https?:\/\//, '').replace(/\/$/, '');
+      const variantItems = cart.map(item => {
+        let vid = item.variantId;
+        if (window.SHOPIFY_CONFIG.variants && window.SHOPIFY_CONFIG.variants[item.variantId]) {
+          vid = window.SHOPIFY_CONFIG.variants[item.variantId].replace(/^gid:\/\/shopify\/ProductVariant\//, '');
+        }
+        return `${vid}:${item.qty || 1}`;
+      }).join(',');
+
+      const user = getCurrentUser() || {};
+      const emailInput = document.getElementById('pageEmailInput') || document.querySelector('.hc-summary-box input[type="email"]');
+      const email = (emailInput ? emailInput.value : (user.email || '')).trim();
+
+      const noteData = encodeURIComponent(`uid:${user.id || ''},discord:${user.discordId || ''},user:${user.name || ''}`);
+      let checkoutUrl = `https://${shop}/cart/${variantItems}?note=${noteData}`;
+      if (email) checkoutUrl += `&checkout[email]=${encodeURIComponent(email)}`;
+      if (activePromo && activePromo.code) checkoutUrl += `&discount=${encodeURIComponent(activePromo.code)}`;
+
+      showToast('Redirecting', 'Opening secure Shopify checkout...');
+      window.location.href = checkoutUrl;
+      return;
+    }
+
     const total = getCartTotal().toFixed(2);
     const orderId = 'ORD-' + Math.floor(100000 + Math.random() * 900000);
     const key = 'HIDDEN-' + Array.from({length: 4}, () => Math.random().toString(36).substring(2, 6).toUpperCase()).join('-');
@@ -1011,46 +1036,124 @@
   function getRegisteredUsers() {
     try {
       const stored = localStorage.getItem('hc_registered_users');
-      if (stored) return JSON.parse(stored);
-      const initial = [
-        {
-          name: 'yvko2',
-          email: 'yvko2@gmail.com',
-          password: 'password123',
-          role: 'MEMBERS',
-          balance: '0.00',
-          avatar: 'favicon.png',
-          discordTag: 'yvko2#0001',
-          discordId: '849201948201948201',
-          orders: [
-            { id: 'ORD-849201', product: 'Private - Arc Raiders (30 Day)', key: 'HIDDEN-ARC-8492-XK91-2041', status: 'Active', expires: '29 Days Left' },
-            { id: 'ORD-849202', product: 'SVO DMA - Valorant (30 Day)', key: 'HIDDEN-VAL-5829-DMA1-9942', status: 'Active', expires: '28 Days Left' }
-          ]
+      if (stored) {
+        const list = JSON.parse(stored);
+        if (Array.isArray(list)) {
+          return list.filter(u => u && u.name !== 'yvko2' && u.email !== 'yvko2@gmail.com' && u.id !== 'usr-849201');
         }
-      ];
-      localStorage.setItem('hc_registered_users', JSON.stringify(initial));
-      return initial;
+      }
+      return [];
     } catch (e) {
       return [];
     }
   }
 
   function syncProfilePage(user) {
-    if (!user || !user.loggedIn) return;
+    const isUserLogged = user && user.loggedIn;
     const nameEls = document.querySelectorAll('.inv-username, .user-display-name');
-    nameEls.forEach(el => { el.textContent = user.name; });
+    nameEls.forEach(el => { el.textContent = isUserLogged ? user.name : 'Guest'; });
     const tagEls = document.querySelectorAll('.inv-usertag, .user-display-role');
-    tagEls.forEach(el => { el.textContent = user.role || 'Members'; });
+    tagEls.forEach(el => { el.textContent = isUserLogged ? (user.role || 'Customer') : 'Guest'; });
     const avatarImgs = document.querySelectorAll('.inv-avatar-holder img, .user-display-avatar');
-    avatarImgs.forEach(img => { img.src = user.avatar || 'favicon.png'; });
-    const userInput = document.querySelector('input[value="yvko2"], input#st-username');
-    if (userInput) userInput.value = user.name;
-    const emailInput = document.querySelector('input[value="yvko2@gmail.com"], input#st-email');
-    if (emailInput) emailInput.value = user.email;
-    const discordLabel = document.querySelector('.discord-connect-box span[style*="font-size:17px"]');
-    if (discordLabel) discordLabel.textContent = user.discordTag || (user.name + '#0001');
+    avatarImgs.forEach(img => { img.src = (isUserLogged && user.avatar) ? user.avatar : 'favicon.png'; });
+    const userInput = document.querySelector('#st-username, input[name="username"]');
+    if (userInput) userInput.value = isUserLogged ? user.name : '';
+    const emailInput = document.querySelector('#st-email, input[name="email"]');
+    if (emailInput) emailInput.value = isUserLogged ? (user.email || '') : '';
+
+    // Discord Section in Settings
+    const discordName = document.getElementById('discord-account-name');
+    const discordBadge = document.getElementById('discord-account-badge');
+    const discordMeta = document.getElementById('discord-account-meta');
+    const discordActions = document.getElementById('discord-actions-container');
+    const discordAvatar = document.getElementById('discord-account-avatar');
+
+    if (discordName) {
+      if (isUserLogged && user.discordTag) {
+        discordName.textContent = user.discordTag;
+        if (discordBadge) {
+          discordBadge.textContent = 'CONNECTED';
+          discordBadge.style.background = 'rgba(16,185,129,0.2)';
+          discordBadge.style.color = '#34d399';
+        }
+        if (discordMeta) {
+          discordMeta.innerHTML = `ID: ${user.discordId || 'Connected via OAuth'} • Synced Roles: <b style="color:#cbd5e1;">Customer, Verified</b>`;
+        }
+        if (discordAvatar) {
+          discordAvatar.innerHTML = (user.avatar && user.avatar !== 'favicon.png')
+            ? `<img src="${user.avatar}" style="width:100%;height:100%;object-fit:cover;" alt="Discord Avatar">`
+            : `<i class="fa-brands fa-discord"></i>`;
+        }
+        if (discordActions) {
+          discordActions.innerHTML = `
+            <button type="button" onclick="window.syncDiscordRoles()" style="background:#252a38;border:1px solid rgba(255,255,255,0.1);color:#ffffff;padding:10px 16px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;">
+              <i class="fa-solid fa-rotate"></i> Sync Roles
+            </button>
+            <button type="button" onclick="window.disconnectDiscord()" style="background:rgba(239,68,68,0.12);border:1px solid #ef4444;color:#ef4444;padding:10px 16px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;">
+              Disconnect
+            </button>
+          `;
+        }
+      } else {
+        discordName.textContent = 'No Discord Connected';
+        if (discordBadge) {
+          discordBadge.textContent = 'NOT LINKED';
+          discordBadge.style.background = 'rgba(148,163,184,0.15)';
+          discordBadge.style.color = '#94a3b8';
+        }
+        if (discordMeta) {
+          discordMeta.textContent = 'Link your Discord account to synchronize roles, access customer channels, and receive automatic key delivery.';
+        }
+        if (discordAvatar) {
+          discordAvatar.innerHTML = `<i class="fa-brands fa-discord"></i>`;
+        }
+        if (discordActions) {
+          discordActions.innerHTML = `
+            <button type="button" onclick="window.loginWithDiscord()" class="hc-discord-auth-btn" style="background:#5865F2;border:none;color:#ffffff;padding:10px 18px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:filter 0.2s;">
+              <i class="fa-brands fa-discord"></i> Connect Discord
+            </button>
+          `;
+        }
+      }
+    }
+
+    // License Keys section in Settings
+    const licContainer = document.getElementById('licenses-container');
+    if (licContainer) {
+      if (isUserLogged && user.orders && user.orders.length > 0) {
+        licContainer.innerHTML = user.orders.map(o => `
+          <div class="key-row">
+            <div style="display:flex;flex-direction:column;gap:4px;">
+              <div style="display:flex;align-items:center;gap:10px;">
+                <span style="font-size:16px;font-weight:800;color:#ffffff;">${o.product}</span>
+                <span style="background:rgba(16,185,129,0.15);color:#34d399;font-size:11px;font-weight:800;padding:2px 8px;border-radius:999px;border:1px solid rgba(16,185,129,0.3);">${o.status ? o.status.toUpperCase() : 'ACTIVE'}</span>
+              </div>
+              <div style="font-size:12px;color:#94a3b8;">Order: <b style="color:#ffffff;">${o.id}</b> • Status: <span style="color:#34d399;font-weight:700;">${o.expires || 'Active'}</span></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+              <div style="background:#11131b;border:1px dashed #9041ea;border-radius:8px;padding:8px 14px;display:flex;align-items:center;gap:12px;">
+                <code style="color:#f43f5e;font-family:monospace;font-size:14px;font-weight:800;letter-spacing:1px;">${o.key}</code>
+                <button type="button" onclick="navigator.clipboard.writeText('${o.key}'); this.textContent='Copied!';" style="background:linear-gradient(135deg,#b937e2,#7d44ed);color:#fff;border:none;padding:5px 12px;border-radius:6px;font-size:11px;font-weight:800;cursor:pointer;">Copy</button>
+              </div>
+              <button type="button" onclick="this.textContent='Reset Done!'; this.disabled=true;" style="background:#202432;border:1px solid rgba(255,255,255,0.1);color:#cbd5e1;padding:8px 14px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;">
+                <i class="fa-solid fa-arrows-rotate"></i> Reset HWID
+              </button>
+            </div>
+          </div>
+        `).join('');
+      } else {
+        licContainer.innerHTML = `
+          <div style="text-align:center;padding:36px 20px;color:#94a3b8;border:1px dashed rgba(255,255,255,0.08);border-radius:12px;background:rgba(255,255,255,0.02);">
+            <i class="fa-solid fa-key" style="font-size:32px;margin-bottom:12px;color:#64748b;display:block;"></i>
+            <div style="font-size:15px;font-weight:700;color:#ffffff;margin-bottom:4px;">No Active License Keys</div>
+            <div style="font-size:13px;color:#94a3b8;">When you complete a purchase via Shopify, your generated license keys will automatically show up here.</div>
+          </div>
+        `;
+      }
+    }
+
     if (document.title.includes('Profile')) {
-      document.title = user.name + "'s Profile - HiddenCheats";
+      document.title = isUserLogged ? (user.name + "'s Profile - HiddenCheats") : 'Profile - HiddenCheats';
     }
   }
 
@@ -1100,7 +1203,7 @@
             <form onsubmit="event.preventDefault(); window.handleAuthSubmit('signin');" style="display:flex;flex-direction:column;gap:14px;">
               <div>
                 <label style="display:block;font-size:12px;font-weight:600;color:#cbd5e1;margin-bottom:6px;">Username or Email Address</label>
-                <input type="text" id="auth-signin-login" required placeholder="e.g. yvko2 or name@example.com" autocomplete="username" style="width:100%;box-sizing:border-box;background:#1a1d27;border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:12px 14px;color:#ffffff;font-size:14px;outline:none;">
+                <input type="text" id="auth-signin-login" required placeholder="Enter your email or username" autocomplete="username" style="width:100%;box-sizing:border-box;background:#1a1d27;border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:12px 14px;color:#ffffff;font-size:14px;outline:none;">
               </div>
               <div>
                 <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
@@ -1241,63 +1344,57 @@
     if (lineSignup) lineSignup.style.display = isSignin ? 'none' : 'block';
   }
 
-  function handleAuthSubmit(type) {
+  async function handleAuthSubmit(type) {
+    const client = initSupabase();
+    if (!client) {
+      showToast('Auth Error', 'Supabase client is not ready. Please refresh.');
+      return;
+    }
+
     if (type === 'signin') {
       const errBox = document.getElementById('auth-signin-error');
       const loginInput = document.getElementById('auth-signin-login');
       const passInput = document.getElementById('auth-signin-password');
+      const submitBtn = document.getElementById('auth-signin-btn');
       if (errBox) { errBox.style.display = 'none'; errBox.textContent = ''; }
       const identity = loginInput ? loginInput.value.trim() : '';
       const password = passInput ? passInput.value : '';
       if (!identity || !password) {
-        if (errBox) { errBox.style.display = 'block'; errBox.textContent = 'Please fill in both fields.'; }
+        if (errBox) { errBox.style.display = 'block'; errBox.textContent = 'Please fill in both email and password.'; }
         return;
       }
 
-      const users = getRegisteredUsers();
-      const existing = users.find(u => (u.name.toLowerCase() === identity.toLowerCase() || u.email.toLowerCase() === identity.toLowerCase()));
-      if (existing) {
-        if (existing.password && existing.password !== password) {
-          if (errBox) { errBox.style.display = 'block'; errBox.textContent = 'Incorrect password. Please try again.'; }
-          return;
-        }
-        existing.loggedIn = true;
-        localStorage.setItem('hc_user', JSON.stringify(existing));
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Signing in...';
+      }
+
+      try {
+        const { data, error } = await client.auth.signInWithPassword({
+          email: identity,
+          password: password
+        });
+        if (error) throw error;
         closeAuthModal();
-        renderAuthNav();
-        syncProfilePage(existing);
-        showToast('Welcome Back', 'Logged in as ' + existing.name);
-        return;
+        showToast('Signed In', 'Welcome back!');
+      } catch (err) {
+        if (errBox) {
+          errBox.style.display = 'block';
+          errBox.textContent = err.message || 'Invalid login credentials.';
+        }
+      } finally {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Sign In';
+        }
       }
-
-      const username = identity.includes('@') ? identity.split('@')[0] : identity;
-      const newUser = {
-        name: username,
-        email: identity.includes('@') ? identity : username + '@hiddencheats.net',
-        password: password,
-        loggedIn: true,
-        role: 'MEMBERS',
-        balance: '0.00',
-        avatar: 'favicon.png',
-        discordTag: username + '#0001',
-        discordId: '84920' + Math.floor(100000 + Math.random() * 900000),
-        orders: [
-          { id: 'ORD-849201', product: 'Private - Arc Raiders (30 Day)', key: 'HIDDEN-ARC-8492-XK91-2041', status: 'Active', expires: '29 Days Left' }
-        ]
-      };
-      users.push(newUser);
-      localStorage.setItem('hc_registered_users', JSON.stringify(users));
-      localStorage.setItem('hc_user', JSON.stringify(newUser));
-      closeAuthModal();
-      renderAuthNav();
-      syncProfilePage(newUser);
-      showToast('Welcome Back', 'Logged in as ' + username);
     } else {
       const errBox = document.getElementById('auth-signup-error');
       const nameInput = document.getElementById('auth-signup-username');
       const emailInput = document.getElementById('auth-signup-email');
       const passInput = document.getElementById('auth-signup-pass');
       const confirmInput = document.getElementById('auth-signup-confirm');
+      const submitBtn = document.getElementById('auth-signup-btn');
       if (errBox) { errBox.style.display = 'none'; errBox.textContent = ''; }
 
       const username = nameInput ? nameInput.value.trim() : '';
@@ -1309,89 +1406,256 @@
         if (errBox) { errBox.style.display = 'block'; errBox.textContent = 'Please fill in all required fields.'; }
         return;
       }
-      if (password.length < 4) {
-        if (errBox) { errBox.style.display = 'block'; errBox.textContent = 'Password must be at least 4 characters long.'; }
+      if (password.length < 6) {
+        if (errBox) { errBox.style.display = 'block'; errBox.textContent = 'Password must be at least 6 characters long.'; }
         return;
       }
       if (password !== confirm) {
-        if (errBox) { errBox.style.display = 'block'; errBox.textContent = 'Passwords do not match. Please re-enter.'; }
+        if (errBox) { errBox.style.display = 'block'; errBox.textContent = 'Passwords do not match.'; }
         return;
       }
 
-      const users = getRegisteredUsers();
-      if (users.some(u => u.name.toLowerCase() === username.toLowerCase())) {
-        if (errBox) { errBox.style.display = 'block'; errBox.textContent = 'Username already registered. Please choose another or sign in.'; }
-        return;
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Creating Account...';
       }
 
-      const newUser = {
-        name: username,
-        email: email,
-        password: password,
-        loggedIn: true,
-        role: 'MEMBERS',
-        balance: '0.00',
-        avatar: 'favicon.png',
-        discordTag: username + '#0001',
-        discordId: '84920' + Math.floor(100000 + Math.random() * 900000),
-        orders: [
-          { id: 'ORD-849201', product: 'Private - Arc Raiders (30 Day)', key: 'HIDDEN-ARC-8492-XK91-2041', status: 'Active', expires: '29 Days Left' }
-        ]
-      };
-      users.push(newUser);
-      localStorage.setItem('hc_registered_users', JSON.stringify(users));
-      localStorage.setItem('hc_user', JSON.stringify(newUser));
-      closeAuthModal();
-      renderAuthNav();
-      syncProfilePage(newUser);
-      showToast('Account Created', 'Welcome to HiddenCheats, ' + username + '!');
+      try {
+        const { data, error } = await client.auth.signUp({
+          email: email,
+          password: password,
+          options: {
+            data: {
+              full_name: username,
+              user_name: username
+            }
+          }
+        });
+        if (error) throw error;
+        closeAuthModal();
+        showToast('Account Created', 'Check your email to confirm your account, or sign in.');
+      } catch (err) {
+        if (errBox) {
+          errBox.style.display = 'block';
+          errBox.textContent = err.message || 'Registration failed.';
+        }
+      } finally {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Create my Account';
+        }
+      }
     }
   }
 
-  function loginWithDiscord() {
+  let supabaseClient = null;
+
+  function ensureSupabaseLibrary(callback) {
+    if (window.supabase && typeof window.supabase.createClient === 'function') {
+      if (callback) callback();
+      return;
+    }
+    const existing = document.getElementById('supabase-js-cdn');
+    if (existing) {
+      existing.addEventListener('load', () => { if (callback) callback(); });
+      return;
+    }
+    const script = document.createElement('script');
+    script.id = 'supabase-js-cdn';
+    script.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';
+    script.onload = () => {
+      console.log('[Supabase] SDK loaded successfully.');
+      if (callback) callback();
+    };
+    script.onerror = () => {
+      console.warn('[Supabase] Failed to load Supabase SDK from CDN.');
+    };
+    document.head.appendChild(script);
+  }
+
+  function initSupabase() {
+    if (supabaseClient) return supabaseClient;
+    const cfg = window.SUPABASE_CONFIG || {};
+    const url = cfg.url || localStorage.getItem('hc_supabase_url') || 'https://gdzsfblrklpqmqanwmwd.supabase.co';
+    const anonKey = cfg.anonKey || localStorage.getItem('hc_supabase_anon_key') || 'sb_publishable_p6uoGFtx-5U6DgwEI3lRJQ_iMfH7ISo';
+
+    if (window.supabase && typeof window.supabase.createClient === 'function' && url && anonKey) {
+      try {
+        supabaseClient = window.supabase.createClient(url, anonKey, {
+          auth: {
+            persistSession: true,
+            autoRefreshToken: true,
+            detectSessionInUrl: true
+          }
+        });
+        window.supabaseClient = supabaseClient;
+      } catch (err) {
+        console.warn('[Supabase] Init error:', err);
+      }
+    }
+    return supabaseClient;
+  }
+
+  async function checkSupabaseSession() {
+    const client = initSupabase();
+    if (!client) return;
+
+    try {
+      const { data: { session }, error } = await client.auth.getSession();
+      if (session && session.user) {
+        handleSupabaseUser(session.user);
+      }
+
+      client.auth.onAuthStateChange((event, session) => {
+        if (event === 'SIGNED_IN' && session?.user) {
+          handleSupabaseUser(session.user);
+        } else if (event === 'SIGNED_OUT') {
+          const defaultLoggedOut = { loggedIn: false };
+          localStorage.setItem('hc_user', JSON.stringify(defaultLoggedOut));
+          renderAuthNav();
+          syncProfilePage(defaultLoggedOut);
+        }
+      });
+    } catch (e) {
+      console.warn('[Supabase] Session check error:', e);
+    }
+  }
+
+  function handleSupabaseUser(sbUser) {
+    if (!sbUser) return;
+    const meta = sbUser.user_metadata || {};
+    const identity = (sbUser.identities && sbUser.identities.length > 0)
+      ? sbUser.identities.find(i => i.provider === 'discord') || sbUser.identities[0]
+      : null;
+
+    const discordData = identity?.identity_data || meta;
+    const name = discordData.full_name || discordData.custom_claims?.global_name || discordData.user_name || sbUser.email?.split('@')[0] || 'Member';
+    const tag = discordData.user_name ? (discordData.discriminator && discordData.discriminator !== '0' ? `${discordData.user_name}#${discordData.discriminator}` : `@${discordData.user_name}`) : (discordData.full_name || name);
+    const avatar = discordData.avatar_url || (discordData.avatar ? `https://cdn.discordapp.com/avatars/${discordData.provider_id || identity?.id}/${discordData.avatar}.png` : 'favicon.png');
+    const discordId = discordData.provider_id || identity?.id || sbUser.id.slice(0, 18);
+
+    const currentUser = getCurrentUser() || {};
+    const updatedUser = {
+      id: sbUser.id,
+      name: name,
+      email: sbUser.email || (currentUser.email && !currentUser.email.includes('yvko2') ? currentUser.email : `${name}@hiddencheats.net`),
+      loggedIn: true,
+      role: (currentUser.role && currentUser.role !== 'VIP CUSTOMER') ? currentUser.role : 'Customer',
+      balance: currentUser.balance || '0.00',
+      avatar: avatar,
+      discordTag: tag,
+      discordId: discordId,
+      provider: identity?.provider || 'discord',
+      orders: (currentUser.orders && Array.isArray(currentUser.orders)) ? currentUser.orders : []
+    };
+
+    localStorage.setItem('hc_user', JSON.stringify(updatedUser));
+    const users = getRegisteredUsers();
+    const idx = users.findIndex(u => u.email === updatedUser.email || u.name === updatedUser.name);
+    if (idx >= 0) users[idx] = updatedUser;
+    else users.push(updatedUser);
+    localStorage.setItem('hc_registered_users', JSON.stringify(users));
+
+    renderAuthNav();
+    syncProfilePage(updatedUser);
+  }
+
+  async function loginWithDiscord() {
     const btn = document.querySelector('.hc-discord-auth-btn');
     const prevText = btn ? btn.innerHTML : '';
     if (btn) {
-      btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Authorizing with Discord...';
+      btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Connecting Discord...';
       btn.style.pointerEvents = 'none';
     }
-    setTimeout(() => {
-      const discordUser = {
-        name: 'yvko2',
-        email: 'yvko2@gmail.com',
-        password: 'password123',
-        loggedIn: true,
-        role: 'VIP CUSTOMER',
-        balance: '0.00',
-        avatar: 'favicon.png',
-        discordTag: 'yvko2#0001',
-        discordId: '849201948201948201',
-        orders: [
-          { id: 'ORD-849201', product: 'Private - Arc Raiders (30 Day)', key: 'HIDDEN-ARC-8492-XK91-2041', status: 'Active', expires: '29 Days Left' },
-          { id: 'ORD-849202', product: 'SVO DMA - Valorant (30 Day)', key: 'HIDDEN-VAL-5829-DMA1-9942', status: 'Active', expires: '28 Days Left' }
-        ]
-      };
-      const users = getRegisteredUsers();
-      if (!users.some(u => u.name.toLowerCase() === discordUser.name.toLowerCase())) {
-        users.push(discordUser);
-        localStorage.setItem('hc_registered_users', JSON.stringify(users));
+
+    const client = initSupabase();
+    if (client) {
+      try {
+        const redirectUrl = window.location.origin + window.location.pathname;
+        const { data, error } = await client.auth.signInWithOAuth({
+          provider: 'discord',
+          options: {
+            redirectTo: redirectUrl,
+            scopes: 'identify email'
+          }
+        });
+        if (error) throw error;
+        return;
+      } catch (err) {
+        console.error('[Supabase] Discord OAuth error:', err);
+        let msg = err.message || 'OAuth error occurred.';
+        if (msg.toLowerCase().includes('not enabled')) {
+          msg = 'Discord provider is not toggled ON yet in Supabase Dashboard (Authentication -> Sign In / Providers -> Discord).';
+        }
+        showToast('Discord Auth Setup', msg);
+        if (btn) {
+          btn.innerHTML = prevText;
+          btn.style.pointerEvents = '';
+        }
+        return;
       }
-      localStorage.setItem('hc_user', JSON.stringify(discordUser));
-      closeAuthModal();
-      renderAuthNav();
-      syncProfilePage(discordUser);
-      showToast('Discord Connected', 'Logged in as ' + discordUser.discordTag);
+    }
+
+    if (!client) {
       if (btn) {
         btn.innerHTML = prevText;
         btn.style.pointerEvents = '';
       }
-    }, 450);
+      const currentUrl = localStorage.getItem('hc_supabase_url') || '';
+      const promptUrl = prompt('Enter your Supabase Project URL (e.g. https://xxxx.supabase.co):', currentUrl);
+      if (!promptUrl) {
+        showToast('Supabase Not Configured', 'Enter your Supabase Project URL & Anon Key to connect Discord OAuth.');
+        return;
+      }
+      const promptKey = prompt('Enter your Supabase public "anon" Key (from Supabase Settings -> API, starts with eyJ...):');
+      if (!promptKey) {
+        showToast('Supabase Not Configured', 'Anon key is required to initialize Supabase OAuth.');
+        return;
+      }
+      window.setSupabaseConfig(promptUrl, promptKey);
+      return;
+    }
+  }
+
+  async function disconnectDiscord() {
+    if (supabaseClient) {
+      try {
+        await supabaseClient.auth.signOut();
+      } catch (e) {
+        console.warn(e);
+      }
+    }
+    const user = getCurrentUser();
+    if (user) {
+      user.discordTag = null;
+      user.discordId = null;
+      user.provider = null;
+      localStorage.setItem('hc_user', JSON.stringify(user));
+      syncProfilePage(user);
+    }
+    showToast('Discord Disconnected', 'Your Discord account has been unlinked.');
+  }
+
+  function syncDiscordRoles() {
+    const user = getCurrentUser();
+    if (!user || !user.discordTag) {
+      showToast('No Discord Linked', 'Please connect your Discord account first.');
+      return;
+    }
+    showToast('Roles Synchronized', 'Verified roles for ' + user.discordTag + ': Customer, VIP Member');
   }
 
   function getCurrentUser() {
     try {
       const stored = localStorage.getItem('hc_user');
-      if (stored) return JSON.parse(stored);
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (parsed && (parsed.name === 'yvko2' || parsed.email === 'yvko2@gmail.com' || parsed.id === 'usr-849201')) {
+          localStorage.removeItem('hc_user');
+          return null;
+        }
+        return parsed;
+      }
       return null;
     } catch (e) {
       return null;
@@ -1552,11 +1816,19 @@
     }
   });
 
-  function signOut() {
+  async function signOut() {
+    if (supabaseClient) {
+      try {
+        await supabaseClient.auth.signOut();
+      } catch (e) {
+        console.warn('[Supabase] Signout error:', e);
+      }
+    }
     const defaultLoggedOut = { loggedIn: false };
     localStorage.setItem('hc_user', JSON.stringify(defaultLoggedOut));
     closeUserDropdown();
     renderAuthNav();
+    syncProfilePage(defaultLoggedOut);
     showToast('Signed Out', 'You have been signed out successfully.');
   }
 
@@ -1658,14 +1930,32 @@
   window.addToCart = addToCart;
   window.showToast = showToast;
   window.loginWithDiscord = loginWithDiscord;
+  window.disconnectDiscord = disconnectDiscord;
+  window.syncDiscordRoles = syncDiscordRoles;
+  window.initSupabase = initSupabase;
+  window.checkSupabaseSession = checkSupabaseSession;
   window.toggleAuthPassVisibility = toggleAuthPassVisibility;
   window.syncProfilePage = syncProfilePage;
   window.getRegisteredUsers = getRegisteredUsers;
   window.getCurrentUser = getCurrentUser;
 
   document.addEventListener('DOMContentLoaded', function () {
+    try {
+      const u = localStorage.getItem('hc_user');
+      if (u && (u.includes('yvko2') || u.includes('usr-849201'))) {
+        localStorage.removeItem('hc_user');
+      }
+      const r = localStorage.getItem('hc_registered_users');
+      if (r && r.includes('yvko2')) {
+        localStorage.removeItem('hc_registered_users');
+      }
+    } catch (e) {}
+
     initCatalogCardTriggers();
     updateNavbarCartBadges();
     renderAuthNav();
+    ensureSupabaseLibrary(() => {
+      checkSupabaseSession();
+    });
   });
 })();

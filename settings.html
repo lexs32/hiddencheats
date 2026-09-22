@@ -219,48 +219,10 @@
           </div>
 
           <div id="licenses-container" style="display:flex;flex-direction:column;gap:16px;">
-            <div class="key-row">
-              <div style="display:flex;flex-direction:column;gap:4px;">
-                <div style="display:flex;align-items:center;gap:10px;">
-                  <span style="font-size:16px;font-weight:800;color:#ffffff;">Private - Arc Raiders</span>
-                  <span style="background:rgba(16,185,129,0.15);color:#34d399;font-size:11px;font-weight:800;padding:2px 8px;border-radius:999px;border:1px solid rgba(16,185,129,0.3);">ACTIVE</span>
-                </div>
-                <div style="font-size:12px;color:#94a3b8;">Plan: <b style="color:#ffffff;">30 Day Key</b> • Expires in: <span style="color:#34d399;font-weight:700;">29 Days 14 Hours</span></div>
-              </div>
-
-              <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
-                <div style="background:#11131b;border:1px dashed #9041ea;border-radius:8px;padding:8px 14px;display:flex;align-items:center;gap:12px;">
-                  <code style="color:#f43f5e;font-family:monospace;font-size:14px;font-weight:800;letter-spacing:1px;">HIDDEN-ARC-8492-XK91-2041</code>
-                  <button onclick="navigator.clipboard.writeText('HIDDEN-ARC-8492-XK91-2041'); this.textContent='Copied!';" style="background:linear-gradient(135deg,#b937e2,#7d44ed);color:#fff;border:none;padding:5px 12px;border-radius:6px;font-size:11px;font-weight:800;cursor:pointer;">
-                    Copy
-                  </button>
-                </div>
-                <button onclick="this.textContent='Reset Done!'; this.disabled=true;" style="background:#202432;border:1px solid rgba(255,255,255,0.1);color:#cbd5e1;padding:8px 14px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;">
-                  <i class="fa-solid fa-arrows-rotate"></i> Reset HWID
-                </button>
-              </div>
-            </div>
-
-            <div class="key-row">
-              <div style="display:flex;flex-direction:column;gap:4px;">
-                <div style="display:flex;align-items:center;gap:10px;">
-                  <span style="font-size:16px;font-weight:800;color:#ffffff;">SVO DMA - Valorant</span>
-                  <span style="background:rgba(16,185,129,0.15);color:#34d399;font-size:11px;font-weight:800;padding:2px 8px;border-radius:999px;border:1px solid rgba(16,185,129,0.3);">ACTIVE</span>
-                </div>
-                <div style="font-size:12px;color:#94a3b8;">Plan: <b style="color:#ffffff;">7 Day Key</b> • Expires in: <span style="color:#34d399;font-weight:700;">6 Days 8 Hours</span></div>
-              </div>
-
-              <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
-                <div style="background:#11131b;border:1px dashed #9041ea;border-radius:8px;padding:8px 14px;display:flex;align-items:center;gap:12px;">
-                  <code style="color:#f43f5e;font-family:monospace;font-size:14px;font-weight:800;letter-spacing:1px;">HIDDEN-VAL-5829-DMA1-9942</code>
-                  <button onclick="navigator.clipboard.writeText('HIDDEN-VAL-5829-DMA1-9942'); this.textContent='Copied!';" style="background:linear-gradient(135deg,#b937e2,#7d44ed);color:#fff;border:none;padding:5px 12px;border-radius:6px;font-size:11px;font-weight:800;cursor:pointer;">
-                    Copy
-                  </button>
-                </div>
-                <button onclick="this.textContent='Reset Done!'; this.disabled=true;" style="background:#202432;border:1px solid rgba(255,255,255,0.1);color:#cbd5e1;padding:8px 14px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;">
-                  <i class="fa-solid fa-arrows-rotate"></i> Reset HWID
-                </button>
-              </div>
+            <div style="text-align:center;padding:36px 20px;color:#94a3b8;border:1px dashed rgba(255,255,255,0.08);border-radius:12px;background:rgba(255,255,255,0.02);">
+              <i class="fa-solid fa-key" style="font-size:32px;margin-bottom:12px;color:#64748b;display:block;"></i>
+              <div style="font-size:15px;font-weight:700;color:#ffffff;margin-bottom:4px;">No Active License Keys</div>
+              <div style="font-size:13px;color:#94a3b8;">When you complete a purchase via Shopify, your generated license keys will automatically show up here.</div>
             </div>
           </div>
         </div>
@@ -269,26 +231,23 @@
           <h2 style="font-size:20px;font-weight:800;color:#ffffff;margin:0 0 6px;">Connected Accounts</h2>
           <p style="font-size:13px;color:#94a3b8;margin:0 0 24px;">Link your Discord account to synchronize roles, access customer channels, and receive automatic key delivery.</p>
 
-          <div class="discord-connect-box">
+          <div id="hc-discord-box" class="discord-connect-box">
             <div style="display:flex;align-items:center;gap:16px;">
-              <div style="width:52px;height:52px;border-radius:14px;background:#5865F2;display:flex;align-items:center;justify-content:center;color:#ffffff;font-size:26px;flex-shrink:0;">
+              <div id="discord-account-avatar" style="width:52px;height:52px;border-radius:14px;background:#5865F2;display:flex;align-items:center;justify-content:center;color:#ffffff;font-size:26px;flex-shrink:0;overflow:hidden;">
                 <i class="fa-brands fa-discord"></i>
               </div>
               <div>
                 <div style="display:flex;align-items:center;gap:8px;">
-                  <span style="font-size:17px;font-weight:800;color:#ffffff;">yvko2#0001</span>
-                  <span style="background:rgba(16,185,129,0.2);color:#34d399;font-size:10px;font-weight:800;padding:2px 8px;border-radius:999px;">CONNECTED</span>
+                  <span id="discord-account-name" style="font-size:17px;font-weight:800;color:#ffffff;">No Discord Connected</span>
+                  <span id="discord-account-badge" style="background:rgba(148,163,184,0.15);color:#94a3b8;font-size:10px;font-weight:800;padding:2px 8px;border-radius:999px;">NOT LINKED</span>
                 </div>
-                <div style="font-size:12px;color:#94a3b8;margin-top:3px;">ID: 849201948201948201 • Synced Roles: <b style="color:#cbd5e1;">Customer, VIP Member</b></div>
+                <div id="discord-account-meta" style="font-size:12px;color:#94a3b8;margin-top:3px;">Link your Discord account to synchronize roles, access customer channels, and receive automatic key delivery.</div>
               </div>
             </div>
 
-            <div style="display:flex;gap:10px;">
-              <button onclick="alert('Discord roles re-synced successfully!')" style="background:#252a38;border:1px solid rgba(255,255,255,0.1);color:#ffffff;padding:10px 16px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;">
-                <i class="fa-solid fa-rotate"></i> Sync Roles
-              </button>
-              <button onclick="alert('Discord disconnected')" style="background:rgba(239,68,68,0.12);border:1px solid #ef4444;color:#ef4444;padding:10px 16px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;">
-                Disconnect
+            <div id="discord-actions-container" style="display:flex;gap:10px;align-items:center;">
+              <button type="button" onclick="window.loginWithDiscord()" class="hc-discord-auth-btn" style="background:#5865F2;border:none;color:#ffffff;padding:10px 18px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:filter 0.2s;">
+                <i class="fa-brands fa-discord"></i> Connect Discord
               </button>
             </div>
           </div>
@@ -301,19 +260,19 @@
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
             <div>
               <label class="st-label">Username</label>
-              <input type="text" class="st-input" value="yvko2">
+              <input type="text" id="st-username" class="st-input" placeholder="Enter username" value="">
             </div>
             <div>
               <label class="st-label">Email Address</label>
-              <input type="email" class="st-input" value="yvko2@gmail.com">
+              <input type="email" id="st-email" class="st-input" placeholder="Enter email" value="">
             </div>
             <div>
               <label class="st-label">Member Group</label>
-              <input type="text" class="st-input" value="Members" disabled style="opacity:0.6;cursor:not-allowed;">
+              <input type="text" class="st-input" value="Customer" disabled style="opacity:0.6;cursor:not-allowed;">
             </div>
             <div>
               <label class="st-label">Account Created</label>
-              <input type="text" class="st-input" value="15 hours ago" disabled style="opacity:0.6;cursor:not-allowed;">
+              <input type="text" class="st-input" value="Active" disabled style="opacity:0.6;cursor:not-allowed;">
             </div>
           </div>
 
@@ -406,6 +365,8 @@
       }
     });
   </script>
+  <script src="assets/js/supabase-config.js"></script>
+  <script src="assets/js/shopify-config.js"></script>
   <script src="assets/js/store.js"></script>
 </body>
 </html>
