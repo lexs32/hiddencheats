@@ -516,79 +516,32 @@
     if (!drawer) {
       drawer = document.createElement('div');
       drawer.id = 'cart-drawer';
-      drawer.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:99999;display:flex;justify-content:flex-end;opacity:0;transition:opacity 0.25s ease;pointer-events:none;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);';
+      drawer.style.cssText = 'position:fixed;inset:0;background:rgba(6,8,14,0.85);z-index:99999;display:flex;align-items:center;justify-content:center;padding:16px;opacity:0;transition:opacity 0.25s cubic-bezier(0.16,1,0.3,1);pointer-events:none;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);';
       drawer.innerHTML = `
-        <div id="cart-drawer-panel" style="background:#14171f;border-left:1px solid rgba(255,255,255,0.1);width:100%;max-width:440px;height:100%;display:flex;flex-direction:column;transform:translateX(100%);transition:transform 0.3s cubic-bezier(0.16,1,0.3,1);box-shadow:-10px 0 40px rgba(0,0,0,0.7);">
-          <div style="padding:20px 24px;border-bottom:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:space-between;background:#171b24;">
-            <div style="display:flex;align-items:center;gap:10px;">
-              <i class="fa-solid fa-cart-shopping" style="color:#b937e2;font-size:16px;"></i>
-              <h3 style="margin:0;font-size:18px;font-weight:900;color:#ffffff;">Shopping Cart</h3>
-              <span id="cart-drawer-count-badge" style="background:rgba(144,65,234,0.15);color:#b937e2;border:1px solid rgba(144,65,234,0.3);font-size:11px;font-weight:800;padding:2px 8px;border-radius:999px;">0</span>
+        <style>
+          @media (max-width: 768px) {
+            .hc-cart-grid { grid-template-columns: 1fr !important; gap: 16px !important; }
+            #cart-drawer-panel { max-height: 94vh !important; border-radius: 16px !important; }
+          }
+        </style>
+        <div id="cart-drawer-panel" style="background:#0f121a;border:1px solid rgba(185,55,226,0.28);border-radius:20px;width:100%;max-width:860px;max-height:88vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,0.85), 0 0 45px rgba(185,55,226,0.15);transform:scale(0.95);transition:transform 0.25s cubic-bezier(0.16,1,0.3,1);">
+          <div style="padding:18px 24px;border-bottom:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:space-between;background:#131722;flex-shrink:0;">
+            <div style="display:flex;align-items:center;gap:12px;">
+              <div style="width:38px;height:38px;border-radius:10px;background:rgba(185,55,226,0.15);border:1px solid rgba(185,55,226,0.35);display:flex;align-items:center;justify-content:center;font-size:16px;color:#b937e2;">
+                <i class="fa-solid fa-cart-shopping"></i>
+              </div>
+              <div>
+                <h3 style="margin:0;font-size:18px;font-weight:900;color:#ffffff;letter-spacing:-0.3px;">Your <span style="background:linear-gradient(135deg,#b937e2,#7d44ed);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Cart</span></h3>
+                <div style="font-size:11px;color:#8896a6;margin-top:2px;">Review items & proceed to secure instant checkout</div>
+              </div>
+              <span id="cart-drawer-count-badge" style="background:rgba(185,55,226,0.15);color:#b937e2;border:1px solid rgba(185,55,226,0.35);font-size:11px;font-weight:800;padding:2px 9px;border-radius:999px;">0</span>
             </div>
-            <button onclick="window.closeCart()" style="background:none;border:none;color:#9aa2b1;font-size:20px;cursor:pointer;width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;">
+            <button onclick="window.closeCart()" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:#9aa2b1;font-size:16px;cursor:pointer;width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;transition:all 0.2s ease;" onmouseover="this.style.color='#fff'; this.style.borderColor='rgba(185,55,226,0.5)';" onmouseout="this.style.color='#9aa2b1'; this.style.borderColor='rgba(255,255,255,0.1)';">
               <i class="fa-solid fa-xmark"></i>
             </button>
           </div>
 
-          <div id="cart-items-container" style="padding:20px;flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:14px;"></div>
-
-          <div id="cart-footer-panel" style="padding:20px;background:#10131a;border-top:1px solid rgba(255,255,255,0.08);display:flex;flex-direction:column;gap:14px;">
-            <div style="display:flex;gap:8px;">
-              <input type="text" id="promo-code-input" placeholder="Promo code (e.g. HIDDEN10)" style="flex:1;background:#1a1d26;border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:8px 12px;color:#ffffff;font-size:12px;outline:none;">
-              <button onclick="window.applyPromoCode()" style="background:#1e222d;border:1px solid rgba(255,255,255,0.12);color:#ffffff;padding:8px 14px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;">
-                Apply
-              </button>
-            </div>
-            <div id="promo-status-msg" style="font-size:11px;margin-top:-6px;display:none;"></div>
-
-            <div style="display:flex;flex-direction:column;gap:6px;font-size:13px;border-top:1px solid rgba(255,255,255,0.06);padding-top:12px;">
-              <div style="display:flex;justify-content:space-between;color:#9aa2b1;">
-                <span>Subtotal</span>
-                <span id="cart-subtotal-val" style="color:#ffffff;font-weight:700;">$0.00</span>
-              </div>
-              <div id="cart-discount-row" style="display:none;justify-content:space-between;color:#10b981;">
-                <span id="cart-discount-label">Discount</span>
-                <span id="cart-discount-val" style="font-weight:700;">-$0.00</span>
-              </div>
-              <div style="display:flex;justify-content:space-between;color:#ffffff;font-size:16px;font-weight:900;border-top:1px solid rgba(255,255,255,0.08);padding-top:8px;">
-                <span>Total</span>
-                <span id="cart-total-val" style="color:#b937e2;">$0.00</span>
-              </div>
-            </div>
-
-            <div>
-              <div style="font-size:11px;color:#8896a6;font-weight:700;text-transform:uppercase;margin-bottom:6px;">Payment Method:</div>
-              <div style="display:grid;grid-template-columns:repeat(4, 1fr);gap:6px;">
-                <button type="button" class="pay-btn active-pay" onclick="window.setPaymentMethod('card', this)" style="background:rgba(144,65,234,0.12);border:1px solid #9041ea;color:#ffffff;padding:6px 4px;border-radius:6px;font-size:11px;font-weight:700;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;">
-                  <i class="fa-solid fa-credit-card" style="color:#b937e2;font-size:12px;"></i>
-                  <span>Card</span>
-                </button>
-                <button type="button" class="pay-btn" onclick="window.setPaymentMethod('paypal', this)" style="background:#1a1d26;border:1px solid rgba(255,255,255,0.08);color:#9aa2b1;padding:6px 4px;border-radius:6px;font-size:11px;font-weight:700;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;">
-                  <i class="fa-brands fa-paypal" style="font-size:12px;"></i>
-                  <span>PayPal</span>
-                </button>
-                <button type="button" class="pay-btn" onclick="window.setPaymentMethod('crypto', this)" style="background:#1a1d26;border:1px solid rgba(255,255,255,0.08);color:#9aa2b1;padding:6px 4px;border-radius:6px;font-size:11px;font-weight:700;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;">
-                  <i class="fa-brands fa-bitcoin" style="font-size:12px;"></i>
-                  <span>Crypto</span>
-                </button>
-                <button type="button" class="pay-btn" onclick="window.setPaymentMethod('cashapp', this)" style="background:#1a1d26;border:1px solid rgba(255,255,255,0.08);color:#9aa2b1;padding:6px 4px;border-radius:6px;font-size:11px;font-weight:700;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;">
-                  <i class="fa-solid fa-dollar-sign" style="font-size:12px;"></i>
-                  <span>CashApp</span>
-                </button>
-              </div>
-            </div>
-
-            <button onclick="window.proceedCheckout()" style="background:linear-gradient(135deg, #b937e2, #7d44ed);border:none;color:#ffffff;padding:13px;border-radius:10px;font-size:14px;font-weight:900;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:none;">
-              <i class="fa-solid fa-lock"></i>
-              <span>Proceed to Checkout</span>
-            </button>
-
-            <div style="display:flex;align-items:center;justify-content:center;gap:12px;font-size:10px;color:#8896a6;">
-              <span><i class="fa-solid fa-bolt" style="color:#b937e2;"></i> Instant Delivery</span>
-              <span>•</span>
-              <span><i class="fa-solid fa-shield-halved" style="color:#b937e2;"></i> 256-Bit SSL Encrypted</span>
-            </div>
-          </div>
+          <div id="cart-items-container" style="padding:22px;flex:1;overflow-y:auto;min-height:0;"></div>
         </div>
       `;
       document.body.appendChild(drawer);
@@ -602,7 +555,7 @@
     drawer.classList.add('active-drawer');
     drawer.style.pointerEvents = 'auto';
     drawer.style.opacity = '1';
-    drawer.querySelector('#cart-drawer-panel').style.transform = 'translateX(0)';
+    drawer.querySelector('#cart-drawer-panel').style.transform = 'scale(1)';
     document.body.style.overflow = 'hidden';
   }
 
@@ -611,7 +564,7 @@
     if (!drawer) return;
     drawer.classList.remove('active-drawer');
     drawer.style.opacity = '0';
-    drawer.querySelector('#cart-drawer-panel').style.transform = 'translateX(100%)';
+    drawer.querySelector('#cart-drawer-panel').style.transform = 'scale(0.95)';
     drawer.style.pointerEvents = 'none';
     if (!document.getElementById('cheat-config-modal')?.classList.contains('active-modal') &&
         !document.getElementById('game-cheats-modal')?.classList.contains('active-modal')) {
@@ -622,17 +575,17 @@
   function setPaymentMethod(method, btn) {
     activePayment = method;
     document.querySelectorAll('.pay-btn').forEach(b => {
-      b.style.background = '#1a1d26';
+      b.style.background = '#161922';
       b.style.borderColor = 'rgba(255,255,255,0.08)';
       b.style.color = '#9aa2b1';
       const icon = b.querySelector('i');
       if (icon) icon.style.color = '';
     });
-    btn.style.background = 'rgba(144,65,234,0.12)';
-    btn.style.borderColor = '#9041ea';
+    btn.style.background = 'rgba(185,55,226,0.15)';
+    btn.style.borderColor = '#b937e2';
     btn.style.color = '#ffffff';
     const icon = btn.querySelector('i');
-    if (icon) icon.style.color = '#9041ea';
+    if (icon) icon.style.color = '#b937e2';
   }
 
   function applyPromoCode() {
@@ -646,99 +599,176 @@
       savePromo();
       msg.style.display = 'block';
       msg.style.color = '#10b981';
-      msg.textContent = 'Promo code applied: 10% discount!';
+      msg.textContent = 'Promo applied: 10% discount!';
       renderCart();
     } else if (val === 'STACK20') {
       activePromo = { code: 'STACK20', discount: 20 };
       savePromo();
       msg.style.display = 'block';
       msg.style.color = '#10b981';
-      msg.textContent = 'Promo code applied: 20% VIP discount!';
+      msg.textContent = 'Promo applied: 20% VIP discount!';
       renderCart();
     } else {
       msg.style.display = 'block';
       msg.style.color = '#ef4444';
-      msg.textContent = 'Invalid promo code. Try HIDDEN10.';
+      msg.textContent = 'Invalid code. Try HIDDEN10.';
     }
   }
 
   function renderCart() {
     const container = document.getElementById('cart-items-container');
     const badge = document.getElementById('cart-drawer-count-badge');
-    const subtotalEl = document.getElementById('cart-subtotal-val');
-    const totalEl = document.getElementById('cart-total-val');
-    const discountRow = document.getElementById('cart-discount-row');
-    const discountVal = document.getElementById('cart-discount-val');
-    const discountLabel = document.getElementById('cart-discount-label');
-    const footerPanel = document.getElementById('cart-footer-panel');
 
     const totalQty = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
-    if (badge) badge.textContent = totalQty;
+    if (badge) badge.textContent = `${totalQty} item${totalQty === 1 ? '' : 's'}`;
     updateNavbarCartBadges();
 
     if (!container) return;
     container.innerHTML = '';
 
     if (cart.length === 0) {
-      if (footerPanel) footerPanel.style.display = 'none';
       container.innerHTML = `
-        <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;text-align:center;padding:40px 20px;color:#8896a6;">
-          <div style="width:64px;height:64px;border-radius:50%;background:#1a1d26;display:flex;align-items:center;justify-content:center;font-size:24px;color:#b937e2;margin-bottom:16px;">
+        <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:56px 20px;text-align:center;">
+          <div style="width:76px;height:76px;border-radius:50%;background:rgba(185,55,226,0.1);border:1px solid rgba(185,55,226,0.25);display:flex;align-items:center;justify-content:center;font-size:30px;color:#b937e2;margin-bottom:18px;box-shadow:0 0 35px rgba(185,55,226,0.2);">
             <i class="fa-solid fa-cart-shopping"></i>
           </div>
-          <h4 style="margin:0 0 8px;font-size:16px;font-weight:800;color:#ffffff;">Your cart is empty</h4>
-          <p style="margin:0 0 20px;font-size:12px;color:#9aa2b1;max-width:240px;line-height:1.5;">Choose from our private cheats and level up your dominance today.</p>
-          <button onclick="window.closeCart(); location.href='index.html#products';" style="background:linear-gradient(135deg, #b937e2, #7d44ed);color:#ffffff;border:none;padding:10px 20px;border-radius:8px;font-size:13px;font-weight:800;cursor:pointer;">
-            Browse Cheats
+          <h4 style="margin:0 0 8px;font-size:20px;font-weight:800;color:#ffffff;">Your cart is empty</h4>
+          <p style="margin:0 0 24px;font-size:13px;color:#9aa2b1;max-width:320px;line-height:1.5;">Looks like you haven't added anything to your cart yet.</p>
+          <button onclick="window.closeCart(); location.href='index.html#products';" style="background:linear-gradient(135deg, #b937e2, #7d44ed);color:#ffffff;border:none;padding:12px 28px;border-radius:10px;font-size:13px;font-weight:800;cursor:pointer;display:inline-flex;align-items:center;gap:8px;box-shadow:0 4px 20px rgba(144,65,234,0.35);">
+            <span>Browse Cheats</span>
+            <i class="fa-solid fa-arrow-right"></i>
           </button>
         </div>
       `;
       return;
     }
 
-    if (footerPanel) footerPanel.style.display = 'flex';
-
-    cart.forEach((item, idx) => {
-      const lineTotal = (item.price * item.quantity).toFixed(2);
-      const row = document.createElement('div');
-      row.style.cssText = 'background:#1a1d26;border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:12px;display:flex;gap:12px;align-items:center;';
-
-      row.innerHTML = `
-        <div style="width:54px;height:54px;border-radius:8px;overflow:hidden;background:#0d0f14;flex-shrink:0;">
-          <img src="${item.image}" alt="${item.name}" style="width:100%;height:100%;object-fit:cover;">
-        </div>
-        <div style="flex:1;min-width:0;">
-          <h4 style="margin:0;font-size:13px;font-weight:700;color:#ffffff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${item.name}</h4>
-          <div style="font-size:11px;color:#b937e2;font-weight:600;margin-top:2px;">${item.variantName}</div>
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-top:8px;">
-            <div style="display:flex;align-items:center;gap:8px;">
-              <button onclick="window.changeCartItemQty(${idx}, -1)" style="width:22px;height:22px;border-radius:4px;background:#242834;border:1px solid rgba(255,255,255,0.08);color:#ffffff;font-size:11px;cursor:pointer;">-</button>
-              <span style="font-size:12px;font-weight:800;color:#ffffff;min-width:16px;text-align:center;">${item.quantity}</span>
-              <button onclick="window.changeCartItemQty(${idx}, 1)" style="width:22px;height:22px;border-radius:4px;background:#242834;border:1px solid rgba(255,255,255,0.08);color:#ffffff;font-size:11px;cursor:pointer;">+</button>
-            </div>
-            <div style="font-size:14px;font-weight:900;color:#ffffff;">$${lineTotal}</div>
-          </div>
-        </div>
-        <button onclick="window.removeCartItem(${idx})" style="background:none;border:none;color:#8896a6;cursor:pointer;padding:4px;font-size:13px;align-self:flex-start;">
-          <i class="fa-solid fa-trash-can"></i>
-        </button>
-      `;
-      container.appendChild(row);
-    });
-
     const subtotal = getCartSubtotal();
     const total = getCartTotal();
 
-    if (subtotalEl) subtotalEl.textContent = `$${subtotal.toFixed(2)}`;
-    if (totalEl) totalEl.textContent = `$${total.toFixed(2)}`;
+    let itemsHtml = '';
+    cart.forEach((item, idx) => {
+      const lineTotal = (item.price * item.quantity).toFixed(2);
+      itemsHtml += `
+        <div style="background:#151822;border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:14px;display:flex;gap:14px;align-items:center;transition:border-color 0.2s ease;">
+          <div style="width:58px;height:58px;border-radius:10px;overflow:hidden;background:#0c0e14;border:1px solid rgba(185,55,226,0.25);flex-shrink:0;">
+            <img src="${item.image}" alt="${item.name}" style="width:100%;height:100%;object-fit:cover;">
+          </div>
+          <div style="flex:1;min-width:0;">
+            <h4 style="margin:0;font-size:13px;font-weight:700;color:#ffffff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${item.name}</h4>
+            <div style="display:inline-block;font-size:11px;color:#b937e2;font-weight:700;background:rgba(185,55,226,0.12);padding:2px 8px;border-radius:6px;margin-top:4px;">${item.variantName}</div>
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-top:10px;">
+              <div style="display:flex;align-items:center;gap:8px;">
+                <button onclick="window.changeCartItemQty(${idx}, -1)" style="width:24px;height:24px;border-radius:6px;background:#1e2330;border:1px solid rgba(255,255,255,0.1);color:#ffffff;font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;">-</button>
+                <span style="font-size:12px;font-weight:800;color:#ffffff;min-width:18px;text-align:center;">${item.quantity}</span>
+                <button onclick="window.changeCartItemQty(${idx}, 1)" style="width:24px;height:24px;border-radius:6px;background:#1e2330;border:1px solid rgba(255,255,255,0.1);color:#ffffff;font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;">+</button>
+              </div>
+              <div style="font-size:14px;font-weight:900;color:#ffffff;">$${lineTotal}</div>
+            </div>
+          </div>
+          <button onclick="window.removeCartItem(${idx})" title="Remove item" style="background:none;border:none;color:#8896a6;cursor:pointer;padding:6px;font-size:13px;align-self:flex-start;transition:color 0.2s ease;" onmouseover="this.style.color='#ef4444'" onmouseout="this.style.color='#8896a6'">
+            <i class="fa-solid fa-trash-can"></i>
+          </button>
+        </div>
+      `;
+    });
 
-    if (activePromo && activePromo.discount && discountRow && discountVal && discountLabel) {
-      discountRow.style.display = 'flex';
-      discountLabel.textContent = `Discount (${activePromo.code} -${activePromo.discount}%)`;
-      discountVal.textContent = `-$${(subtotal - total).toFixed(2)}`;
-    } else if (discountRow) {
-      discountRow.style.display = 'none';
-    }
+    const discountHtml = activePromo && activePromo.discount ? `
+      <div style="display:flex;justify-content:space-between;color:#10b981;">
+        <span>Discount (${activePromo.code} -${activePromo.discount}%)</span>
+        <span style="font-weight:700;">-$${(subtotal - total).toFixed(2)}</span>
+      </div>
+    ` : '';
+
+    container.innerHTML = `
+      <div class="hc-cart-grid" style="display:grid;grid-template-columns:1.25fr 1fr;gap:22px;align-items:start;">
+        <!-- Left: Cart Items -->
+        <div style="display:flex;flex-direction:column;gap:12px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;padding-bottom:6px;border-bottom:1px solid rgba(255,255,255,0.06);">
+            <span style="font-size:13px;font-weight:800;color:#ffffff;text-transform:uppercase;letter-spacing:0.5px;">Cart Items (${totalQty})</span>
+            <span style="font-size:11px;color:#8896a6;">Instant license key</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:12px;max-height:420px;overflow-y:auto;padding-right:4px;">
+            ${itemsHtml}
+          </div>
+        </div>
+
+        <!-- Right: BearCheats style Summary & Checkout Card -->
+        <div style="background:#131620;border:1px solid rgba(185,55,226,0.25);border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:14px;box-shadow:0 10px 30px rgba(0,0,0,0.35);">
+          <h4 style="margin:0;font-size:15px;font-weight:800;color:#ffffff;display:flex;align-items:center;gap:8px;">
+            <span>Order Summary</span>
+          </h4>
+
+          <!-- Promo input -->
+          <div style="display:flex;gap:8px;">
+            <input type="text" id="promo-code-input" placeholder="Promo code (HIDDEN10)" value="${activePromo ? activePromo.code : ''}" style="flex:1;background:#181c27;border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:8px 12px;color:#ffffff;font-size:12px;outline:none;" onfocus="this.style.borderColor='#b937e2'" onblur="this.style.borderColor='rgba(255,255,255,0.1)'">
+            <button onclick="window.applyPromoCode()" style="background:#1f2433;border:1px solid rgba(185,55,226,0.3);color:#ffffff;padding:8px 14px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;transition:all 0.2s ease;">
+              Apply
+            </button>
+          </div>
+          <div id="promo-status-msg" style="font-size:11px;margin-top:-6px;display:none;"></div>
+
+          <!-- Price rows -->
+          <div style="display:flex;flex-direction:column;gap:8px;font-size:13px;border-top:1px solid rgba(255,255,255,0.06);padding-top:12px;">
+            <div style="display:flex;justify-content:space-between;color:#9aa2b1;">
+              <span>Subtotal</span>
+              <span id="cart-subtotal-val" style="color:#ffffff;font-weight:700;">$${subtotal.toFixed(2)}</span>
+            </div>
+            ${discountHtml}
+            <div style="display:flex;justify-content:space-between;color:#ffffff;font-size:17px;font-weight:900;border-top:1px solid rgba(255,255,255,0.08);padding-top:10px;">
+              <span>Total</span>
+              <span id="cart-total-val" style="color:#b937e2;text-shadow:0 0 15px rgba(185,55,226,0.3);">$${total.toFixed(2)}</span>
+            </div>
+          </div>
+
+          <!-- Email Input -->
+          <div style="display:flex;flex-direction:column;gap:6px;">
+            <label style="font-size:11px;font-weight:700;color:#8896a6;text-transform:uppercase;letter-spacing:0.5px;">Email Address</label>
+            <input type="email" id="checkout-email" placeholder="your@email.com" style="width:100%;background:#181c27;border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:9px 12px;color:#ffffff;font-size:13px;outline:none;" onfocus="this.style.borderColor='#b937e2'" onblur="this.style.borderColor='rgba(255,255,255,0.1)'">
+          </div>
+
+          <!-- Payment selector -->
+          <div>
+            <div style="font-size:11px;color:#8896a6;font-weight:700;text-transform:uppercase;margin-bottom:6px;">Payment Method:</div>
+            <div style="display:grid;grid-template-columns:repeat(4, 1fr);gap:6px;">
+              <button type="button" class="pay-btn" onclick="window.setPaymentMethod('card', this)" style="background:${activePayment === 'card' ? 'rgba(185,55,226,0.15)' : '#161922'};border:1px solid ${activePayment === 'card' ? '#b937e2' : 'rgba(255,255,255,0.08)'};color:${activePayment === 'card' ? '#ffffff' : '#9aa2b1'};padding:7px 4px;border-radius:8px;font-size:11px;font-weight:700;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;">
+                <i class="fa-solid fa-credit-card" style="color:${activePayment === 'card' ? '#b937e2' : ''};font-size:12px;"></i>
+                <span>Card</span>
+              </button>
+              <button type="button" class="pay-btn" onclick="window.setPaymentMethod('paypal', this)" style="background:${activePayment === 'paypal' ? 'rgba(185,55,226,0.15)' : '#161922'};border:1px solid ${activePayment === 'paypal' ? '#b937e2' : 'rgba(255,255,255,0.08)'};color:${activePayment === 'paypal' ? '#ffffff' : '#9aa2b1'};padding:7px 4px;border-radius:8px;font-size:11px;font-weight:700;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;">
+                <i class="fa-brands fa-paypal" style="color:${activePayment === 'paypal' ? '#b937e2' : ''};font-size:12px;"></i>
+                <span>PayPal</span>
+              </button>
+              <button type="button" class="pay-btn" onclick="window.setPaymentMethod('crypto', this)" style="background:${activePayment === 'crypto' ? 'rgba(185,55,226,0.15)' : '#161922'};border:1px solid ${activePayment === 'crypto' ? '#b937e2' : 'rgba(255,255,255,0.08)'};color:${activePayment === 'crypto' ? '#ffffff' : '#9aa2b1'};padding:7px 4px;border-radius:8px;font-size:11px;font-weight:700;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;">
+                <i class="fa-brands fa-bitcoin" style="color:${activePayment === 'crypto' ? '#b937e2' : ''};font-size:12px;"></i>
+                <span>Crypto</span>
+              </button>
+              <button type="button" class="pay-btn" onclick="window.setPaymentMethod('cashapp', this)" style="background:${activePayment === 'cashapp' ? 'rgba(185,55,226,0.15)' : '#161922'};border:1px solid ${activePayment === 'cashapp' ? '#b937e2' : 'rgba(255,255,255,0.08)'};color:${activePayment === 'cashapp' ? '#ffffff' : '#9aa2b1'};padding:7px 4px;border-radius:8px;font-size:11px;font-weight:700;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;">
+                <i class="fa-solid fa-dollar-sign" style="color:${activePayment === 'cashapp' ? '#b937e2' : ''};font-size:12px;"></i>
+                <span>CashApp</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Pay Now action -->
+          <button onclick="window.proceedCheckout()" style="background:linear-gradient(135deg, #b937e2, #7d44ed);border:none;color:#ffffff;padding:14px;border-radius:10px;font-size:14px;font-weight:900;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 4px 20px rgba(144,65,234,0.35);transition:all 0.2s ease;" onmouseover="this.style.transform='translateY(-1px)'; this.style.boxShadow='0 6px 25px rgba(185,55,226,0.5)';" onmouseout="this.style.transform='none'; this.style.boxShadow='0 4px 20px rgba(144,65,234,0.35)';">
+            <i class="fa-solid fa-lock"></i>
+            <span>Pay Now</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </button>
+
+          <p style="margin:0;font-size:11px;color:#8896a6;text-align:center;line-height:1.4;">
+            You'll be redirected to complete your payment securely.
+          </p>
+
+          <div style="display:flex;align-items:center;justify-content:center;gap:12px;font-size:10px;color:#8896a6;padding-top:10px;border-top:1px solid rgba(255,255,255,0.06);">
+            <span><i class="fa-solid fa-bolt" style="color:#b937e2;"></i> Instant Delivery</span>
+            <span>•</span>
+            <span><i class="fa-solid fa-shield-halved" style="color:#b937e2;"></i> 256-Bit SSL Encrypted</span>
+          </div>
+        </div>
+      </div>
+    `;
   }
 
   function proceedCheckout() {

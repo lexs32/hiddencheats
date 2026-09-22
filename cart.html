@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="ipsJS_has ipsApp ipsApp_front ipsClearfix">
+<head>
+  <meta charset="utf-8">
+  <title>Shopping Cart - HiddenCheats</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="View your cart, configure keys, apply discount codes, and complete your secure order at HiddenCheats.">
+  <meta name="theme-color" content="#9041ea">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="shortcut icon" href="favicon.png">
+  <link rel="apple-touch-icon" href="favicon.png">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/framework.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
+  <link rel="stylesheet" href="assets/css/core.css">
+  <link rel="stylesheet" href="assets/css/core_responsive.css">
+  <link rel="stylesheet" href="assets/css/nexus.css">
+  <link rel="stylesheet" href="assets/css/store.css">
+  <link rel="stylesheet" href="assets/css/store_responsive.css">
+  <link rel="stylesheet" href="assets/css/custom.css?v=2.2">
+
+  <style>
+    :root {
+      --hc-purple: #b937e2;
+      --hc-purple-deep: #7d44ed;
+      --hc-purple-grad: linear-gradient(135deg, #b937e2, #7d44ed);
+      --hc-bg-card: #0f121a;
+      --hc-bg-card-sec: #131620;
+      --hc-border: rgba(185, 55, 226, 0.25);
+    }
+    body {
+      background: #090b10 !important;
+      color: #ffffff;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .hc-cart-page-wrap {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 40px 20px 80px;
+      flex: 1;
+      width: 100%;
+    }
+    .hc-page-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .hc-page-title {
+      font-size: 28px;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .hc-page-title span.grad {
+      background: var(--hc-purple-grad);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hc-continue-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #9aa2b1;
+      padding: 9px 18px;
+      border-radius: 9px;
+      font-size: 13px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    .hc-continue-btn:hover {
+      color: #ffffff;
+      border-color: var(--hc-purple);
+      background: rgba(185, 55, 226, 0.1);
+    }
+    .hc-cart-card {
+      background: var(--hc-bg-card);
+      border: 1px solid var(--hc-border);
+      border-radius: 20px;
+      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.8), 0 0 40px rgba(185, 55, 226, 0.12);
+      overflow: hidden;
+    }
+    .hc-cart-grid {
+      display: grid;
+      grid-template-columns: 1.35fr 1fr;
+      gap: 28px;
+      padding: 28px;
+      align-items: start;
+    }
+    @media (max-width: 860px) {
+      .hc-cart-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 20px;
+      }
+    }
+    .hc-item-card {
+      background: #151822;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 16px;
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      transition: border-color 0.2s ease;
+    }
+    .hc-item-card:hover {
+      border-color: rgba(185, 55, 226, 0.4);
+    }
+    .hc-item-img {
+      width: 68px;
+      height: 68px;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #0b0d13;
+      border: 1px solid rgba(185, 55, 226, 0.25);
+      flex-shrink: 0;
+    }
+    .hc-item-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .hc-qty-btn {
+      width: 26px;
+      height: 26px;
+      border-radius: 6px;
+      background: #1e2330;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+      font-size: 13px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+    }
+    .hc-qty-btn:hover {
+      background: var(--hc-purple);
+      border-color: var(--hc-purple);
+    }
+    .hc-summary-box {
+      background: var(--hc-bg-card-sec);
+      border: 1px solid var(--hc-border);
+      border-radius: 16px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+    }
+    .hc-checkout-btn {
+      background: var(--hc-purple-grad);
+      border: none;
+      color: #ffffff;
+      padding: 15px;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 900;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: 0 4px 25px rgba(144, 65, 234, 0.4);
+      transition: all 0.2s ease;
+      width: 100%;
+    }
+    .hc-checkout-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(185, 55, 226, 0.6);
+    }
+    .pay-btn.active-pay {
+      background: rgba(185, 55, 226, 0.15) !important;
+      border-color: var(--hc-purple) !important;
+      color: #ffffff !important;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HiddenCheats Header -->
+  <div class="theme-main--header">
+    <header id="theme-header">
+      <div class="ipsLayout_container" style="display:flex;align-items:center;justify-content:space-between;width:100%;max-width:1560px;margin:0 auto;padding:0 40px;height:100%;">
+        <div style="display:flex;align-items:center;">
+          <a href="index.html" id="elLogo" accesskey="1" style="display:inline-flex;align-items:center;text-decoration:none;">
+            <img src="favicon.png" style="height:44px;width:auto;object-fit:contain;" alt="HiddenCheats">
+          </a>
+
+          <div class="theme-spacer--hr ipsResponsive_showDesktop"></div>
+
+          <nav class="theme-navbar ipsResponsive_showDesktop">
+            <ul style="display:flex;align-items:center;gap:14px;margin:0;padding:0;list-style:none;">
+              <li>
+                <a href="index.html" class="nav-chams-link"><i class="fa-solid fa-store" style="margin-right:7px;font-size:13px;"></i>STORE</a>
+              </li>
+              <li>
+                <a href="status.html" class="nav-chams-link"><i class="fa-solid fa-signal" style="margin-right:7px;font-size:13px;"></i>STATUS</a>
+              </li>
+              <li>
+                <a href="reviews.html" class="nav-chams-link"><i class="fa-solid fa-comments" style="margin-right:7px;font-size:13px;"></i>REVIEWS</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+
+        <ul id="elUserNav" class="ipsList_inline ipsResponsive_showDesktop" style="display:flex;align-items:center;gap:14px;margin:0;padding:0;list-style:none;">
+          <li>
+            <button id="elSearchTrigger" type="button" onclick="window.openSearchModal()" aria-label="Search" class="chams-search-btn">
+              <svg width="17" height="17" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M17.5 17.5L13.875 13.875M15.8333 12.8486 12.8486 15.8333 9.16667 15.8333C5.48477 15.8333 2.5 12.8486 2.5 9.16667C2.5 5.48477 5.48477 2.5 9.16667 2.5C12.8486 2.5 15.8333 5.48477 15.8333 9.16667Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+            </button>
+          </li>
+          <li>
+            <button class="cCartTrigger" type="button" onclick="window.openCart()" aria-label="Cart">
+              <i class="fa-solid fa-cart-shopping" style="color:#b937e2;font-size:13px;"></i>
+              <span>Cart</span>
+              <span class="cart-badge" style="background:linear-gradient(135deg,#b937e2,#7d44ed);color:#ffffff;font-size:10px;font-weight:900;padding:1px 6px;border-radius:999px;display:none;">0</span>
+            </button>
+          </li>
+          <li class="auth-nav-container" style="position:relative;">
+            <div style="display:flex;align-items:center;gap:14px;">
+              <button type="button" onclick="window.openAuthModal('signin')" class="chams-signin-btn">
+                <span>Existing user? Sign In</span>
+                <i class="fa-solid fa-caret-down" style="font-size:11px;opacity:0.75;"></i>
+              </button>
+              <button type="button" onclick="window.openAuthModal('signup')" class="chams-signup-btn">
+                Sign Up
+              </button>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </header>
+  </div>
+
+  <!-- Main Cart Container -->
+  <main class="hc-cart-page-wrap">
+    <div class="hc-page-header">
+      <div>
+        <h1 class="hc-page-title">
+          <span>Your</span> <span class="grad">Cart</span>
+          <span id="pageCartBadge" style="background:rgba(185,55,226,0.15);color:#b937e2;border:1px solid rgba(185,55,226,0.35);font-size:12px;font-weight:800;padding:3px 12px;border-radius:999px;margin-left:6px;">0 items</span>
+        </h1>
+        <p style="margin:4px 0 0;font-size:13px;color:#8896a6;">Review your items and proceed to secure instant checkout.</p>
+      </div>
+      <a href="index.html#products" class="hc-continue-btn">
+        <i class="fa-solid fa-arrow-left"></i>
+        <span>Continue Shopping</span>
+      </a>
+    </div>
+
+    <div class="hc-cart-card">
+      <div id="pageCartContent"></div>
+    </div>
+  </main>
+
+  <footer style="margin-top:auto;border-top:1px solid rgba(255,255,255,0.06);background:#090b10;padding:30px 20px;text-align:center;font-size:12px;color:#8896a6;">
+    <div style="max-width:1140px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;">
+      <div style="display:flex;align-items:center;gap:8px;">
+        <img src="favicon.png" style="height:20px;width:auto;" alt="HiddenCheats">
+        <span style="font-weight:800;color:#fff;">HIDDENCHEATS</span> &copy; 2026. All rights reserved.
+      </div>
+      <div style="display:flex;align-items:center;gap:18px;">
+        <a href="index.html" style="color:#8896a6;text-decoration:none;">Store</a>
+        <a href="status.html" style="color:#8896a6;text-decoration:none;">Status</a>
+        <a href="reviews.html" style="color:#8896a6;text-decoration:none;">Reviews</a>
+        <a href="https://discord.gg/hiddencheats" target="_blank" style="color:#8896a6;text-decoration:none;">Discord</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/store.js"></script>
+  <script>
+    // Sync page-level cart renderer with localStorage
+    function renderPageCart() {
+      const container = document.getElementById('pageCartContent');
+      const badge = document.getElementById('pageCartBadge');
+      if (!container) return;
+
+      const raw = localStorage.getItem('hc_cart_items_v2');
+      let cartItems = [];
+      try { if (raw) cartItems = JSON.parse(raw); } catch(e) { cartItems = []; }
+
+      const rawPromo = localStorage.getItem('hc_cart_promo_v2');
+      let promo = null;
+      try { if (rawPromo) promo = JSON.parse(rawPromo); } catch(e) { promo = null; }
+
+      const totalQty = cartItems.reduce((sum, item) => sum + (item.quantity || 1), 0);
+      if (badge) badge.textContent = `${totalQty} item${totalQty === 1 ? '' : 's'}`;
+
+      if (cartItems.length === 0) {
+        container.innerHTML = `
+          <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:70px 20px;text-align:center;">
+            <div style="width:84px;height:84px;border-radius:50%;background:rgba(185,55,226,0.1);border:1px solid rgba(185,55,226,0.25);display:flex;align-items:center;justify-content:center;font-size:34px;color:#b937e2;margin-bottom:20px;box-shadow:0 0 40px rgba(185,55,226,0.25);">
+              <i class="fa-solid fa-cart-shopping"></i>
+            </div>
+            <h2 style="margin:0 0 10px;font-size:22px;font-weight:900;color:#ffffff;">Your cart is empty</h2>
+            <p style="margin:0 0 28px;font-size:14px;color:#9aa2b1;max-width:360px;line-height:1.5;">Looks like you haven't added anything to your cart yet.</p>
+            <a href="index.html#products" class="theme-button__primary" style="padding:12px 28px;font-size:14px;font-weight:800;border-radius:10px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;">
+              <span>Browse Cheats</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+          </div>
+        `;
+        return;
+      }
+
+      let subtotal = cartItems.reduce((sum, item) => sum + (parseFloat(item.price) * (item.quantity || 1)), 0);
+      let total = subtotal;
+      if (promo && promo.discount) {
+        total = subtotal * (1 - (promo.discount / 100));
+      }
+
+      let itemsHtml = '';
+      cartItems.forEach((item, idx) => {
+        const lineTotal = (item.price * item.quantity).toFixed(2);
+        itemsHtml += `
+          <div class="hc-item-card">
+            <div class="hc-item-img">
+              <img src="${item.image}" alt="${item.name}">
+            </div>
+            <div style="flex:1;min-width:0;">
+              <h4 style="margin:0;font-size:15px;font-weight:800;color:#ffffff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${item.name}</h4>
+              <div style="display:inline-block;font-size:11px;color:#b937e2;font-weight:700;background:rgba(185,55,226,0.12);padding:2px 8px;border-radius:6px;margin-top:4px;">${item.variantName}</div>
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-top:12px;">
+                <div style="display:flex;align-items:center;gap:8px;">
+                  <button class="hc-qty-btn" onclick="window.changeCartItemQty(${idx}, -1); renderPageCart();">-</button>
+                  <span style="font-size:13px;font-weight:800;color:#ffffff;min-width:20px;text-align:center;">${item.quantity}</span>
+                  <button class="hc-qty-btn" onclick="window.changeCartItemQty(${idx}, 1); renderPageCart();">+</button>
+                </div>
+                <div style="font-size:16px;font-weight:900;color:#ffffff;">$${lineTotal}</div>
+              </div>
+            </div>
+            <button onclick="window.removeCartItem(${idx}); renderPageCart();" title="Remove item" style="background:none;border:none;color:#8896a6;cursor:pointer;padding:6px;font-size:14px;align-self:flex-start;transition:color 0.2s ease;" onmouseover="this.style.color='#ef4444'" onmouseout="this.style.color='#8896a6'">
+              <i class="fa-solid fa-trash-can"></i>
+            </button>
+          </div>
+        `;
+      });
+
+      const discountHtml = promo && promo.discount ? `
+        <div style="display:flex;justify-content:space-between;color:#10b981;">
+          <span>Discount (${promo.code} -${promo.discount}%)</span>
+          <span style="font-weight:700;">-$${(subtotal - total).toFixed(2)}</span>
+        </div>
+      ` : '';
+
+      container.innerHTML = `
+        <div class="hc-cart-grid">
+          <div style="display:flex;flex-direction:column;gap:14px;">
+            <div style="display:flex;align-items:center;justify-content:space-between;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,0.06);">
+              <span style="font-size:13px;font-weight:800;color:#ffffff;text-transform:uppercase;letter-spacing:0.5px;">Selected Products (${totalQty})</span>
+              <span style="font-size:11px;color:#8896a6;"><i class="fa-solid fa-shield-halved" style="color:#b937e2;"></i> Undetected & Verified</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:14px;">
+              ${itemsHtml}
+            </div>
+          </div>
+
+          <div class="hc-summary-box">
+            <h3 style="margin:0;font-size:16px;font-weight:900;color:#ffffff;">Order Summary</h3>
+            
+            <div style="display:flex;gap:8px;">
+              <input type="text" id="pagePromoInput" placeholder="Promo code (HIDDEN10)" value="${promo ? promo.code : ''}" style="flex:1;background:#181c27;border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:9px 12px;color:#ffffff;font-size:12px;outline:none;" onfocus="this.style.borderColor='#b937e2'" onblur="this.style.borderColor='rgba(255,255,255,0.1)'">
+              <button onclick="applyPagePromo()" style="background:#1f2433;border:1px solid rgba(185,55,226,0.3);color:#ffffff;padding:9px 16px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;transition:all 0.2s ease;">
+                Apply
+              </button>
+            </div>
+            <div id="pagePromoMsg" style="font-size:11px;margin-top:-8px;display:none;"></div>
+
+            <div style="display:flex;flex-direction:column;gap:8px;font-size:13px;border-top:1px solid rgba(255,255,255,0.06);padding-top:14px;">
+              <div style="display:flex;justify-content:space-between;color:#9aa2b1;">
+                <span>Subtotal</span>
+                <span style="color:#ffffff;font-weight:700;">$${subtotal.toFixed(2)}</span>
+              </div>
+              ${discountHtml}
+              <div style="display:flex;justify-content:space-between;color:#ffffff;font-size:18px;font-weight:900;border-top:1px solid rgba(255,255,255,0.08);padding-top:12px;">
+                <span>Total</span>
+                <span style="color:#b937e2;text-shadow:0 0 15px rgba(185,55,226,0.35);">$${total.toFixed(2)}</span>
+              </div>
+            </div>
+
+            <div style="display:flex;flex-direction:column;gap:6px;">
+              <label style="font-size:11px;font-weight:700;color:#8896a6;text-transform:uppercase;letter-spacing:0.5px;">Email Address</label>
+              <input type="email" id="pageEmailInput" placeholder="your@email.com" style="width:100%;background:#181c27;border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:10px 12px;color:#ffffff;font-size:13px;outline:none;" onfocus="this.style.borderColor='#b937e2'" onblur="this.style.borderColor='rgba(255,255,255,0.1)'">
+            </div>
+
+            <div>
+              <div style="font-size:11px;color:#8896a6;font-weight:700;text-transform:uppercase;margin-bottom:6px;">Payment Method:</div>
+              <div style="display:grid;grid-template-columns:repeat(4, 1fr);gap:6px;">
+                <button type="button" class="pay-btn active-pay" onclick="window.setPaymentMethod('card', this)" style="background:rgba(185,55,226,0.15);border:1px solid #b937e2;color:#ffffff;padding:8px 4px;border-radius:8px;font-size:11px;font-weight:700;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px;">
+                  <i class="fa-solid fa-credit-card" style="color:#b937e2;font-size:12px;"></i>
+                  <span>Card</span>
+                </button>
+                <button type="button" class="pay-btn" onclick="window.setPaymentMethod('paypal', this)" style="background:#161922;border:1px solid rgba(255,255,255,0.08);color:#9aa2b1;padding:8px 4px;border-radius:8px;font-size:11px;font-weight:700;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px;">
+                  <i class="fa-brands fa-paypal" style="font-size:12px;"></i>
+                  <span>PayPal</span>
+                </button>
+                <button type="button" class="pay-btn" onclick="window.setPaymentMethod('crypto', this)" style="background:#161922;border:1px solid rgba(255,255,255,0.08);color:#9aa2b1;padding:8px 4px;border-radius:8px;font-size:11px;font-weight:700;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px;">
+                  <i class="fa-brands fa-bitcoin" style="font-size:12px;"></i>
+                  <span>Crypto</span>
+                </button>
+                <button type="button" class="pay-btn" onclick="window.setPaymentMethod('cashapp', this)" style="background:#161922;border:1px solid rgba(255,255,255,0.08);color:#9aa2b1;padding:8px 4px;border-radius:8px;font-size:11px;font-weight:700;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px;">
+                  <i class="fa-solid fa-dollar-sign" style="font-size:12px;"></i>
+                  <span>CashApp</span>
+                </button>
+              </div>
+            </div>
+
+            <button onclick="window.proceedCheckout()" class="hc-checkout-btn">
+              <i class="fa-solid fa-lock"></i>
+              <span>Pay Now</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </button>
+
+            <p style="margin:0;font-size:11px;color:#8896a6;text-align:center;line-height:1.4;">
+              You'll be redirected to complete your payment securely.
+            </p>
+
+            <div style="display:flex;align-items:center;justify-content:center;gap:12px;font-size:10px;color:#8896a6;padding-top:10px;border-top:1px solid rgba(255,255,255,0.06);">
+              <span><i class="fa-solid fa-bolt" style="color:#b937e2;"></i> Instant Delivery</span>
+              <span>•</span>
+              <span><i class="fa-solid fa-shield-halved" style="color:#b937e2;"></i> 256-Bit SSL Encrypted</span>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function applyPagePromo() {
+      const input = document.getElementById('pagePromoInput');
+      const msg = document.getElementById('pagePromoMsg');
+      if (!input || !msg) return;
+      const code = input.value.trim().toUpperCase();
+      if (code === 'HIDDEN10') {
+        localStorage.setItem('hc_cart_promo_v2', JSON.stringify({ code: 'HIDDEN10', discount: 10 }));
+        msg.style.display = 'block';
+        msg.style.color = '#10b981';
+        msg.textContent = 'Promo applied: 10% discount!';
+        renderPageCart();
+      } else if (code === 'STACK20') {
+        localStorage.setItem('hc_cart_promo_v2', JSON.stringify({ code: 'STACK20', discount: 20 }));
+        msg.style.display = 'block';
+        msg.style.color = '#10b981';
+        msg.textContent = 'Promo applied: 20% VIP discount!';
+        renderPageCart();
+      } else {
+        msg.style.display = 'block';
+        msg.style.color = '#ef4444';
+        msg.textContent = 'Invalid code. Try HIDDEN10.';
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderPageCart();
+    });
+  </script>
+</body>
+</html>
