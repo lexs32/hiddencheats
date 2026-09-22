@@ -1501,13 +1501,79 @@
     if (!client) return;
 
     try {
+      // 1. Explicit Check for Hash Fragment (#access_token=...&refresh_token=...)
+      const rawHash = window.location.hash || '';
+      if (rawHash && rawHash.includes('access_token')) {
+        const hashStr = rawHash.startsWith('#') ? rawHash.substring(1) : rawHash;
+        const params = new URLSearchParams(hashStr);
+        const accessToken = params.get('access_token');
+        const refreshToken = params.get('refresh_token');
+
+        if (accessToken) {
+          try {
+            const { data, error } = await client.auth.setSession({
+              access_token: accessToken,
+              refresh_token: refreshToken || ''
+            });
+            if (error) {
+              console.warn('[Supabase] setSession error:', error);
+            } else if (data?.session?.user) {
+              handleSupabaseUser(data.session.user);
+              try {
+                window.history.replaceState(null, '', window.location.pathname + window.location.search);
+              } catch (e) {}
+              showToast('Welcome!', 'Logged in successfully via Discord.');
+              return;
+            }
+          } catch (e) {
+            console.warn('[Supabase] setSession exception:', e);
+          }
+        }
+      }
+
+      // 2. Explicit Check for PKCE Authorization Code (?code=...)
+      const rawSearch = window.location.search || '';
+      if (rawSearch && rawSearch.includes('code=')) {
+        const searchParams = new URLSearchParams(rawSearch);
+        const code = searchParams.get('code');
+        if (code) {
+          try {
+            const { data, error } = await client.auth.exchangeCodeForSession(code);
+            if (error) {
+              console.warn('[Supabase] exchangeCodeForSession error:', error);
+            } else if (data?.session?.user) {
+              handleSupabaseUser(data.session.user);
+              try {
+                window.history.replaceState(null, '', window.location.pathname);
+              } catch (e) {}
+              showToast('Welcome!', 'Logged in successfully via Discord.');
+              return;
+            }
+          } catch (err) {
+            console.warn('[Supabase] exchangeCodeForSession exception:', err);
+          }
+        }
+      }
+
+      // 3. Normal session lookup from client storage
       const { data: { session }, error } = await client.auth.getSession();
       if (session && session.user) {
         handleSupabaseUser(session.user);
+        return;
       }
 
+      // 4. Fallback: getUser() in case cookie/token is active
+      try {
+        const { data: { user } } = await client.auth.getUser();
+        if (user) {
+          handleSupabaseUser(user);
+          return;
+        }
+      } catch (e) {}
+
+      // 5. Auth state change listener
       client.auth.onAuthStateChange((event, session) => {
-        if (event === 'SIGNED_IN' && session?.user) {
+        if ((event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED' || event === 'USER_UPDATED') && session?.user) {
           handleSupabaseUser(session.user);
         } else if (event === 'SIGNED_OUT') {
           const defaultLoggedOut = { loggedIn: false };
@@ -1524,15 +1590,22 @@
   function handleSupabaseUser(sbUser) {
     if (!sbUser) return;
     const meta = sbUser.user_metadata || {};
-    const identity = (sbUser.identities && sbUser.identities.length > 0)
-      ? sbUser.identities.find(i => i.provider === 'discord') || sbUser.identities[0]
-      : null;
+    const identities = sbUser.identities || [];
+    const discordIdentity = identities.find(i => i.provider === 'discord') || identities[0];
 
-    const discordData = identity?.identity_data || meta;
-    const name = discordData.full_name || discordData.custom_claims?.global_name || discordData.user_name || sbUser.email?.split('@')[0] || 'Member';
-    const tag = discordData.user_name ? (discordData.discriminator && discordData.discriminator !== '0' ? `${discordData.user_name}#${discordData.discriminator}` : `@${discordData.user_name}`) : (discordData.full_name || name);
-    const avatar = discordData.avatar_url || (discordData.avatar ? `https://cdn.discordapp.com/avatars/${discordData.provider_id || identity?.id}/${discordData.avatar}.png` : 'favicon.png');
-    const discordId = discordData.provider_id || identity?.id || sbUser.id.slice(0, 18);
+    const discordData = discordIdentity?.identity_data || meta;
+    const name = discordData.full_name || discordData.global_name || discordData.custom_claims?.global_name || discordData.user_name || discordData.name || sbUser.email?.split('@')[0] || 'Member';
+    const tag = discordData.user_name
+      ? (discordData.discriminator && discordData.discriminator !== '0' ? `${discordData.user_name}#${discordData.discriminator}` : `@${discordData.user_name}`)
+      : (discordData.global_name || discordData.full_name || name);
+
+    let avatar = discordData.avatar_url || meta.avatar_url;
+    if (!avatar && discordData.avatar) {
+      avatar = `https://cdn.discordapp.com/avatars/${discordData.provider_id || discordIdentity?.id}/${discordData.avatar}.png`;
+    }
+    if (!avatar) avatar = 'favicon.png';
+
+    const discordId = discordData.provider_id || discordIdentity?.id || meta.sub || sbUser.id.slice(0, 18);
 
     const currentUser = getCurrentUser() || {};
     const updatedUser = {
@@ -1540,12 +1613,12 @@
       name: name,
       email: sbUser.email || (currentUser.email && !currentUser.email.includes('yvko2') ? currentUser.email : `${name}@hiddencheats.net`),
       loggedIn: true,
-      role: (currentUser.role && currentUser.role !== 'VIP CUSTOMER') ? currentUser.role : 'Customer',
+      role: (currentUser.role && currentUser.role !== 'VIP CUSTOMER' && currentUser.role !== 'Members') ? currentUser.role : 'Customer',
       balance: currentUser.balance || '0.00',
       avatar: avatar,
       discordTag: tag,
       discordId: discordId,
-      provider: identity?.provider || 'discord',
+      provider: discordIdentity?.provider || 'discord',
       orders: (currentUser.orders && Array.isArray(currentUser.orders)) ? currentUser.orders : []
     };
 
@@ -1938,6 +2011,12 @@
   window.syncProfilePage = syncProfilePage;
   window.getRegisteredUsers = getRegisteredUsers;
   window.getCurrentUser = getCurrentUser;
+  window.handleSupabaseUser = handleSupabaseUser;
+
+  // Immediate check if Supabase is already loaded on page boot
+  if (typeof window !== 'undefined' && window.supabase) {
+    checkSupabaseSession();
+  }
 
   document.addEventListener('DOMContentLoaded', function () {
     try {
