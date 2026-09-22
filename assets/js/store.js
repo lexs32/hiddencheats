@@ -1,4 +1,14 @@
 (function () {
+  function escapeHtml(str) {
+    if (str === null || str === undefined) return '';
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+  }
+
   const CATALOG = {
     arc: {
       id: 'arc',
@@ -198,9 +208,9 @@
     }
 
     const toast = document.createElement('div');
-    toast.style.cssText = 'background:#191c25;border:1px solid #9041ea;border-radius:12px;padding:14px 20px;box-shadow:0 12px 30px rgba(0,0,0,0.6);display:flex;align-items:center;gap:12px;color:#ffffff;pointer-events:auto;min-width:280px;transform:translateY(20px);opacity:0;transition:all 0.3s cubic-bezier(0.16,1,0.3,1);';
+    toast.style.cssText = 'background:#191c25;border:1px solid #34d399;border-radius:12px;padding:14px 20px;box-shadow:0 12px 30px rgba(0,0,0,0.6);display:flex;align-items:center;gap:12px;color:#ffffff;pointer-events:auto;min-width:280px;transform:translateY(20px);opacity:0;transition:all 0.3s cubic-bezier(0.16,1,0.3,1);';
     toast.innerHTML = `
-      <div style="width:34px;height:34px;border-radius:8px;background:rgba(144,65,234,0.15);color:#b937e2;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;">
+      <div style="width:34px;height:34px;border-radius:8px;background:rgba(52,211,153,0.15);color:#34d399;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;">
         <i class="fa-solid fa-check"></i>
       </div>
       <div>
@@ -237,7 +247,7 @@
         <div id="game-cheats-card" style="background:#14171f;border:1px solid rgba(255,255,255,0.1);border-radius:18px;max-width:960px;width:100%;max-height:90vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 25px 60px rgba(0,0,0,0.7);transform:scale(0.96);transition:transform 0.25s ease;">
           <div style="padding:20px 24px;border-bottom:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:space-between;background:#171b24;">
             <div style="display:flex;align-items:center;gap:12px;">
-              <div id="gcm-icon-box" style="width:40px;height:40px;border-radius:10px;background:rgba(144,65,234,0.15);color:#b937e2;display:flex;align-items:center;justify-content:center;font-size:18px;">
+              <div id="gcm-icon-box" style="width:40px;height:40px;border-radius:10px;background:rgba(52,211,153,0.15);color:#34d399;display:flex;align-items:center;justify-content:center;font-size:18px;">
                 <i class="fa-solid fa-gamepad"></i>
               </div>
               <div>
@@ -255,7 +265,7 @@
 
           <div style="padding:14px 24px;background:#10131a;border-top:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:space-between;font-size:12px;color:#9aa2b1;">
             <span style="display:flex;align-items:center;gap:6px;">
-              <i class="fa-solid fa-shield-halved" style="color:#b937e2;"></i> All software ring0 driver verified & instant key automated
+              <i class="fa-solid fa-shield-halved" style="color:#34d399;"></i> All software ring0 driver verified & instant key automated
             </span>
             <button onclick="window.closeGameCheats()" style="background:#1e222d;border:1px solid rgba(255,255,255,0.08);color:#ffffff;padding:6px 14px;border-radius:6px;font-weight:600;cursor:pointer;">
               Close
@@ -306,9 +316,9 @@
           <div style="display:flex;align-items:center;justify-content:space-between;padding-top:12px;border-top:1px solid rgba(255,255,255,0.06);">
             <div>
               <div style="font-size:10px;color:#8896a6;text-transform:uppercase;font-weight:700;">Starting from</div>
-              <div style="font-size:16px;font-weight:900;color:#b937e2;">$${cheat.minPrice.toFixed(2)}</div>
+              <div style="font-size:16px;font-weight:900;color:#34d399;">$${cheat.minPrice.toFixed(2)}</div>
             </div>
-            <button onclick="event.stopPropagation(); window.openCheatConfig('${gameKey}', '${cheat.id}')" style="background:linear-gradient(135deg, #b937e2, #7d44ed);color:#ffffff;border:none;padding:8px 16px;border-radius:8px;font-size:12px;font-weight:800;cursor:pointer;transition:background 0.2s ease;">
+            <button onclick="event.stopPropagation(); window.openCheatConfig('${gameKey}', '${cheat.id}')" style="background:#252834;border:1px solid rgba(255,255,255,0.12);color:#ffffff;padding:8px 16px;border-radius:8px;font-size:12px;font-weight:800;cursor:pointer;transition:all 0.2s ease;" onmouseover="this.style.background='#323646'; this.style.borderColor='rgba(255,255,255,0.25)';" onmouseout="this.style.background='#252834'; this.style.borderColor='rgba(255,255,255,0.12)';">
               View Options
             </button>
           </div>
@@ -356,7 +366,7 @@
       if (vtop && !vtop.querySelector('.fa-circle-check')) {
         const icon = document.createElement('i');
         icon.className = 'fa-solid fa-circle-check';
-        icon.style.color = '#b937e2';
+        icon.style.color = '#34d399';
         vtop.appendChild(icon);
       }
     }
@@ -524,19 +534,19 @@
             #cart-drawer-panel { max-height: 94vh !important; border-radius: 16px !important; }
           }
         </style>
-        <div id="cart-drawer-panel" style="background:#0f121a;border:1px solid rgba(185,55,226,0.28);border-radius:20px;width:100%;max-width:860px;max-height:88vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,0.85), 0 0 45px rgba(185,55,226,0.15);transform:scale(0.95);transition:transform 0.25s cubic-bezier(0.16,1,0.3,1);">
+        <div id="cart-drawer-panel" style="background:#0f121a;border:1px solid rgba(255,255,255,0.1);border-radius:20px;width:100%;max-width:860px;max-height:88vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,0.85);transform:scale(0.95);transition:transform 0.25s cubic-bezier(0.16,1,0.3,1);">
           <div style="padding:18px 24px;border-bottom:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:space-between;background:#131722;flex-shrink:0;">
             <div style="display:flex;align-items:center;gap:12px;">
-              <div style="width:38px;height:38px;border-radius:10px;background:rgba(185,55,226,0.15);border:1px solid rgba(185,55,226,0.35);display:flex;align-items:center;justify-content:center;font-size:16px;color:#b937e2;">
+              <div style="width:38px;height:38px;border-radius:10px;background:rgba(52,211,153,0.12);border:1px solid rgba(52,211,153,0.25);display:flex;align-items:center;justify-content:center;font-size:16px;color:#34d399;">
                 <i class="fa-solid fa-cart-shopping"></i>
               </div>
               <div>
-                <h3 style="margin:0;font-size:18px;font-weight:900;color:#ffffff;letter-spacing:-0.3px;">Your <span style="background:linear-gradient(135deg,#b937e2,#7d44ed);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Cart</span></h3>
+                <h3 style="margin:0;font-size:18px;font-weight:900;color:#ffffff;letter-spacing:-0.3px;">Your <span style="color:#34d399;">Cart</span></h3>
                 <div style="font-size:11px;color:#8896a6;margin-top:2px;">Review items & proceed to secure instant checkout</div>
               </div>
-              <span id="cart-drawer-count-badge" style="background:rgba(185,55,226,0.15);color:#b937e2;border:1px solid rgba(185,55,226,0.35);font-size:11px;font-weight:800;padding:2px 9px;border-radius:999px;">0</span>
+              <span id="cart-drawer-count-badge" style="background:rgba(52,211,153,0.12);color:#34d399;border:1px solid rgba(52,211,153,0.25);font-size:11px;font-weight:800;padding:2px 9px;border-radius:999px;">0</span>
             </div>
-            <button onclick="window.closeCart()" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:#9aa2b1;font-size:16px;cursor:pointer;width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;transition:all 0.2s ease;" onmouseover="this.style.color='#fff'; this.style.borderColor='rgba(185,55,226,0.5)';" onmouseout="this.style.color='#9aa2b1'; this.style.borderColor='rgba(255,255,255,0.1)';">
+            <button onclick="window.closeCart()" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:#9aa2b1;font-size:16px;cursor:pointer;width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;transition:all 0.2s ease;" onmouseover="this.style.color='#fff'; this.style.borderColor='rgba(52,211,153,0.5)';" onmouseout="this.style.color='#9aa2b1'; this.style.borderColor='rgba(255,255,255,0.1)';">
               <i class="fa-solid fa-xmark"></i>
             </button>
           </div>
@@ -581,11 +591,11 @@
       const icon = b.querySelector('i');
       if (icon) icon.style.color = '';
     });
-    btn.style.background = 'rgba(185,55,226,0.15)';
-    btn.style.borderColor = '#b937e2';
+    btn.style.background = 'rgba(52,211,153,0.12)';
+    btn.style.borderColor = '#34d399';
     btn.style.color = '#ffffff';
     const icon = btn.querySelector('i');
-    if (icon) icon.style.color = '#b937e2';
+    if (icon) icon.style.color = '#34d399';
   }
 
   function applyPromoCode() {
@@ -629,12 +639,12 @@
     if (cart.length === 0) {
       container.innerHTML = `
         <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:56px 20px;text-align:center;">
-          <div style="width:76px;height:76px;border-radius:50%;background:rgba(185,55,226,0.1);border:1px solid rgba(185,55,226,0.25);display:flex;align-items:center;justify-content:center;font-size:30px;color:#b937e2;margin-bottom:18px;box-shadow:0 0 35px rgba(185,55,226,0.2);">
+          <div style="width:76px;height:76px;border-radius:50%;background:rgba(52,211,153,0.1);border:1px solid rgba(52,211,153,0.25);display:flex;align-items:center;justify-content:center;font-size:30px;color:#34d399;margin-bottom:18px;box-shadow:0 0 35px rgba(52,211,153,0.15);">
             <i class="fa-solid fa-cart-shopping"></i>
           </div>
           <h4 style="margin:0 0 8px;font-size:20px;font-weight:800;color:#ffffff;">Your cart is empty</h4>
           <p style="margin:0 0 24px;font-size:13px;color:#9aa2b1;max-width:320px;line-height:1.5;">Looks like you haven't added anything to your cart yet.</p>
-          <button onclick="window.closeCart(); location.href='index.html#products';" style="background:linear-gradient(135deg, #b937e2, #7d44ed);color:#ffffff;border:none;padding:12px 28px;border-radius:10px;font-size:13px;font-weight:800;cursor:pointer;display:inline-flex;align-items:center;gap:8px;box-shadow:0 4px 20px rgba(144,65,234,0.35);">
+          <button onclick="window.closeCart(); location.href='index.html#products';" style="background:#252834;border:1px solid rgba(255,255,255,0.12);color:#ffffff;padding:12px 28px;border-radius:10px;font-size:13px;font-weight:800;cursor:pointer;display:inline-flex;align-items:center;gap:8px;box-shadow:0 4px 15px rgba(0,0,0,0.4);transition:all 0.2s ease;" onmouseover="this.style.background='#323646'; this.style.borderColor='rgba(255,255,255,0.25)';" onmouseout="this.style.background='#252834'; this.style.borderColor='rgba(255,255,255,0.12)';">
             <span>Browse Cheats</span>
             <i class="fa-solid fa-arrow-right"></i>
           </button>
@@ -651,12 +661,12 @@
       const lineTotal = (item.price * item.quantity).toFixed(2);
       itemsHtml += `
         <div style="background:#151822;border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:14px;display:flex;gap:14px;align-items:center;transition:border-color 0.2s ease;">
-          <div style="width:58px;height:58px;border-radius:10px;overflow:hidden;background:#0c0e14;border:1px solid rgba(185,55,226,0.25);flex-shrink:0;">
+          <div style="width:58px;height:58px;border-radius:10px;overflow:hidden;background:#0c0e14;border:1px solid rgba(255,255,255,0.1);flex-shrink:0;">
             <img src="${item.image}" alt="${item.name}" style="width:100%;height:100%;object-fit:cover;">
           </div>
           <div style="flex:1;min-width:0;">
             <h4 style="margin:0;font-size:13px;font-weight:700;color:#ffffff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${item.name}</h4>
-            <div style="display:inline-block;font-size:11px;color:#b937e2;font-weight:700;background:rgba(185,55,226,0.12);padding:2px 8px;border-radius:6px;margin-top:4px;">${item.variantName}</div>
+            <div style="display:inline-block;font-size:11px;color:#34d399;font-weight:700;background:rgba(52,211,153,0.12);padding:2px 8px;border-radius:6px;margin-top:4px;">${item.variantName}</div>
             <div style="display:flex;align-items:center;justify-content:space-between;margin-top:10px;">
               <div style="display:flex;align-items:center;gap:8px;">
                 <button onclick="window.changeCartItemQty(${idx}, -1)" style="width:24px;height:24px;border-radius:6px;background:#1e2330;border:1px solid rgba(255,255,255,0.1);color:#ffffff;font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;">-</button>
@@ -694,15 +704,15 @@
         </div>
 
         <!-- Right: BearCheats style Summary & Checkout Card -->
-        <div style="background:#131620;border:1px solid rgba(185,55,226,0.25);border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:14px;box-shadow:0 10px 30px rgba(0,0,0,0.35);">
+        <div style="background:#131620;border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:14px;box-shadow:0 10px 30px rgba(0,0,0,0.35);">
           <h4 style="margin:0;font-size:15px;font-weight:800;color:#ffffff;display:flex;align-items:center;gap:8px;">
             <span>Order Summary</span>
           </h4>
 
           <!-- Promo input -->
           <div style="display:flex;gap:8px;">
-            <input type="text" id="promo-code-input" placeholder="Promo code (HIDDEN10)" value="${activePromo ? activePromo.code : ''}" style="flex:1;background:#181c27;border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:8px 12px;color:#ffffff;font-size:12px;outline:none;" onfocus="this.style.borderColor='#b937e2'" onblur="this.style.borderColor='rgba(255,255,255,0.1)'">
-            <button onclick="window.applyPromoCode()" style="background:#1f2433;border:1px solid rgba(185,55,226,0.3);color:#ffffff;padding:8px 14px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;transition:all 0.2s ease;">
+            <input type="text" id="promo-code-input" placeholder="Promo code (HIDDEN10)" value="${activePromo ? activePromo.code : ''}" style="flex:1;background:#181c27;border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:8px 12px;color:#ffffff;font-size:12px;outline:none;" onfocus="this.style.borderColor='#34d399'" onblur="this.style.borderColor='rgba(255,255,255,0.1)'">
+            <button onclick="window.applyPromoCode()" style="background:#1f2433;border:1px solid rgba(255,255,255,0.1);color:#ffffff;padding:8px 14px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;transition:all 0.2s ease;">
               Apply
             </button>
           </div>
@@ -717,41 +727,41 @@
             ${discountHtml}
             <div style="display:flex;justify-content:space-between;color:#ffffff;font-size:17px;font-weight:900;border-top:1px solid rgba(255,255,255,0.08);padding-top:10px;">
               <span>Total</span>
-              <span id="cart-total-val" style="color:#b937e2;text-shadow:0 0 15px rgba(185,55,226,0.3);">$${total.toFixed(2)}</span>
+              <span id="cart-total-val" style="color:#34d399;text-shadow:0 0 15px rgba(52,211,153,0.3);">$${total.toFixed(2)}</span>
             </div>
           </div>
 
           <!-- Email Input -->
           <div style="display:flex;flex-direction:column;gap:6px;">
             <label style="font-size:11px;font-weight:700;color:#8896a6;text-transform:uppercase;letter-spacing:0.5px;">Email Address</label>
-            <input type="email" id="checkout-email" placeholder="your@email.com" style="width:100%;background:#181c27;border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:9px 12px;color:#ffffff;font-size:13px;outline:none;" onfocus="this.style.borderColor='#b937e2'" onblur="this.style.borderColor='rgba(255,255,255,0.1)'">
+            <input type="email" id="checkout-email" placeholder="your@email.com" style="width:100%;background:#181c27;border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:9px 12px;color:#ffffff;font-size:13px;outline:none;" onfocus="this.style.borderColor='#34d399'" onblur="this.style.borderColor='rgba(255,255,255,0.1)'">
           </div>
 
           <!-- Payment selector -->
           <div>
             <div style="font-size:11px;color:#8896a6;font-weight:700;text-transform:uppercase;margin-bottom:6px;">Payment Method:</div>
             <div style="display:grid;grid-template-columns:repeat(4, 1fr);gap:6px;">
-              <button type="button" class="pay-btn" onclick="window.setPaymentMethod('card', this)" style="background:${activePayment === 'card' ? 'rgba(185,55,226,0.15)' : '#161922'};border:1px solid ${activePayment === 'card' ? '#b937e2' : 'rgba(255,255,255,0.08)'};color:${activePayment === 'card' ? '#ffffff' : '#9aa2b1'};padding:7px 4px;border-radius:8px;font-size:11px;font-weight:700;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;">
-                <i class="fa-solid fa-credit-card" style="color:${activePayment === 'card' ? '#b937e2' : ''};font-size:12px;"></i>
+              <button type="button" class="pay-btn" onclick="window.setPaymentMethod('card', this)" style="background:${activePayment === 'card' ? 'rgba(52,211,153,0.12)' : '#161922'};border:1px solid ${activePayment === 'card' ? '#34d399' : 'rgba(255,255,255,0.08)'};color:${activePayment === 'card' ? '#ffffff' : '#9aa2b1'};padding:7px 4px;border-radius:8px;font-size:11px;font-weight:700;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;">
+                <i class="fa-solid fa-credit-card" style="color:${activePayment === 'card' ? '#34d399' : ''};font-size:12px;"></i>
                 <span>Card</span>
               </button>
-              <button type="button" class="pay-btn" onclick="window.setPaymentMethod('paypal', this)" style="background:${activePayment === 'paypal' ? 'rgba(185,55,226,0.15)' : '#161922'};border:1px solid ${activePayment === 'paypal' ? '#b937e2' : 'rgba(255,255,255,0.08)'};color:${activePayment === 'paypal' ? '#ffffff' : '#9aa2b1'};padding:7px 4px;border-radius:8px;font-size:11px;font-weight:700;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;">
-                <i class="fa-brands fa-paypal" style="color:${activePayment === 'paypal' ? '#b937e2' : ''};font-size:12px;"></i>
+              <button type="button" class="pay-btn" onclick="window.setPaymentMethod('paypal', this)" style="background:${activePayment === 'paypal' ? 'rgba(52,211,153,0.12)' : '#161922'};border:1px solid ${activePayment === 'paypal' ? '#34d399' : 'rgba(255,255,255,0.08)'};color:${activePayment === 'paypal' ? '#ffffff' : '#9aa2b1'};padding:7px 4px;border-radius:8px;font-size:11px;font-weight:700;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;">
+                <i class="fa-brands fa-paypal" style="color:${activePayment === 'paypal' ? '#34d399' : ''};font-size:12px;"></i>
                 <span>PayPal</span>
               </button>
-              <button type="button" class="pay-btn" onclick="window.setPaymentMethod('crypto', this)" style="background:${activePayment === 'crypto' ? 'rgba(185,55,226,0.15)' : '#161922'};border:1px solid ${activePayment === 'crypto' ? '#b937e2' : 'rgba(255,255,255,0.08)'};color:${activePayment === 'crypto' ? '#ffffff' : '#9aa2b1'};padding:7px 4px;border-radius:8px;font-size:11px;font-weight:700;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;">
-                <i class="fa-brands fa-bitcoin" style="color:${activePayment === 'crypto' ? '#b937e2' : ''};font-size:12px;"></i>
+              <button type="button" class="pay-btn" onclick="window.setPaymentMethod('crypto', this)" style="background:${activePayment === 'crypto' ? 'rgba(52,211,153,0.12)' : '#161922'};border:1px solid ${activePayment === 'crypto' ? '#34d399' : 'rgba(255,255,255,0.08)'};color:${activePayment === 'crypto' ? '#ffffff' : '#9aa2b1'};padding:7px 4px;border-radius:8px;font-size:11px;font-weight:700;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;">
+                <i class="fa-brands fa-bitcoin" style="color:${activePayment === 'crypto' ? '#34d399' : ''};font-size:12px;"></i>
                 <span>Crypto</span>
               </button>
-              <button type="button" class="pay-btn" onclick="window.setPaymentMethod('cashapp', this)" style="background:${activePayment === 'cashapp' ? 'rgba(185,55,226,0.15)' : '#161922'};border:1px solid ${activePayment === 'cashapp' ? '#b937e2' : 'rgba(255,255,255,0.08)'};color:${activePayment === 'cashapp' ? '#ffffff' : '#9aa2b1'};padding:7px 4px;border-radius:8px;font-size:11px;font-weight:700;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;">
-                <i class="fa-solid fa-dollar-sign" style="color:${activePayment === 'cashapp' ? '#b937e2' : ''};font-size:12px;"></i>
+              <button type="button" class="pay-btn" onclick="window.setPaymentMethod('cashapp', this)" style="background:${activePayment === 'cashapp' ? 'rgba(52,211,153,0.12)' : '#161922'};border:1px solid ${activePayment === 'cashapp' ? '#34d399' : 'rgba(255,255,255,0.08)'};color:${activePayment === 'cashapp' ? '#ffffff' : '#9aa2b1'};padding:7px 4px;border-radius:8px;font-size:11px;font-weight:700;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;">
+                <i class="fa-solid fa-dollar-sign" style="color:${activePayment === 'cashapp' ? '#34d399' : ''};font-size:12px;"></i>
                 <span>CashApp</span>
               </button>
             </div>
           </div>
 
           <!-- Pay Now action -->
-          <button onclick="window.proceedCheckout()" style="background:linear-gradient(135deg, #b937e2, #7d44ed);border:none;color:#ffffff;padding:14px;border-radius:10px;font-size:14px;font-weight:900;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 4px 20px rgba(144,65,234,0.35);transition:all 0.2s ease;" onmouseover="this.style.transform='translateY(-1px)'; this.style.boxShadow='0 6px 25px rgba(185,55,226,0.5)';" onmouseout="this.style.transform='none'; this.style.boxShadow='0 4px 20px rgba(144,65,234,0.35)';">
+          <button onclick="window.proceedCheckout()" style="background:#252834;border:1px solid rgba(255,255,255,0.15);color:#ffffff;padding:14px;border-radius:10px;font-size:14px;font-weight:900;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 4px 15px rgba(0,0,0,0.3);transition:all 0.2s ease;" onmouseover="this.style.background='#323646'; this.style.borderColor='rgba(255,255,255,0.25)';" onmouseout="this.style.background='#252834'; this.style.borderColor='rgba(255,255,255,0.15)';">
             <i class="fa-solid fa-lock"></i>
             <span>Pay Now</span>
             <i class="fa-solid fa-arrow-right"></i>
@@ -762,9 +772,9 @@
           </p>
 
           <div style="display:flex;align-items:center;justify-content:center;gap:12px;font-size:10px;color:#8896a6;padding-top:10px;border-top:1px solid rgba(255,255,255,0.06);">
-            <span><i class="fa-solid fa-bolt" style="color:#b937e2;"></i> Instant Delivery</span>
+            <span><i class="fa-solid fa-bolt" style="color:#34d399;"></i> Instant Delivery</span>
             <span>•</span>
-            <span><i class="fa-solid fa-shield-halved" style="color:#b937e2;"></i> 256-Bit SSL Encrypted</span>
+            <span><i class="fa-solid fa-shield-halved" style="color:#34d399;"></i> 256-Bit SSL Encrypted</span>
           </div>
         </div>
       </div>
@@ -811,9 +821,9 @@
     }
 
     modal.innerHTML = `
-      <div style="background:#14171f;border:1px solid rgba(185,55,226,0.4);border-radius:18px;max-width:540px;width:100%;overflow:hidden;box-shadow:0 25px 60px rgba(0,0,0,0.8);">
-        <div style="padding:24px;text-align:center;background:radial-gradient(circle at top, rgba(144,65,234,0.15) 0%, transparent 70%);border-bottom:1px solid rgba(255,255,255,0.08);">
-          <div style="width:60px;height:60px;border-radius:50%;background:rgba(144,65,234,0.2);color:#b937e2;border:2px solid #9041ea;display:flex;align-items:center;justify-content:center;font-size:26px;margin:0 auto 14px;">
+      <div style="background:#14171f;border:1px solid rgba(52,211,153,0.3);border-radius:18px;max-width:540px;width:100%;overflow:hidden;box-shadow:0 25px 60px rgba(0,0,0,0.8);">
+        <div style="padding:24px;text-align:center;background:radial-gradient(circle at top, rgba(52,211,153,0.12) 0%, transparent 70%);border-bottom:1px solid rgba(255,255,255,0.08);">
+          <div style="width:60px;height:60px;border-radius:50%;background:rgba(52,211,153,0.15);color:#34d399;border:2px solid #34d399;display:flex;align-items:center;justify-content:center;font-size:26px;margin:0 auto 14px;">
             <i class="fa-solid fa-check"></i>
           </div>
           <h3 style="margin:0;font-size:22px;font-weight:900;color:#ffffff;">Payment Confirmed!</h3>
@@ -823,9 +833,9 @@
         <div style="padding:24px;display:flex;flex-direction:column;gap:16px;">
           <div style="background:#1a1d26;border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:16px;">
             <div style="font-size:11px;font-weight:700;color:#8896a6;text-transform:uppercase;margin-bottom:6px;">Your License Key:</div>
-            <div style="display:flex;align-items:center;justify-content:space-between;background:#10131a;border:1px dashed #9041ea;border-radius:8px;padding:10px 14px;">
-              <code id="license-key-val" style="color:#ff52be;font-family:monospace;font-size:14px;font-weight:800;letter-spacing:1px;">${key}</code>
-              <button onclick="navigator.clipboard.writeText('${key}'); this.textContent='Copied!';" style="background:linear-gradient(135deg, #b937e2, #7d44ed);color:#ffffff;border:none;padding:5px 12px;border-radius:6px;font-size:11px;font-weight:800;cursor:pointer;">
+            <div style="display:flex;align-items:center;justify-content:space-between;background:#10131a;border:1px dashed rgba(52,211,153,0.5);border-radius:8px;padding:10px 14px;">
+              <code id="license-key-val" style="color:#34d399;font-family:monospace;font-size:14px;font-weight:800;letter-spacing:1px;">${key}</code>
+              <button onclick="navigator.clipboard.writeText('${key}'); this.textContent='Copied!';" style="background:#252834;border:1px solid rgba(255,255,255,0.12);color:#ffffff;padding:6px 14px;border-radius:6px;font-size:11px;font-weight:800;cursor:pointer;transition:all 0.2s ease;">
                 Copy
               </button>
             </div>
@@ -839,10 +849,10 @@
           </div>
 
           <div style="display:flex;gap:10px;">
-            <a href="https://discord.gg/hiddencheats" target="_blank" style="flex:1;background:#5865F2;color:#ffffff;padding:12px;border-radius:8px;font-weight:700;font-size:13px;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:8px;">
+            <a href="https://discord.gg/hiddencheats" target="_blank" rel="noopener noreferrer" style="flex:1;background:#5865F2;color:#ffffff;padding:12px;border-radius:8px;font-weight:700;font-size:13px;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:8px;">
               <i class="fa-brands fa-discord"></i> Join Discord
             </a>
-            <a href="settings.html#keys" style="flex:1.2;background:linear-gradient(135deg, #b937e2, #7d44ed);color:#ffffff;padding:12px;border-radius:8px;font-weight:800;font-size:13px;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:8px;">
+            <a href="settings.html#keys" style="flex:1.2;background:#252834;border:1px solid rgba(255,255,255,0.12);color:#ffffff;padding:12px;border-radius:8px;font-weight:800;font-size:13px;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:8px;transition:all 0.2s ease;">
               <i class="fa-solid fa-key"></i> View in My Keys
             </a>
             <button onclick="document.getElementById('checkout-success-modal').remove(); window.clearCart(); window.closeCart();" style="flex:0.7;background:#1e222d;border:1px solid rgba(255,255,255,0.08);color:#ffffff;padding:12px;border-radius:8px;font-weight:700;font-size:13px;cursor:pointer;">
@@ -932,7 +942,7 @@
             </a>
             <div onclick="window.openAuthModal('signin'); window.closeSearchModal();" class="cSearch_quickItem" style="display:flex;align-items:center;justify-content:space-between;background:#1a1d27;border:1px solid rgba(255,255,255,0.05);border-radius:10px;padding:12px 14px;cursor:pointer;transition:all 0.15s ease;">
               <div style="display:flex;align-items:center;gap:14px;">
-                <div style="width:42px;height:42px;border-radius:10px;background:linear-gradient(135deg, #b937e2, #7d44ed);display:flex;align-items:center;justify-content:center;color:#fff;font-size:18px;flex-shrink:0;"><i class="fa-solid fa-key"></i></div>
+                <div style="width:42px;height:42px;border-radius:10px;background:#252834;border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;color:#34d399;font-size:18px;flex-shrink:0;"><i class="fa-solid fa-key"></i></div>
                 <div>
                   <div style="font-size:14px;font-weight:600;color:#ffffff;">License Key</div>
                   <div style="font-size:12px;color:#94a3b8;margin-top:2px;">View your license keys</div>
@@ -1009,18 +1019,18 @@
     }
 
     if (filtered.length === 0) {
-      container.innerHTML = '<div style="padding:16px;text-align:center;color:#64748b;font-size:13px;">No products found matching "' + query.replace(/</g, '&lt;') + '"</div>';
+      container.innerHTML = '<div style="padding:16px;text-align:center;color:#64748b;font-size:13px;">No products found matching "' + escapeHtml(query) + '"</div>';
       return;
     }
 
     container.innerHTML = filtered.map(p => `
       <div onclick="window.location.href='${p.page}'; window.closeSearchModal();" class="cSearch_product_row" style="display:flex;align-items:center;justify-content:space-between;background:#1a1d27;border:1px solid rgba(255,255,255,0.05);border-radius:10px;padding:10px 12px;cursor:pointer;transition:all 0.15s ease;">
         <div style="display:flex;align-items:center;gap:12px;">
-          <img src="${p.image}" alt="${p.name}" style="width:48px;height:48px;border-radius:6px;object-fit:contain;background:#11131a;padding:2px;flex-shrink:0;">
+          <img src="${p.image}" alt="${escapeHtml(p.name)}" style="width:48px;height:48px;border-radius:6px;object-fit:contain;background:#11131a;padding:2px;flex-shrink:0;">
           <div>
-            <div style="font-size:14px;font-weight:600;color:#ffffff;">${p.name}</div>
+            <div style="font-size:14px;font-weight:600;color:#ffffff;">${escapeHtml(p.name)}</div>
             <div style="display:flex;align-items:center;gap:6px;margin-top:3px;">
-              <span style="font-size:13px;font-weight:600;color:#b937e2;">$${p.price.toFixed(2)}</span>
+              <span style="font-size:13px;font-weight:700;color:#34d399;">$${p.price.toFixed(2)}</span>
               <span style="color:#475569;font-size:11px;">•</span>
               <span style="font-size:12px;color:#94a3b8;">In Stock (${p.stock})</span>
             </div>
@@ -1077,11 +1087,11 @@
           discordBadge.style.color = '#34d399';
         }
         if (discordMeta) {
-          discordMeta.innerHTML = `ID: ${user.discordId || 'Connected via OAuth'} • Synced Roles: <b style="color:#cbd5e1;">Customer, Verified</b>`;
+          discordMeta.innerHTML = `ID: ${escapeHtml(user.discordId || 'Connected via OAuth')} • Synced Roles: <b style="color:#cbd5e1;">Customer, Verified</b>`;
         }
         if (discordAvatar) {
           discordAvatar.innerHTML = (user.avatar && user.avatar !== 'favicon.png')
-            ? `<img src="${user.avatar}" style="width:100%;height:100%;object-fit:cover;" alt="Discord Avatar">`
+            ? `<img src="${encodeURI(user.avatar)}" style="width:100%;height:100%;object-fit:cover;" alt="Discord Avatar">`
             : `<i class="fa-brands fa-discord"></i>`;
         }
         if (discordActions) {
@@ -1125,15 +1135,15 @@
           <div class="key-row">
             <div style="display:flex;flex-direction:column;gap:4px;">
               <div style="display:flex;align-items:center;gap:10px;">
-                <span style="font-size:16px;font-weight:800;color:#ffffff;">${o.product}</span>
-                <span style="background:rgba(16,185,129,0.15);color:#34d399;font-size:11px;font-weight:800;padding:2px 8px;border-radius:999px;border:1px solid rgba(16,185,129,0.3);">${o.status ? o.status.toUpperCase() : 'ACTIVE'}</span>
+                <span style="font-size:16px;font-weight:800;color:#ffffff;">${escapeHtml(o.product)}</span>
+                <span style="background:rgba(16,185,129,0.15);color:#34d399;font-size:11px;font-weight:800;padding:2px 8px;border-radius:999px;border:1px solid rgba(16,185,129,0.3);">${escapeHtml(o.status ? o.status.toUpperCase() : 'ACTIVE')}</span>
               </div>
-              <div style="font-size:12px;color:#94a3b8;">Order: <b style="color:#ffffff;">${o.id}</b> • Status: <span style="color:#34d399;font-weight:700;">${o.expires || 'Active'}</span></div>
+              <div style="font-size:12px;color:#94a3b8;">Order: <b style="color:#ffffff;">${escapeHtml(o.id)}</b> • Status: <span style="color:#34d399;font-weight:700;">${escapeHtml(o.expires || 'Active')}</span></div>
             </div>
             <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
-              <div style="background:#11131b;border:1px dashed #9041ea;border-radius:8px;padding:8px 14px;display:flex;align-items:center;gap:12px;">
-                <code style="color:#f43f5e;font-family:monospace;font-size:14px;font-weight:800;letter-spacing:1px;">${o.key}</code>
-                <button type="button" onclick="navigator.clipboard.writeText('${o.key}'); this.textContent='Copied!';" style="background:linear-gradient(135deg,#b937e2,#7d44ed);color:#fff;border:none;padding:5px 12px;border-radius:6px;font-size:11px;font-weight:800;cursor:pointer;">Copy</button>
+              <div style="background:#11131b;border:1px dashed rgba(52,211,153,0.35);border-radius:8px;padding:8px 14px;display:flex;align-items:center;gap:12px;">
+                <code style="color:#34d399;font-family:monospace;font-size:14px;font-weight:800;letter-spacing:1px;">${escapeHtml(o.key)}</code>
+                <button type="button" onclick="navigator.clipboard.writeText('${escapeHtml(o.key)}'); this.textContent='Copied!';" style="background:#252a38;border:1px solid rgba(255,255,255,0.15);color:#fff;padding:5px 12px;border-radius:6px;font-size:11px;font-weight:800;cursor:pointer;">Copy</button>
               </div>
               <button type="button" onclick="this.textContent='Reset Done!'; this.disabled=true;" style="background:#202432;border:1px solid rgba(255,255,255,0.1);color:#cbd5e1;padding:8px 14px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;">
                 <i class="fa-solid fa-arrows-rotate"></i> Reset HWID
@@ -1180,7 +1190,7 @@
           <div style="display:flex;align-items:center;gap:14px;margin-bottom:20px;">
             <img src="favicon.png" alt="HiddenCheats" style="height:44px;width:auto;object-fit:contain;">
             <div>
-              <div style="font-size:20px;font-weight:900;letter-spacing:0.5px;color:#ffffff;line-height:1.2;">HIDDEN<span style="color:#b937e2;">CHEATS</span></div>
+              <div style="font-size:20px;font-weight:900;letter-spacing:0.5px;color:#ffffff;line-height:1.2;">HIDDEN<span style="color:#34d399;">CHEATS</span></div>
               <div style="font-size:11px;font-weight:700;color:#94a3b8;letter-spacing:1px;text-transform:uppercase;">Authentication Portal</div>
             </div>
           </div>
@@ -1188,11 +1198,11 @@
           <div style="display:flex;align-items:center;gap:20px;border-bottom:1px solid rgba(255,255,255,0.08);padding-bottom:12px;margin-bottom:24px;">
             <button id="auth-tab-signin" onclick="window.switchAuthTab('signin')" style="background:none;border:none;font-size:16px;font-weight:700;padding:6px 0;cursor:pointer;position:relative;transition:all 0.15s ease;color:#ffffff;">
               Sign In
-              <div id="auth-tab-signin-line" style="position:absolute;bottom:-13px;left:0;right:0;height:2px;background:linear-gradient(135deg, #b937e2, #7d44ed);"></div>
+              <div id="auth-tab-signin-line" style="position:absolute;bottom:-13px;left:0;right:0;height:2px;background:#34d399;"></div>
             </button>
             <button id="auth-tab-signup" onclick="window.switchAuthTab('signup')" style="background:none;border:none;font-size:16px;font-weight:700;padding:6px 0;cursor:pointer;position:relative;transition:all 0.15s ease;color:#94a3b8;">
               Create Account
-              <div id="auth-tab-signup-line" style="position:absolute;bottom:-13px;left:0;right:0;height:2px;background:linear-gradient(135deg, #b937e2, #7d44ed);display:none;"></div>
+              <div id="auth-tab-signup-line" style="position:absolute;bottom:-13px;left:0;right:0;height:2px;background:#34d399;display:none;"></div>
             </button>
           </div>
 
@@ -1208,7 +1218,7 @@
               <div>
                 <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
                   <label style="font-size:12px;font-weight:600;color:#cbd5e1;">Password</label>
-                  <a href="javascript:void(0)" onclick="window.showToast('Password Reset', 'Password recovery instructions have been sent.');" style="font-size:12px;color:#b937e2;text-decoration:none;">Forgot password?</a>
+                  <a href="javascript:void(0)" onclick="window.showToast('Password Reset', 'Password recovery instructions have been sent.');" style="font-size:12px;color:#34d399;text-decoration:none;">Forgot password?</a>
                 </div>
                 <div style="position:relative;">
                   <input type="password" id="auth-signin-password" required placeholder="Enter your password" autocomplete="current-password" style="width:100%;box-sizing:border-box;background:#1a1d27;border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:12px 42px 12px 14px;color:#ffffff;font-size:14px;outline:none;">
@@ -1218,10 +1228,10 @@
                 </div>
               </div>
               <div style="display:flex;align-items:center;gap:8px;">
-                <input type="checkbox" id="auth-remember" checked style="accent-color:#9041ea;width:16px;height:16px;cursor:pointer;">
+                <input type="checkbox" id="auth-remember" checked style="accent-color:#34d399;width:16px;height:16px;cursor:pointer;">
                 <label for="auth-remember" style="font-size:13px;color:#94a3b8;cursor:pointer;">Remember me on this browser</label>
               </div>
-              <button type="submit" id="auth-signin-btn" class="auth-submit-btn" style="background:linear-gradient(135deg, #b937e2, #7d44ed);color:#ffffff;font-weight:700;font-size:14px;padding:12px;border-radius:8px;border:none;cursor:pointer;transition:all 0.2s ease;margin-top:6px;">
+              <button type="submit" id="auth-signin-btn" class="auth-submit-btn" style="background:#252a38;border:1px solid rgba(255,255,255,0.15);color:#ffffff;font-weight:700;font-size:14px;padding:12px;border-radius:8px;cursor:pointer;transition:all 0.2s ease;margin-top:6px;">
                 Sign In
               </button>
               <div style="display:flex;align-items:center;gap:10px;margin:8px 0;">
@@ -1233,7 +1243,7 @@
                 <i class="fa-brands fa-discord"></i> Continue with Discord
               </button>
               <div style="text-align:center;margin-top:10px;font-size:13px;color:#94a3b8;">
-                Don't have an account? <a href="javascript:void(0)" onclick="window.switchAuthTab('signup')" style="color:#b937e2;font-weight:700;text-decoration:none;">Create an Account</a>
+                Don't have an account? <a href="javascript:void(0)" onclick="window.switchAuthTab('signup')" style="color:#34d399;font-weight:700;text-decoration:none;">Create an Account</a>
               </div>
             </form>
           </div>
@@ -1246,15 +1256,15 @@
                 <div id="auth-signup-error" style="display:none;background:rgba(239,68,68,0.15);border:1px solid rgba(239,68,68,0.3);border-radius:8px;padding:10px 14px;color:#fca5a5;font-size:13px;margin-bottom:14px;"></div>
                 <form onsubmit="event.preventDefault(); window.handleAuthSubmit('signup');" style="display:flex;flex-direction:column;gap:12px;">
                   <div>
-                    <label style="display:block;font-size:12px;font-weight:600;color:#cbd5e1;margin-bottom:5px;">Username <span style="color:#b937e2;">*</span></label>
+                    <label style="display:block;font-size:12px;font-weight:600;color:#cbd5e1;margin-bottom:5px;">Username <span style="color:#f43f5e;">*</span></label>
                     <input type="text" id="auth-signup-username" required placeholder="Choose a username" autocomplete="username" style="width:100%;box-sizing:border-box;background:#1a1d27;border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:10px 14px;color:#ffffff;font-size:14px;outline:none;">
                   </div>
                   <div>
-                    <label style="display:block;font-size:12px;font-weight:600;color:#cbd5e1;margin-bottom:5px;">Email Address <span style="color:#b937e2;">*</span></label>
+                    <label style="display:block;font-size:12px;font-weight:600;color:#cbd5e1;margin-bottom:5px;">Email Address <span style="color:#f43f5e;">*</span></label>
                     <input type="email" id="auth-signup-email" required placeholder="name@example.com" autocomplete="email" style="width:100%;box-sizing:border-box;background:#1a1d27;border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:10px 14px;color:#ffffff;font-size:14px;outline:none;">
                   </div>
                   <div>
-                    <label style="display:block;font-size:12px;font-weight:600;color:#cbd5e1;margin-bottom:5px;">Password <span style="color:#b937e2;">*</span></label>
+                    <label style="display:block;font-size:12px;font-weight:600;color:#cbd5e1;margin-bottom:5px;">Password <span style="color:#f43f5e;">*</span></label>
                     <div style="position:relative;">
                       <input type="password" id="auth-signup-pass" required placeholder="Create strong password" autocomplete="new-password" style="width:100%;box-sizing:border-box;background:#1a1d27;border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:10px 42px 10px 14px;color:#ffffff;font-size:14px;outline:none;">
                       <button type="button" onclick="window.toggleAuthPassVisibility('auth-signup-pass', this)" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;color:#64748b;cursor:pointer;padding:4px;" aria-label="Toggle password visibility">
@@ -1263,7 +1273,7 @@
                     </div>
                   </div>
                   <div>
-                    <label style="display:block;font-size:12px;font-weight:600;color:#cbd5e1;margin-bottom:5px;">Confirm Password <span style="color:#b937e2;">*</span></label>
+                    <label style="display:block;font-size:12px;font-weight:600;color:#cbd5e1;margin-bottom:5px;">Confirm Password <span style="color:#f43f5e;">*</span></label>
                     <div style="position:relative;">
                       <input type="password" id="auth-signup-confirm" required placeholder="Re-type your password" autocomplete="new-password" style="width:100%;box-sizing:border-box;background:#1a1d27;border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:10px 42px 10px 14px;color:#ffffff;font-size:14px;outline:none;">
                       <button type="button" onclick="window.toggleAuthPassVisibility('auth-signup-confirm', this)" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;color:#64748b;cursor:pointer;padding:4px;" aria-label="Toggle password visibility">
@@ -1272,14 +1282,14 @@
                     </div>
                   </div>
                   <div style="display:flex;align-items:center;gap:8px;">
-                    <input type="checkbox" id="auth-terms" required checked style="accent-color:#9041ea;width:15px;height:15px;cursor:pointer;">
+                    <input type="checkbox" id="auth-terms" required checked style="accent-color:#34d399;width:15px;height:15px;cursor:pointer;">
                     <label for="auth-terms" style="font-size:12px;color:#94a3b8;cursor:pointer;">I agree to the <span style="color:#ffffff;font-weight:600;">Terms of Use</span> and <span style="color:#ffffff;font-weight:600;">Privacy Policy</span></label>
                   </div>
-                  <button type="submit" id="auth-signup-btn" class="auth-submit-btn" style="background:linear-gradient(135deg, #b937e2, #7d44ed);color:#ffffff;font-weight:700;font-size:14px;padding:12px;border-radius:8px;border:none;cursor:pointer;transition:all 0.2s ease;margin-top:4px;">
+                  <button type="submit" id="auth-signup-btn" class="auth-submit-btn" style="background:#252a38;border:1px solid rgba(255,255,255,0.15);color:#ffffff;font-weight:700;font-size:14px;padding:12px;border-radius:8px;cursor:pointer;transition:all 0.2s ease;margin-top:4px;">
                     Create my Account
                   </button>
                   <div style="text-align:center;margin-top:8px;font-size:13px;color:#94a3b8;">
-                    Already registered? <a href="javascript:void(0)" onclick="window.switchAuthTab('signin')" style="color:#b937e2;font-weight:700;text-decoration:none;">Sign In</a>
+                    Already registered? <a href="javascript:void(0)" onclick="window.switchAuthTab('signin')" style="color:#34d399;font-weight:700;text-decoration:none;">Sign In</a>
                   </div>
                 </form>
               </div>
@@ -1795,22 +1805,22 @@
                 <path d="M17.5 17.5L13.875 13.875M15.8333 9.16667C15.8333 12.8486 12.8486 15.8333 9.16667 15.8333C5.48477 15.8333 2.5 12.8486 2.5 9.16667C2.5 5.48477 5.48477 2.5 9.16667 2.5C12.8486 2.5 15.8333 5.48477 15.8333 9.16667Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
               </svg>
             </button>
-            <a href="https://discord.gg/hiddencheats" target="_blank" class="hc-square-btn hc-discord-btn" aria-label="Discord">
+            <a href="https://discord.gg/hiddencheats" target="_blank" rel="noopener noreferrer" class="hc-square-btn hc-discord-btn" aria-label="Discord">
               <i class="fa-brands fa-discord" style="font-size:18px;"></i>
             </a>
             <div class="hc-balance-pill" onclick="window.location.href='settings.html#billing'">
               <span class="hc-b-dollar">$</span>
               <span class="hc-b-sep">|</span>
-              <span class="hc-b-val">${user.balance || '0.00'}</span>
+              <span class="hc-b-val">${escapeHtml(user.balance || '0.00')}</span>
             </div>
             <div class="hc-vsep"></div>
             <div class="hc-user-trigger" onclick="window.toggleUserDropdown(event)">
               <div style="display:flex;flex-direction:column;align-items:flex-end;">
-                <span class="hc-user-name">${user.name || 'Member'}</span>
-                <span class="hc-user-role">${user.role || 'MEMBERS'}</span>
+                <span class="hc-user-name">${escapeHtml(user.name || 'Member')}</span>
+                <span class="hc-user-role">${escapeHtml(user.role || 'MEMBERS')}</span>
               </div>
               <div class="hc-user-avatar-wrap">
-                <img src="${user.avatar || 'favicon.png'}" alt="${user.name || 'Member'}" style="object-fit:cover;">
+                <img src="${encodeURI(user.avatar || 'favicon.png')}" alt="${escapeHtml(user.name || 'Member')}" style="object-fit:cover;">
               </div>
             </div>
             <div id="hc-user-dropdown" class="hc-user-dropdown">
@@ -1819,7 +1829,7 @@
                   <i class="fa-solid fa-key"></i>
                   <span>My Keys</span>
                 </a>
-                <a href="https://discord.gg/hiddencheats" target="_blank" class="hc-drop-btn-support">
+                <a href="https://discord.gg/hiddencheats" target="_blank" rel="noopener noreferrer" class="hc-drop-btn-support">
                   <i class="fa-solid fa-headset"></i>
                   <span>Support</span>
                 </a>
@@ -1951,12 +1961,12 @@
       <div style="background:#14171f;border:1px solid rgba(255,255,255,0.1);border-radius:16px;width:640px;max-width:100%;max-height:90vh;overflow-y:auto;padding:24px;box-shadow:0 25px 60px rgba(0,0,0,0.8);position:relative;">
         <div style="display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.08);padding-bottom:14px;margin-bottom:20px;">
           <div style="display:flex;align-items:center;gap:10px;">
-            <div style="width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,#b937e2,#7d44ed);display:flex;align-items:center;justify-content:center;color:#fff;font-size:16px;">
+            <div style="width:36px;height:36px;border-radius:8px;background:#252a38;border:1px solid rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;color:#34d399;font-size:16px;">
               <i class="fa-solid fa-key"></i>
             </div>
             <div>
               <h3 style="margin:0;font-size:18px;font-weight:800;color:#ffffff;">My License Keys</h3>
-              <p style="margin:2px 0 0;font-size:12px;color:#94a3b8;">Active subscriptions for ${user.name}</p>
+              <p style="margin:2px 0 0;font-size:12px;color:#94a3b8;">Active subscriptions for ${escapeHtml(user.name)}</p>
             </div>
           </div>
           <button onclick="document.getElementById('hc-orders-modal').style.display='none';" style="background:none;border:none;color:#94a3b8;font-size:22px;cursor:pointer;">&times;</button>
@@ -1967,14 +1977,14 @@
             <div style="background:#1a1d27;border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:10px;">
               <div style="display:flex;align-items:center;justify-content:space-between;">
                 <div>
-                  <div style="font-size:15px;font-weight:700;color:#ffffff;">${o.product}</div>
-                  <div style="font-size:11px;color:#94a3b8;margin-top:2px;">Order ID: ${o.id} • <span style="color:#10b981;font-weight:700;">${o.status}</span> (${o.expires})</div>
+                  <div style="font-size:15px;font-weight:700;color:#ffffff;">${escapeHtml(o.product)}</div>
+                  <div style="font-size:11px;color:#94a3b8;margin-top:2px;">Order ID: ${escapeHtml(o.id)} • <span style="color:#10b981;font-weight:700;">${escapeHtml(o.status)}</span> (${escapeHtml(o.expires)})</div>
                 </div>
                 <span style="background:rgba(16,185,129,0.15);color:#34d399;font-size:11px;font-weight:800;padding:3px 10px;border-radius:999px;border:1px solid rgba(16,185,129,0.3);">ACTIVE</span>
               </div>
-              <div style="display:flex;align-items:center;justify-content:space-between;background:#10131a;border:1px dashed #9041ea;border-radius:8px;padding:8px 12px;">
-                <code style="color:#ff52be;font-family:monospace;font-size:13px;font-weight:800;letter-spacing:1px;">${o.key}</code>
-                <button onclick="navigator.clipboard.writeText('${o.key}'); this.textContent='Copied!';" style="background:linear-gradient(135deg,#b937e2,#7d44ed);color:#ffffff;border:none;padding:5px 12px;border-radius:6px;font-size:11px;font-weight:800;cursor:pointer;">
+              <div style="display:flex;align-items:center;justify-content:space-between;background:#10131a;border:1px dashed rgba(52,211,153,0.35);border-radius:8px;padding:8px 12px;">
+                <code style="color:#34d399;font-family:monospace;font-size:13px;font-weight:800;letter-spacing:1px;">${escapeHtml(o.key)}</code>
+                <button onclick="navigator.clipboard.writeText('${escapeHtml(o.key)}'); this.textContent='Copied!';" style="background:#252a38;border:1px solid rgba(255,255,255,0.15);color:#ffffff;padding:5px 12px;border-radius:6px;font-size:11px;font-weight:800;cursor:pointer;">
                   Copy Key
                 </button>
               </div>
@@ -1983,7 +1993,7 @@
         </div>
 
         <div style="margin-top:20px;padding-top:16px;border-top:1px solid rgba(255,255,255,0.08);display:flex;gap:12px;justify-content:flex-end;">
-          <a href="https://discord.gg/hiddencheats" target="_blank" style="background:#5865F2;color:#ffffff;padding:10px 18px;border-radius:8px;font-size:13px;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:8px;">
+          <a href="https://discord.gg/hiddencheats" target="_blank" rel="noopener noreferrer" style="background:#5865F2;color:#ffffff;padding:10px 18px;border-radius:8px;font-size:13px;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:8px;">
             <i class="fa-brands fa-discord"></i> Download Loader
           </a>
           <button onclick="document.getElementById('hc-orders-modal').style.display='none';" style="background:#27262e;border:1px solid rgba(255,255,255,0.1);color:#ffffff;padding:10px 18px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;">

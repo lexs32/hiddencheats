@@ -93,7 +93,7 @@
       transition: border-color 0.2s ease;
     }
     .st-input:focus {
-      border-color: #9041ea;
+      border-color: #34d399;
     }
     .st-label {
       font-size: 12px;
@@ -105,8 +105,8 @@
       display: block;
     }
     .st-btn-save {
-      background: linear-gradient(135deg, #b937e2, #7d44ed);
-      border: none;
+      background: #252834;
+      border: 1px solid rgba(255, 255, 255, 0.15);
       color: #ffffff;
       padding: 12px 24px;
       border-radius: 10px;
@@ -117,6 +117,11 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
+    }
+    .st-btn-save:hover {
+      background: #323646;
+      border-color: rgba(255, 255, 255, 0.25);
+      transform: translateY(-1px);
     }
     .st-btn-save:hover {
       filter: brightness(1.15);
@@ -163,9 +168,9 @@
           </li>
           <li>
             <button class="cCartTrigger" type="button" onclick="window.openCart()" aria-label="Cart">
-              <i class="fa-solid fa-cart-shopping" style="color:#b937e2;font-size:13px;"></i>
+              <i class="fa-solid fa-cart-shopping" style="color:#ffffff;font-size:13px;"></i>
               <span>Cart</span>
-              <span class="cart-badge" style="background:linear-gradient(135deg,#b937e2,#7d44ed);color:#ffffff;font-size:10px;font-weight:900;padding:1px 6px;border-radius:999px;display:none;">0</span>
+              <span class="cart-badge" style="background:#34d399;color:#0e1017;font-size:10px;font-weight:900;padding:1px 6px;border-radius:999px;display:none;">0</span>
             </button>
           </li>
           <li class="auth-nav-container" style="position:relative;"></li>
@@ -181,7 +186,7 @@
                 var s = document.getElementById('elSearchTrigger');
                 if (s && s.closest('li')) s.closest('li').style.display = 'none';
                 var ac = document.querySelector('.auth-nav-container');
-                if (ac) ac.innerHTML = '<div style="display:flex;align-items:center;height:38px;padding:0 8px;"><i class="fa-solid fa-circle-notch fa-spin" style="color:#b937e2;font-size:16px;"></i></div>';
+                if (ac) ac.innerHTML = '<div style="display:flex;align-items:center;height:38px;padding:0 8px;"><i class="fa-solid fa-circle-notch fa-spin" style="color:#34d399;font-size:16px;"></i></div>';
               }
             } catch(e) {}
           })();
@@ -229,7 +234,7 @@
               <h2 style="font-size:20px;font-weight:800;color:#ffffff;margin:0;">My License Keys</h2>
               <p style="font-size:13px;color:#94a3b8;margin:4px 0 0;">Manage your active subscriptions, loader downloads, and HWID locks.</p>
             </div>
-            <a href="https://discord.gg/hiddencheats" target="_blank" class="st-btn-save" style="text-decoration:none;">
+            <a href="https://discord.gg/hiddencheats" target="_blank" rel="noopener noreferrer" class="st-btn-save" style="text-decoration:none;">
               <i class="fa-solid fa-download"></i>
               <span>Download Loader</span>
             </a>
@@ -357,7 +362,7 @@
           <a href="index.html" style="color:#94a3b8;font-size:13px;text-decoration:none;">Store</a>
           <a href="forums.html" style="color:#94a3b8;font-size:13px;text-decoration:none;">Forums</a>
           <a href="status.html" style="color:#94a3b8;font-size:13px;text-decoration:none;">Status</a>
-          <a href="https://discord.gg/hiddencheats" target="_blank" style="color:#94a3b8;font-size:13px;text-decoration:none;">Discord</a>
+          <a href="https://discord.gg/hiddencheats" target="_blank" rel="noopener noreferrer" style="color:#94a3b8;font-size:13px;text-decoration:none;">Discord</a>
         </div>
       </div>
     </div>

@@ -22,12 +22,12 @@
 
   <style>
     :root {
-      --hc-purple: #b937e2;
-      --hc-purple-deep: #7d44ed;
-      --hc-purple-grad: linear-gradient(135deg, #b937e2, #7d44ed);
+      --hc-purple: #34d399;
+      --hc-purple-deep: #059669;
+      --hc-purple-grad: linear-gradient(135deg, #34d399, #059669);
       --hc-bg-card: #0f121a;
       --hc-bg-card-sec: #131620;
-      --hc-border: rgba(185, 55, 226, 0.25);
+      --hc-border: rgba(52, 211, 153, 0.25);
     }
     body {
       background: #090b10 !important;
@@ -227,9 +227,9 @@
           </li>
           <li>
             <button class="cCartTrigger" type="button" onclick="window.openCart()" aria-label="Cart">
-              <i class="fa-solid fa-cart-shopping" style="color:#b937e2;font-size:13px;"></i>
+              <i class="fa-solid fa-cart-shopping" style="color:#ffffff;font-size:13px;"></i>
               <span>Cart</span>
-              <span class="cart-badge" style="background:linear-gradient(135deg,#b937e2,#7d44ed);color:#ffffff;font-size:10px;font-weight:900;padding:1px 6px;border-radius:999px;display:none;">0</span>
+              <span class="cart-badge" style="background:#34d399;color:#0e1017;font-size:10px;font-weight:900;padding:1px 6px;border-radius:999px;display:none;">0</span>
             </button>
           </li>
           <li class="auth-nav-container" style="position:relative;">
@@ -255,7 +255,7 @@
                 var s = document.getElementById('elSearchTrigger');
                 if (s && s.closest('li')) s.closest('li').style.display = 'none';
                 var ac = document.querySelector('.auth-nav-container');
-                if (ac) ac.innerHTML = '<div style="display:flex;align-items:center;height:38px;padding:0 8px;"><i class="fa-solid fa-circle-notch fa-spin" style="color:#b937e2;font-size:16px;"></i></div>';
+                if (ac) ac.innerHTML = '<div style="display:flex;align-items:center;height:38px;padding:0 8px;"><i class="fa-solid fa-circle-notch fa-spin" style="color:#34d399;font-size:16px;"></i></div>';
               }
             } catch(e) {}
           })();
@@ -271,7 +271,7 @@
       <div>
         <h1 class="hc-page-title">
           <span>Your</span> <span class="grad">Cart</span>
-          <span id="pageCartBadge" style="background:rgba(185,55,226,0.15);color:#b937e2;border:1px solid rgba(185,55,226,0.35);font-size:12px;font-weight:800;padding:3px 12px;border-radius:999px;margin-left:6px;">0 items</span>
+          <span id="pageCartBadge" style="background:rgba(52,211,153,0.12);color:#34d399;border:1px solid rgba(52,211,153,0.3);font-size:12px;font-weight:800;padding:3px 12px;border-radius:999px;margin-left:6px;">0 items</span>
         </h1>
         <p style="margin:4px 0 0;font-size:13px;color:#8896a6;">Review your items and proceed to secure instant checkout.</p>
       </div>
@@ -296,7 +296,7 @@
         <a href="index.html" style="color:#8896a6;text-decoration:none;">Store</a>
         <a href="status.html" style="color:#8896a6;text-decoration:none;">Status</a>
         <a href="reviews.html" style="color:#8896a6;text-decoration:none;">Reviews</a>
-        <a href="https://discord.gg/hiddencheats" target="_blank" style="color:#8896a6;text-decoration:none;">Discord</a>
+        <a href="https://discord.gg/hiddencheats" target="_blank" rel="noopener noreferrer" style="color:#8896a6;text-decoration:none;">Discord</a>
       </div>
     </div>
   </footer>
@@ -306,6 +306,16 @@
   <script src="assets/js/shopify-config.js"></script>
   <script src="assets/js/store.js?v=20260922_v2"></script>
   <script>
+    function escapeHtml(str) {
+      if (str === null || str === undefined) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
     // Sync page-level cart renderer with localStorage
     function renderPageCart() {
       const container = document.getElementById('pageCartContent');
@@ -326,7 +336,7 @@
       if (cartItems.length === 0) {
         container.innerHTML = `
           <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:70px 20px;text-align:center;">
-            <div style="width:84px;height:84px;border-radius:50%;background:rgba(185,55,226,0.1);border:1px solid rgba(185,55,226,0.25);display:flex;align-items:center;justify-content:center;font-size:34px;color:#b937e2;margin-bottom:20px;box-shadow:0 0 40px rgba(185,55,226,0.25);">
+            <div style="width:84px;height:84px;border-radius:50%;background:rgba(52,211,153,0.1);border:1px solid rgba(52,211,153,0.25);display:flex;align-items:center;justify-content:center;font-size:34px;color:#34d399;margin-bottom:20px;box-shadow:0 0 40px rgba(52,211,153,0.15);">
               <i class="fa-solid fa-cart-shopping"></i>
             </div>
             <h2 style="margin:0 0 10px;font-size:22px;font-weight:900;color:#ffffff;">Your cart is empty</h2>
@@ -352,11 +362,11 @@
         itemsHtml += `
           <div class="hc-item-card">
             <div class="hc-item-img">
-              <img src="${item.image}" alt="${item.name}">
+              <img src="${encodeURI(item.image)}" alt="${escapeHtml(item.name)}">
             </div>
             <div style="flex:1;min-width:0;">
-              <h4 style="margin:0;font-size:15px;font-weight:800;color:#ffffff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${item.name}</h4>
-              <div style="display:inline-block;font-size:11px;color:#b937e2;font-weight:700;background:rgba(185,55,226,0.12);padding:2px 8px;border-radius:6px;margin-top:4px;">${item.variantName}</div>
+              <h4 style="margin:0;font-size:15px;font-weight:800;color:#ffffff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${escapeHtml(item.name)}</h4>
+              <div style="display:inline-block;font-size:11px;color:#34d399;font-weight:700;background:rgba(52,211,153,0.12);padding:2px 8px;border-radius:6px;margin-top:4px;">${escapeHtml(item.variantName)}</div>
               <div style="display:flex;align-items:center;justify-content:space-between;margin-top:12px;">
                 <div style="display:flex;align-items:center;gap:8px;">
                   <button class="hc-qty-btn" onclick="window.changeCartItemQty(${idx}, -1); renderPageCart();">-</button>
@@ -375,7 +385,7 @@
 
       const discountHtml = promo && promo.discount ? `
         <div style="display:flex;justify-content:space-between;color:#10b981;">
-          <span>Discount (${promo.code} -${promo.discount}%)</span>
+          <span>Discount (${escapeHtml(promo.code)} -${promo.discount}%)</span>
           <span style="font-weight:700;">-$${(subtotal - total).toFixed(2)}</span>
         </div>
       ` : '';
@@ -385,7 +395,7 @@
           <div style="display:flex;flex-direction:column;gap:14px;">
             <div style="display:flex;align-items:center;justify-content:space-between;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,0.06);">
               <span style="font-size:13px;font-weight:800;color:#ffffff;text-transform:uppercase;letter-spacing:0.5px;">Selected Products (${totalQty})</span>
-              <span style="font-size:11px;color:#8896a6;"><i class="fa-solid fa-shield-halved" style="color:#b937e2;"></i> Undetected & Verified</span>
+              <span style="font-size:11px;color:#8896a6;"><i class="fa-solid fa-shield-halved" style="color:#34d399;"></i> Undetected & Verified</span>
             </div>
             <div style="display:flex;flex-direction:column;gap:14px;">
               ${itemsHtml}
@@ -396,8 +406,8 @@
             <h3 style="margin:0;font-size:16px;font-weight:900;color:#ffffff;">Order Summary</h3>
             
             <div style="display:flex;gap:8px;">
-              <input type="text" id="pagePromoInput" placeholder="Promo code (HIDDEN10)" value="${promo ? promo.code : ''}" style="flex:1;background:#181c27;border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:9px 12px;color:#ffffff;font-size:12px;outline:none;" onfocus="this.style.borderColor='#b937e2'" onblur="this.style.borderColor='rgba(255,255,255,0.1)'">
-              <button onclick="applyPagePromo()" style="background:#1f2433;border:1px solid rgba(185,55,226,0.3);color:#ffffff;padding:9px 16px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;transition:all 0.2s ease;">
+              <input type="text" id="pagePromoInput" placeholder="Promo code (HIDDEN10)" value="${promo ? escapeHtml(promo.code) : ''}" style="flex:1;background:#181c27;border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:9px 12px;color:#ffffff;font-size:12px;outline:none;" onfocus="this.style.borderColor='#34d399'" onblur="this.style.borderColor='rgba(255,255,255,0.1)'">
+              <button onclick="applyPagePromo()" style="background:#1f2433;border:1px solid rgba(52,211,153,0.3);color:#ffffff;padding:9px 16px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;transition:all 0.2s ease;">
                 Apply
               </button>
             </div>
@@ -411,20 +421,20 @@
               ${discountHtml}
               <div style="display:flex;justify-content:space-between;color:#ffffff;font-size:18px;font-weight:900;border-top:1px solid rgba(255,255,255,0.08);padding-top:12px;">
                 <span>Total</span>
-                <span style="color:#b937e2;text-shadow:0 0 15px rgba(185,55,226,0.35);">$${total.toFixed(2)}</span>
+                <span style="color:#34d399;text-shadow:0 0 15px rgba(52,211,153,0.25);">$${total.toFixed(2)}</span>
               </div>
             </div>
 
             <div style="display:flex;flex-direction:column;gap:6px;">
               <label style="font-size:11px;font-weight:700;color:#8896a6;text-transform:uppercase;letter-spacing:0.5px;">Email Address</label>
-              <input type="email" id="pageEmailInput" placeholder="your@email.com" style="width:100%;background:#181c27;border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:10px 12px;color:#ffffff;font-size:13px;outline:none;" onfocus="this.style.borderColor='#b937e2'" onblur="this.style.borderColor='rgba(255,255,255,0.1)'">
+              <input type="email" id="pageEmailInput" placeholder="your@email.com" style="width:100%;background:#181c27;border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:10px 12px;color:#ffffff;font-size:13px;outline:none;" onfocus="this.style.borderColor='#34d399'" onblur="this.style.borderColor='rgba(255,255,255,0.1)'">
             </div>
 
             <div>
               <div style="font-size:11px;color:#8896a6;font-weight:700;text-transform:uppercase;margin-bottom:6px;">Payment Method:</div>
               <div style="display:grid;grid-template-columns:repeat(4, 1fr);gap:6px;">
-                <button type="button" class="pay-btn active-pay" onclick="window.setPaymentMethod('card', this)" style="background:rgba(185,55,226,0.15);border:1px solid #b937e2;color:#ffffff;padding:8px 4px;border-radius:8px;font-size:11px;font-weight:700;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px;">
-                  <i class="fa-solid fa-credit-card" style="color:#b937e2;font-size:12px;"></i>
+                <button type="button" class="pay-btn active-pay" onclick="window.setPaymentMethod('card', this)" style="background:rgba(52,211,153,0.15);border:1px solid #34d399;color:#ffffff;padding:8px 4px;border-radius:8px;font-size:11px;font-weight:700;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px;">
+                  <i class="fa-solid fa-credit-card" style="color:#34d399;font-size:12px;"></i>
                   <span>Card</span>
                 </button>
                 <button type="button" class="pay-btn" onclick="window.setPaymentMethod('paypal', this)" style="background:#161922;border:1px solid rgba(255,255,255,0.08);color:#9aa2b1;padding:8px 4px;border-radius:8px;font-size:11px;font-weight:700;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px;">
@@ -453,9 +463,9 @@
             </p>
 
             <div style="display:flex;align-items:center;justify-content:center;gap:12px;font-size:10px;color:#8896a6;padding-top:10px;border-top:1px solid rgba(255,255,255,0.06);">
-              <span><i class="fa-solid fa-bolt" style="color:#b937e2;"></i> Instant Delivery</span>
+              <span><i class="fa-solid fa-bolt" style="color:#34d399;"></i> Instant Delivery</span>
               <span>•</span>
-              <span><i class="fa-solid fa-shield-halved" style="color:#b937e2;"></i> 256-Bit SSL Encrypted</span>
+              <span><i class="fa-solid fa-shield-halved" style="color:#34d399;"></i> 256-Bit SSL Encrypted</span>
             </div>
           </div>
         </div>
