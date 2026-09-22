@@ -1496,9 +1496,18 @@
     return supabaseClient;
   }
 
+  let isCheckingSession = false;
+  let sessionCheckCompleted = false;
+
   async function checkSupabaseSession() {
+    if (isCheckingSession || sessionCheckCompleted) return;
+    isCheckingSession = true;
+
     const client = initSupabase();
-    if (!client) return;
+    if (!client) {
+      isCheckingSession = false;
+      return;
+    }
 
     try {
       // 1. Explicit Check for Hash Fragment (#access_token=...&refresh_token=...)
@@ -1517,13 +1526,16 @@
             });
             if (error) {
               console.warn('[Supabase] setSession error:', error);
-            } else if (data?.session?.user) {
-              handleSupabaseUser(data.session.user);
-              try {
-                window.history.replaceState(null, '', window.location.pathname + window.location.search);
-              } catch (e) {}
-              showToast('Welcome!', 'Logged in successfully via Discord.');
-              return;
+            } else {
+              const u = data?.session?.user || data?.user;
+              if (u) {
+                handleSupabaseUser(u);
+                try {
+                  window.history.replaceState(null, '', window.location.origin + window.location.pathname);
+                } catch (e) {}
+                sessionCheckCompleted = true;
+                return;
+              }
             }
           } catch (e) {
             console.warn('[Supabase] setSession exception:', e);
@@ -1541,13 +1553,16 @@
             const { data, error } = await client.auth.exchangeCodeForSession(code);
             if (error) {
               console.warn('[Supabase] exchangeCodeForSession error:', error);
-            } else if (data?.session?.user) {
-              handleSupabaseUser(data.session.user);
-              try {
-                window.history.replaceState(null, '', window.location.pathname);
-              } catch (e) {}
-              showToast('Welcome!', 'Logged in successfully via Discord.');
-              return;
+            } else {
+              const u = data?.session?.user || data?.user;
+              if (u) {
+                handleSupabaseUser(u);
+                try {
+                  window.history.replaceState(null, '', window.location.origin + window.location.pathname);
+                } catch (e) {}
+                sessionCheckCompleted = true;
+                return;
+              }
             }
           } catch (err) {
             console.warn('[Supabase] exchangeCodeForSession exception:', err);
@@ -1556,10 +1571,15 @@
       }
 
       // 3. Normal session lookup from client storage
-      const { data: { session }, error } = await client.auth.getSession();
-      if (session && session.user) {
-        handleSupabaseUser(session.user);
-        return;
+      try {
+        const { data: { session }, error } = await client.auth.getSession();
+        if (session?.user) {
+          handleSupabaseUser(session.user);
+          sessionCheckCompleted = true;
+          return;
+        }
+      } catch (e) {
+        console.warn('[Supabase] getSession error:', e);
       }
 
       // 4. Fallback: getUser() in case cookie/token is active
@@ -1567,23 +1587,25 @@
         const { data: { user } } = await client.auth.getUser();
         if (user) {
           handleSupabaseUser(user);
+          sessionCheckCompleted = true;
           return;
         }
       } catch (e) {}
 
-      // 5. Auth state change listener
-      client.auth.onAuthStateChange((event, session) => {
-        if ((event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED' || event === 'USER_UPDATED') && session?.user) {
-          handleSupabaseUser(session.user);
-        } else if (event === 'SIGNED_OUT') {
-          const defaultLoggedOut = { loggedIn: false };
-          localStorage.setItem('hc_user', JSON.stringify(defaultLoggedOut));
-          renderAuthNav();
-          syncProfilePage(defaultLoggedOut);
-        }
-      });
+      // 5. Auth state change listener (NEVER wipe session on SIGNED_OUT)
+      if (!window.__hcSupabaseListenerRegistered) {
+        window.__hcSupabaseListenerRegistered = true;
+        client.auth.onAuthStateChange((event, session) => {
+          if ((event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED' || event === 'USER_UPDATED') && session?.user) {
+            handleSupabaseUser(session.user);
+          }
+        });
+      }
     } catch (e) {
       console.warn('[Supabase] Session check error:', e);
+    } finally {
+      isCheckingSession = false;
+      renderAuthNav();
     }
   }
 
@@ -1631,6 +1653,12 @@
 
     renderAuthNav();
     syncProfilePage(updatedUser);
+
+    const welcomeKey = 'hc_welcomed_' + sbUser.id;
+    if (!sessionStorage.getItem(welcomeKey)) {
+      sessionStorage.setItem(welcomeKey, 'true');
+      showToast('Welcome!', 'Logged in successfully via Discord.');
+    }
   }
 
   async function loginWithDiscord() {
@@ -2032,7 +2060,14 @@
 
     initCatalogCardTriggers();
     updateNavbarCartBadges();
-    renderAuthNav();
+
+    const hasAuthParams = (window.location.hash && window.location.hash.includes('access_token')) ||
+                          (window.location.search && window.location.search.includes('code='));
+
+    if (!hasAuthParams) {
+      renderAuthNav();
+    }
+
     ensureSupabaseLibrary(() => {
       checkSupabaseSession();
     });

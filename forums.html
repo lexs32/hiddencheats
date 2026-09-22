@@ -363,6 +363,23 @@
             </button>
           </div>
         </li>
+              <script>
+          (function() {
+            try {
+              var h = window.location.hash || '';
+              var q = window.location.search || '';
+              var isAuth = h.indexOf('access_token') !== -1 || q.indexOf('code=') !== -1;
+              var u = localStorage.getItem('hc_user');
+              var p = u ? JSON.parse(u) : null;
+              if (isAuth || (p && p.loggedIn)) {
+                var s = document.getElementById('elSearchTrigger');
+                if (s && s.closest('li')) s.closest('li').style.display = 'none';
+                var ac = document.querySelector('.auth-nav-container');
+                if (ac) ac.innerHTML = '<div style="display:flex;align-items:center;height:38px;padding:0 8px;"><i class="fa-solid fa-circle-notch fa-spin" style="color:#b937e2;font-size:16px;"></i></div>';
+              }
+            } catch(e) {}
+          })();
+        </script>
       </ul>
 
       <ul class="ipsMobileHamburger ipsList_reset ipsResponsive_hideDesktop" style="display:flex;align-items:center;gap:10px;">
@@ -642,6 +659,6 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="assets/js/supabase-config.js"></script>
   <script src="assets/js/shopify-config.js"></script>
-  <script src="assets/js/store.js"></script>
+  <script src="assets/js/store.js?v=20260922_v2"></script>
 </body>
 </html>
