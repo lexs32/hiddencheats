@@ -426,6 +426,175 @@
       color: #ffffff !important;
     }
 
+    
+    /* Live Auto-Sync Indicator */
+    @keyframes pulse-dot-glow {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.35); opacity: 0.7; }
+    }
+    .status-pulse-dot {
+      animation: pulse-dot-glow 1.8s infinite;
+      box-shadow: 0 0 8px currentColor;
+    }
+    .pulse-green { color: #34d399; }
+    .pulse-orange { color: #fb923c; }
+    .pulse-blue { color: #60a5fa; }
+    .pulse-red { color: #f87171; }
+    .pulse-yellow { color: #fde047; }
+    .pulse-slate { color: #cbd5e1; }
+    .pulse-rose { color: #fb7185; }
+
+    .live-sync-indicator {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(52, 211, 153, 0.08);
+      border: 1px solid rgba(52, 211, 153, 0.25);
+      border-radius: 999px;
+      padding: 6px 14px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.6px;
+      color: #34d399;
+    }
+    .live-sync-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #34d399;
+      box-shadow: 0 0 10px #34d399;
+      animation: pulse-dot-glow 1.5s infinite;
+    }
+    .live-sync-ping {
+      color: #94a3b8;
+      font-weight: 600;
+      font-size: 10px;
+      padding-left: 6px;
+      border-left: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    /* Status Search Bar */
+    .status-search-wrap {
+      position: relative;
+      margin-bottom: 20px;
+    }
+    .status-search-icon {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #94a3b8;
+      font-size: 14px;
+      pointer-events: none;
+    }
+    .status-search-input {
+      width: 100%;
+      background: #141720;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      padding: 13px 44px 13px 42px;
+      color: #ffffff;
+      font-size: 14px;
+      font-weight: 600;
+      outline: none;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    }
+    .status-search-input:focus {
+      border-color: rgba(255, 255, 255, 0.25);
+      background: #171b26;
+    }
+    .status-search-clear {
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: #94a3b8;
+      font-size: 18px;
+      cursor: pointer;
+      line-height: 1;
+      padding: 4px;
+    }
+
+    /* Status Counts Pill Bar */
+    .status-filter-scroll {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      margin-bottom: 12px;
+    }
+    .status-filter-scroll::-webkit-scrollbar { display: none; }
+    .status-pill {
+      background: #181b25;
+      color: #94a3b8;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 8px;
+      padding: 7px 12px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+      transition: all 0.15s ease;
+      text-transform: uppercase;
+    }
+    .status-pill:hover {
+      background: #232736;
+      color: #ffffff;
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+    .status-pill.active {
+      background: #252a38;
+      color: #ffffff !important;
+      border-color: rgba(255, 255, 255, 0.25);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+    }
+    .status-pill-count {
+      background: rgba(255, 255, 255, 0.08);
+      padding: 1px 6px;
+      border-radius: 999px;
+      font-size: 10px;
+    }
+
+    /* Product Item Enhancements */
+    .status-prod-thumb {
+      width: 44px;
+      height: 44px;
+      border-radius: 8px;
+      object-fit: cover;
+      background: #1c202c;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      flex-shrink: 0;
+    }
+    .status-prod-notes {
+      font-size: 12px;
+      color: #94a3b8;
+      margin: 4px 0 0 0;
+      line-height: 1.4;
+    }
+    .status-prod-category {
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.8px;
+      color: #64748b;
+      text-transform: uppercase;
+    }
+    .status-btn-paused {
+      background: #1c1e27 !important;
+      border: 1px solid rgba(255, 255, 255, 0.08) !important;
+      color: #94a3b8 !important;
+      box-shadow: none !important;
+      cursor: not-allowed !important;
+      opacity: 0.7;
+    }
+
     /* Footer */
     #cFooter {
       background: #090a0e !important;
@@ -574,15 +743,44 @@
     
     <section class="status-hero">
       <!-- Banner Header -->
-      <div class="status-banner-card">
-        <img src="favicon.png" alt="HiddenCheats" class="status-banner-logo">
-        <div>
-          <h1 class="status-banner-title">Status Page</h1>
-          <div class="status-banner-subtitle">
-            <i class="fa-solid fa-heart-pulse pulse-icon"></i>
-            <a href="https://discord.gg/hiddencheats" target="_blank" rel="noopener noreferrer">Status outdated? Let us know on Discord.</a>
+      <div class="status-banner-card" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;">
+        <div style="display:flex;align-items:center;gap:18px;">
+          <img src="favicon.png" alt="HiddenCheats" class="status-banner-logo">
+          <div>
+            <h1 class="status-banner-title">Status Page</h1>
+            <div class="status-banner-subtitle">
+              <i class="fa-solid fa-heart-pulse pulse-icon"></i>
+              <a href="https://discord.gg/hiddencheats" target="_blank" rel="noopener noreferrer">Status outdated? Let us know on Discord.</a>
+            </div>
           </div>
         </div>
+
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div class="live-sync-indicator" id="liveSyncBadge" title="Connected to real-time Dual-Sync Bot network">
+            <span class="live-sync-dot"></span>
+            <span>LIVE AUTO-SYNC ACTIVE</span>
+            <span class="live-sync-ping" id="liveSyncPing">32ms</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Instant Search Input -->
+      <div class="status-search-wrap">
+        <i class="fa-solid fa-magnifying-glass status-search-icon"></i>
+        <input type="text" id="statusSearchInput" class="status-search-input" placeholder="Search by cheat title, game category, or status notes..." autocomplete="off">
+        <button type="button" id="clearStatusSearchBtn" class="status-search-clear" style="display:none;" onclick="clearStatusSearch()">&times;</button>
+      </div>
+
+      <!-- Live Category Counts Pills Bar -->
+      <div class="status-filter-scroll" id="statusCountsFilterBar">
+        <button type="button" class="status-pill active" data-status-filter="all">Total <span class="status-pill-count" id="cnt-total">19</span></button>
+        <button type="button" class="status-pill" data-status-filter="Undetected" style="border-left:3px solid #34d399;">Undetected <span class="status-pill-count" id="cnt-undetected" style="color:#34d399;">19</span></button>
+        <button type="button" class="status-pill" data-status-filter="Updating" style="border-left:3px solid #fb923c;">Updating <span class="status-pill-count" id="cnt-updating" style="color:#fb923c;">0</span></button>
+        <button type="button" class="status-pill" data-status-filter="Testing" style="border-left:3px solid #60a5fa;">Testing <span class="status-pill-count" id="cnt-testing" style="color:#60a5fa;">0</span></button>
+        <button type="button" class="status-pill" data-status-filter="Detected" style="border-left:3px solid #f87171;">Detected <span class="status-pill-count" id="cnt-detected" style="color:#f87171;">0</span></button>
+        <button type="button" class="status-pill" data-status-filter="Maintenance" style="border-left:3px solid #fde047;">Maintenance <span class="status-pill-count" id="cnt-maintenance" style="color:#fde047;">0</span></button>
+        <button type="button" class="status-pill" data-status-filter="Offline" style="border-left:3px solid #94a3b8;">Offline <span class="status-pill-count" id="cnt-offline">0</span></button>
+        <button type="button" class="status-pill" data-status-filter="Use At Own Risk" style="border-left:3px solid #fb7185;">Use At Risk <span class="status-pill-count" id="cnt-use_at_own_risk" style="color:#fb7185;">0</span></button>
       </div>
 
       <!-- Filter Pills Bar -->
@@ -935,57 +1133,302 @@
       drawer.style.display = (drawer.style.display === 'none' || drawer.style.display === '') ? 'block' : 'none';
     }
 
-    // Interactive category filter pills logic
-    document.addEventListener('DOMContentLoaded', () => {
-      const pills = document.querySelectorAll('.filter-pill');
+    // --- REAL-TIME STATUS ENGINE & SWR POLLER ---
+    let activeGameFilter = 'all';
+    let activeStatusFilter = 'all';
+    let activeSearchQuery = '';
+    let latestProductsCache = [];
+
+    // Clear search helper
+    function clearStatusSearch() {
+      const inp = document.getElementById('statusSearchInput');
+      if (inp) {
+        inp.value = '';
+        activeSearchQuery = '';
+        document.getElementById('clearStatusSearchBtn').style.display = 'none';
+        applyFilters();
+      }
+    }
+
+    // Filter coordinator
+    function applyFilters() {
+      const rows = document.querySelectorAll('.status-row');
       const groups = document.querySelectorAll('.status-group');
 
-      function filterTo(targetGroup) {
-        pills.forEach(p => {
-          if (p.getAttribute('data-filter') === targetGroup) {
-            p.classList.add('active');
-          } else {
-            p.classList.remove('active');
-          }
-        });
+      const query = activeSearchQuery.toLowerCase().trim();
 
-        groups.forEach(g => {
-          if (targetGroup === 'all' || g.getAttribute('data-group') === targetGroup) {
-            g.style.display = 'block';
+      // Check each row
+      rows.forEach(row => {
+        const prodName = (row.getAttribute('data-prod-name') || row.querySelector('.status-product-name')?.textContent || '').toLowerCase();
+        const prodGame = (row.getAttribute('data-prod-game') || '').toLowerCase();
+        const prodNotes = (row.querySelector('.status-prod-notes')?.textContent || '').toLowerCase();
+        const prodStatus = (row.getAttribute('data-prod-status') || 'Undetected').toLowerCase();
+
+        // 1. Game filter match
+        const matchesGame = (activeGameFilter === 'all' || prodGame === activeGameFilter.toLowerCase());
+
+        // 2. Status filter match
+        let matchesStatus = true;
+        if (activeStatusFilter !== 'all') {
+          matchesStatus = prodStatus === activeStatusFilter.toLowerCase();
+        }
+
+        // 3. Search query match
+        let matchesSearch = true;
+        if (query) {
+          matchesSearch = prodName.includes(query) || prodGame.includes(query) || prodNotes.includes(query);
+        }
+
+        if (matchesGame && matchesStatus && matchesSearch) {
+          row.style.display = 'flex';
+        } else {
+          row.style.display = 'none';
+        }
+      });
+
+      // Show/hide group containers based on whether any child row is visible
+      groups.forEach(group => {
+        const visibleRows = group.querySelectorAll('.status-row[style*="display: flex"]');
+        if (visibleRows.length > 0) {
+          group.style.display = 'block';
+        } else {
+          group.style.display = 'none';
+        }
+      });
+    }
+
+    // Mutates row status in-place without rebuilding DOM
+    function updateRowStatus(row, prod) {
+      if (!row || !prod) return;
+
+      const norm = window.HCStatusEngine ? window.HCStatusEngine.normalizeStatus(prod.status) : prod.status;
+      row.setAttribute('data-prod-status', norm);
+      row.setAttribute('data-prod-name', prod.name);
+      row.setAttribute('data-prod-game', prod.game);
+
+      // Update badge
+      const badgeWrap = row.querySelector('.status-badge-container') || row.querySelector('.status-actions');
+      if (badgeWrap) {
+        let badgeEl = badgeWrap.querySelector('.status-badge');
+        if (window.HCStatusEngine && window.HCStatusEngine.generateStatusBadgeHtml) {
+          const temp = document.createElement('div');
+          temp.innerHTML = window.HCStatusEngine.generateStatusBadgeHtml(norm).trim();
+          const newBadge = temp.firstChild;
+          if (badgeEl) {
+            badgeEl.replaceWith(newBadge);
           } else {
-            g.style.display = 'none';
+            badgeWrap.prepend(newBadge);
           }
-        });
+        }
       }
 
-      pills.forEach(pill => {
-        pill.addEventListener('click', (e) => {
-          e.preventDefault();
-          const target = pill.getAttribute('data-filter');
-          filterTo(target);
-
-          // Update URL query string seamlessly
-          const url = new URL(window.location);
-          if (target === 'all') {
-            url.searchParams.delete('group');
-          } else {
-            url.searchParams.set('group', target);
+      // Update notes if present
+      let notesEl = row.querySelector('.status-prod-notes');
+      if (prod.notes) {
+        if (!notesEl) {
+          const textWrap = row.querySelector('.status-text-wrap') || row.querySelector('.status-product-name')?.parentElement;
+          if (textWrap) {
+            notesEl = document.createElement('p');
+            notesEl.className = 'status-prod-notes';
+            textWrap.appendChild(notesEl);
           }
+        }
+        if (notesEl && notesEl.textContent !== prod.notes) {
+          notesEl.textContent = prod.notes;
+        }
+      }
+
+      // Update purchase button status
+      const btn = row.querySelector('.status-btn-purchase');
+      if (btn) {
+        const cfg = window.HCStatusEngine ? window.HCStatusEngine.getStatusConfig(norm) : { canPurchase: true };
+        if (cfg.canPurchase) {
+          btn.classList.remove('status-btn-paused');
+          btn.textContent = 'Purchase now';
+          btn.style.pointerEvents = 'auto';
+        } else {
+          btn.classList.add('status-btn-paused');
+          btn.textContent = norm === 'Updating' ? 'Updating' : 'Paused';
+          btn.style.pointerEvents = 'none';
+        }
+      }
+    }
+
+    // Update dynamic count pills
+    function updateCountBadges(counts) {
+      if (!counts) return;
+      const map = {
+        'cnt-total': counts.total,
+        'cnt-undetected': counts.undetected,
+        'cnt-updating': counts.updating,
+        'cnt-testing': counts.testing,
+        'cnt-detected': counts.detected,
+        'cnt-maintenance': counts.maintenance,
+        'cnt-offline': counts.offline,
+        'cnt-use_at_own_risk': counts.use_at_own_risk
+      };
+      for (const [id, val] of Object.entries(map)) {
+        const el = document.getElementById(id);
+        if (el) el.textContent = val !== undefined ? val : 0;
+      }
+    }
+
+    // SWR Poller function
+    async function pollLiveStatus() {
+      const startTime = performance.now();
+      try {
+        const res = await fetch('/api/status?t=' + Date.now(), {
+          headers: { 'Cache-Control': 'no-cache' }
+        });
+        const elapsed = Math.round(performance.now() - startTime);
+        const pingEl = document.getElementById('liveSyncPing');
+        if (pingEl) pingEl.textContent = elapsed + 'ms';
+
+        if (!res.ok) return;
+        const data = await res.json();
+
+        if (data.counts) {
+          updateCountBadges(data.counts);
+        }
+
+        if (Array.isArray(data.products)) {
+          latestProductsCache = data.products;
+          // Store globally so store.js can access
+          window.HC_LIVE_STATUS_CACHE = data.products;
+
+          data.products.forEach(p => {
+            // Find row by id or product name
+            const row = document.querySelector(`.status-row[data-prod-id="${p.id}"]`) ||
+                        Array.from(document.querySelectorAll('.status-row')).find(r => 
+                          r.querySelector('.status-product-name')?.textContent.trim().toLowerCase() === p.name.toLowerCase()
+                        );
+            if (row) {
+              row.setAttribute('data-prod-id', p.id);
+              updateRowStatus(row, p);
+            }
+          });
+
+          // Re-apply filters smoothly
+          applyFilters();
+        }
+      } catch (err) {
+        // Quiet fallback
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Initial tag rows with identifiers and structure
+      const rows = document.querySelectorAll('.status-row');
+      rows.forEach(r => {
+        const group = r.closest('.status-group')?.getAttribute('data-group') || '';
+        r.setAttribute('data-prod-game', group);
+        const nameEl = r.querySelector('.status-product-name');
+        if (nameEl) {
+          r.setAttribute('data-prod-name', nameEl.textContent.trim());
+          // Ensure structure has thumbnail and text wrap if not already present
+          if (!r.querySelector('.status-prod-thumb')) {
+            const wrap = document.createElement('div');
+            wrap.className = 'status-info-wrap';
+            wrap.style.cssText = 'display:flex;align-items:center;gap:14px;';
+
+            // Find image for game
+            let imgPath = 'favicon.png';
+            if (group.includes('arc')) imgPath = 'boxes/arc.png';
+            else if (group.includes('apex')) imgPath = 'boxes/apex.png';
+            else if (group.includes('cod')) imgPath = 'boxes/cod.png';
+            else if (group.includes('fort')) imgPath = 'boxes/fort.png';
+            else if (group.includes('rust')) imgPath = 'boxes/rust.png';
+            else if (group.includes('siege')) imgPath = 'boxes/r6.png';
+            else if (group.includes('counter')) imgPath = 'boxes/valorant.png';
+
+            const img = document.createElement('img');
+            img.src = imgPath;
+            img.alt = nameEl.textContent;
+            img.className = 'status-prod-thumb';
+
+            const textWrap = document.createElement('div');
+            textWrap.className = 'status-text-wrap';
+            nameEl.parentNode.insertBefore(wrap, nameEl);
+            textWrap.appendChild(nameEl);
+
+            const catEl = document.createElement('span');
+            catEl.className = 'status-prod-category';
+            catEl.textContent = group.replace('-', ' ').toUpperCase();
+            textWrap.prepend(catEl);
+
+            wrap.appendChild(img);
+            wrap.appendChild(textWrap);
+          }
+        }
+      });
+
+      // 2. Game Category Pills Listener
+      const gamePills = document.querySelectorAll('#statusFilterBar .filter-pill');
+      gamePills.forEach(p => {
+        p.addEventListener('click', (e) => {
+          e.preventDefault();
+          gamePills.forEach(pi => pi.classList.remove('active'));
+          p.classList.add('active');
+          activeGameFilter = p.getAttribute('data-filter') || 'all';
+          applyFilters();
+
+          const url = new URL(window.location);
+          if (activeGameFilter === 'all') url.searchParams.delete('group');
+          else url.searchParams.set('group', activeGameFilter);
           window.history.replaceState({}, '', url);
         });
       });
 
-      // Handle URL param on direct load e.g. status.html?group=arc-raiders
+      // 3. Status Category Pills Listener
+      const statusPills = document.querySelectorAll('#statusCountsFilterBar .status-pill');
+      statusPills.forEach(sp => {
+        sp.addEventListener('click', (e) => {
+          e.preventDefault();
+          statusPills.forEach(spi => spi.classList.remove('active'));
+          sp.classList.add('active');
+          activeStatusFilter = sp.getAttribute('data-status-filter') || 'all';
+          applyFilters();
+        });
+      });
+
+      // 4. Instant Search Input Listener
+      const searchInput = document.getElementById('statusSearchInput');
+      const clearBtn = document.getElementById('clearStatusSearchBtn');
+      if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+          activeSearchQuery = e.target.value.trim();
+          if (clearBtn) clearBtn.style.display = activeSearchQuery ? 'block' : 'none';
+          applyFilters();
+        });
+      }
+
+      // Handle URL param on boot e.g. status.html?group=arc-raiders
       const urlParams = new URLSearchParams(window.location.search);
       const groupParam = urlParams.get('group');
       if (groupParam) {
-        filterTo(groupParam);
+        const targetPill = document.querySelector(`#statusFilterBar .filter-pill[data-filter="${groupParam}"]`);
+        if (targetPill) targetPill.click();
       }
+
+      // 5. Initial fetch and SWR polling interval (15 seconds)
+      pollLiveStatus();
+      setInterval(() => {
+        if (document.visibilityState === 'visible') {
+          pollLiveStatus();
+        }
+      }, 15000);
+
+      document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'visible') {
+          pollLiveStatus();
+        }
+      });
     });
   </script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="assets/js/supabase-config.js"></script>
   <script src="assets/js/shopify-config.js"></script>
-  <script src="assets/js/store.js?v=20260922_v2"></script>
+  <script src="assets/js/status-engine.js?v=20260922_v3"></script>
+  <script src="assets/js/store.js?v=20260922_v3"></script>
 </body>
 </html>

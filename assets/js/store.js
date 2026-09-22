@@ -232,6 +232,272 @@
     }, 3200);
   }
 
+  // --- REAL-TIME LIVE STATUS SYNC ENGINE ---
+  let liveStatusProducts = null;
+  let lastLiveStatusFetch = 0;
+
+  async function fetchLiveStatus(force = false) {
+    const now = Date.now();
+    if (!force && liveStatusProducts && (now - lastLiveStatusFetch < 10000)) {
+      return liveStatusProducts;
+    }
+    try {
+      const res = await fetch('/api/status', { cache: 'no-store' });
+      if (res.ok) {
+        const data = await res.json();
+        if (data && Array.isArray(data.products)) {
+          liveStatusProducts = data.products;
+          window.HC_LIVE_STATUS_CACHE = liveStatusProducts;
+          lastLiveStatusFetch = now;
+          return liveStatusProducts;
+        }
+      }
+    } catch (e) {
+      // Offline or network error fallback
+    }
+    return liveStatusProducts || [];
+  }
+
+  function getStatusConfig(rawStatus) {
+    if (window.HCStatusEngine && window.HCStatusEngine.getStatusConfig) {
+      return window.HCStatusEngine.getStatusConfig(rawStatus);
+    }
+    const s = String(rawStatus || '').toLowerCase();
+    if (s.includes('detect') && !s.includes('undetect')) {
+      return { label: 'DETECTED', icon: 'fa-solid fa-triangle-exclamation', textColor: '#f87171', bgColor: 'rgba(239, 68, 68, 0.12)', borderColor: 'rgba(239, 68, 68, 0.3)', borderLeft: '#ef4444', dotColor: '#f87171', canPurchase: false, cautionNote: 'Detections reported on recent game patch. Purchases paused while our developers deploy an update.' };
+    }
+    if (s.includes('updat') || s.includes('patch')) {
+      return { label: 'UPDATING', icon: 'fa-solid fa-arrows-rotate fa-spin', textColor: '#fb923c', bgColor: 'rgba(249, 115, 22, 0.12)', borderColor: 'rgba(249, 115, 22, 0.3)', borderLeft: '#f97316', dotColor: '#fb923c', canPurchase: false, cautionNote: 'Cheat is updating for the latest game patch. Purchases are temporarily paused.' };
+    }
+    if (s.includes('maint')) {
+      return { label: 'MAINTENANCE', icon: 'fa-solid fa-screwdriver-wrench', textColor: '#fde047', bgColor: 'rgba(234, 179, 8, 0.12)', borderColor: 'rgba(234, 179, 8, 0.3)', borderLeft: '#eab308', dotColor: '#fde047', canPurchase: false, cautionNote: 'Server maintenance in progress. Key delivery briefly paused.' };
+    }
+    if (s.includes('off') || s.includes('down')) {
+      return { label: 'OFFLINE', icon: 'fa-solid fa-power-off', textColor: '#cbd5e1', bgColor: 'rgba(148, 163, 184, 0.12)', borderColor: 'rgba(148, 163, 184, 0.3)', borderLeft: '#94a3b8', dotColor: '#cbd5e1', canPurchase: false, cautionNote: 'Product server offline.' };
+    }
+    if (s.includes('test')) {
+      return { label: 'TESTING', icon: 'fa-solid fa-flask', textColor: '#60a5fa', bgColor: 'rgba(59, 130, 246, 0.12)', borderColor: 'rgba(59, 130, 246, 0.3)', borderLeft: '#3b82f6', dotColor: '#60a5fa', canPurchase: true, cautionNote: 'Internal testing in progress.' };
+    }
+    if (s.includes('risk') || s.includes('warn')) {
+      return { label: 'USE AT OWN RISK', icon: 'fa-solid fa-shield-halved', textColor: '#fb7185', bgColor: 'rgba(244, 63, 94, 0.12)', borderColor: 'rgba(244, 63, 94, 0.3)', borderLeft: '#f43f5e', dotColor: '#fb7185', canPurchase: true, cautionNote: 'Closet play strongly advised. High ban risk on aggressive settings.' };
+    }
+    return { label: 'UNDETECTED', icon: 'fa-solid fa-circle-check', textColor: '#34d399', bgColor: 'rgba(52, 211, 153, 0.12)', borderColor: 'rgba(52, 211, 153, 0.3)', borderLeft: '#34d399', dotColor: '#34d399', canPurchase: true };
+  }
+
+  function getLiveProductStatus(nameOrId, fallbackGameKey) {
+    const list = window.HC_LIVE_STATUS_CACHE || liveStatusProducts || [];
+    if (!list.length) {
+      return {
+        status: 'Undetected',
+        config: getStatusConfig('Undetected')
+      };
+    }
+
+    const cleanStr = (str) => String(str || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+    const target = cleanStr(nameOrId);
+    const game = cleanStr(fallbackGameKey);
+
+    // 1. Exact match on id or name
+    let match = list.find(p => cleanStr(p.id) === target || cleanStr(p.name) === target);
+
+    // 2. Substring matching
+    if (!match && target) {
+      match = list.find(p => cleanStr(p.id).includes(target) || target.includes(cleanStr(p.id)) ||
+                             cleanStr(p.name).includes(target) || target.includes(cleanStr(p.name)));
+    }
+
+    // 3. Category / Game fallback
+    if (!match && game) {
+      const candidates = list.filter(p => cleanStr(p.game).includes(game) || cleanStr(p.category).includes(game));
+      if (candidates.length) {
+        // Return most restrictive status (Detected/Updating first)
+        const getPriority = (raw) => {
+          const s = String(raw || '').toLowerCase();
+          if (s.includes('detect') && !s.includes('undetect')) return 0;
+          if (s.includes('updat') || s.includes('patch')) return 1;
+          if (s.includes('maint')) return 2;
+          if (s.includes('off') || s.includes('down')) return 3;
+          if (s.includes('risk') || s.includes('warn')) return 4;
+          if (s.includes('test')) return 5;
+          return 6;
+        };
+        candidates.sort((a, b) => getPriority(a.status) - getPriority(b.status));
+        match = candidates[0];
+      }
+    }
+
+    const status = match ? match.status : 'Undetected';
+    const config = getStatusConfig(status);
+    return {
+      product: match,
+      status: status,
+      config: config
+    };
+  }
+
+  function showStatusCautionModal(productName, status, note) {
+    let modal = document.getElementById('hc-status-caution-modal');
+    if (!modal) {
+      modal = document.createElement('div');
+      modal.id = 'hc-status-caution-modal';
+      modal.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:999999;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;padding:16px;';
+      document.body.appendChild(modal);
+    }
+    const cfg = getStatusConfig(status);
+    modal.innerHTML = `
+      <div style="background:#141720;border:1px solid ${cfg.borderColor};border-radius:18px;max-width:500px;width:100%;overflow:hidden;box-shadow:0 25px 60px rgba(0,0,0,0.85);">
+        <div style="padding:22px;border-bottom:1px solid rgba(255,255,255,0.08);background:#171b26;display:flex;align-items:center;justify-content:space-between;">
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div style="width:38px;height:38px;border-radius:10px;background:${cfg.bgColor};border:1px solid ${cfg.borderColor};display:flex;align-items:center;justify-content:center;color:${cfg.textColor};font-size:18px;">
+              <i class="${cfg.icon}"></i>
+            </div>
+            <div>
+              <h3 style="margin:0;font-size:17px;font-weight:900;color:#ffffff;">Product Notice</h3>
+              <div style="font-size:11px;color:${cfg.textColor};font-weight:700;letter-spacing:0.5px;">${cfg.label}</div>
+            </div>
+          </div>
+          <button onclick="document.getElementById('hc-status-caution-modal').remove()" style="background:none;border:none;color:#9aa2b1;font-size:20px;cursor:pointer;">&times;</button>
+        </div>
+        <div style="padding:22px;display:flex;flex-direction:column;gap:16px;">
+          <div style="font-size:14px;font-weight:700;color:#ffffff;">${escapeHtml(productName)}</div>
+          <div style="font-size:13px;color:#cbd5e1;line-height:1.6;background:#0f121a;border:1px solid rgba(255,255,255,0.06);border-left:3px solid ${cfg.textColor};padding:14px;border-radius:8px;">
+            ${escapeHtml(note || cfg.cautionNote || 'This product is currently under maintenance or updating for a recent patch. Instant purchases are paused to protect all customers.')}
+          </div>
+          <div style="font-size:12px;color:#8896a6;line-height:1.5;">
+            Our automated build pipelines and Ring-0 kernel engineers update software 24/7. Join our Discord for real-time release notifications.
+          </div>
+          <div style="display:flex;gap:10px;margin-top:4px;">
+            <a href="https://discord.gg/hiddencheats" target="_blank" rel="noopener noreferrer" style="flex:1;background:#5865F2;color:#ffffff;padding:11px;border-radius:8px;font-weight:700;font-size:12px;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:8px;">
+              <i class="fa-brands fa-discord"></i> Join Discord
+            </a>
+            <a href="status.html" style="flex:1;background:#1e2330;border:1px solid rgba(255,255,255,0.1);color:#ffffff;padding:11px;border-radius:8px;font-weight:700;font-size:12px;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:8px;">
+              <i class="fa-solid fa-signal" style="color:#34d399;"></i> Status Page
+            </a>
+          </div>
+        </div>
+      </div>
+    `;
+    modal.style.display = 'flex';
+  }
+
+  function syncProductPageStatus() {
+    const titleEl = document.getElementById('bcProductTitle');
+    const badgeEl = document.querySelector('.bc-undetected-badge, .bc-status-live-badge');
+    const path = window.location.pathname.toLowerCase();
+
+    let gameKey = '';
+    if (path.includes('apex')) gameKey = 'apex';
+    else if (path.includes('arc')) gameKey = 'arc';
+    else if (path.includes('cod')) gameKey = 'cod';
+    else if (path.includes('fortnite')) gameKey = 'fortnite';
+
+    if (!titleEl && !badgeEl && !gameKey) return;
+
+    const titleText = titleEl ? titleEl.textContent.trim() : gameKey;
+    const info = getLiveProductStatus(titleText, gameKey);
+    const cfg = info.config;
+
+    if (badgeEl) {
+      badgeEl.className = 'bc-status-live-badge';
+      badgeEl.style.cssText = `
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 14px;
+        border-radius: 6px;
+        background: ${cfg.bgColor};
+        border: 1px solid ${cfg.borderColor};
+        border-left: 3px solid ${cfg.borderLeft || cfg.textColor};
+        color: ${cfg.textColor};
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.6px;
+        text-transform: uppercase;
+        transition: all 0.3s ease;
+      `;
+      badgeEl.innerHTML = `
+        <span style="width:7px;height:7px;border-radius:50%;background:${cfg.dotColor};box-shadow:0 0 8px ${cfg.dotColor};display:inline-block;"></span>
+        <i class="${cfg.icon}"></i>
+        <span>${cfg.label}</span>
+      `;
+    }
+
+    const actionsRow = document.querySelector('.bc-actions-row');
+    const cartBtn = document.querySelector('.bc-btn-cart');
+    const buyBtn = document.querySelector('.bc-btn-buy');
+
+    if (cfg.canPurchase === false) {
+      let banner = document.getElementById('bc-status-caution-banner');
+      if (!banner && actionsRow && actionsRow.parentElement) {
+        banner = document.createElement('div');
+        banner.id = 'bc-status-caution-banner';
+        actionsRow.parentElement.insertBefore(banner, actionsRow);
+      }
+      if (banner) {
+        banner.style.cssText = `
+          background: ${cfg.bgColor};
+          border: 1px solid ${cfg.borderColor};
+          border-left: 4px solid ${cfg.borderLeft || cfg.textColor};
+          border-radius: 10px;
+          padding: 14px 18px;
+          margin: 16px 0;
+          display: flex;
+          align-items: flex-start;
+          gap: 12px;
+          color: #ffffff;
+          font-size: 13px;
+          line-height: 1.5;
+        `;
+        banner.innerHTML = `
+          <div style="font-size:18px;color:${cfg.textColor};flex-shrink:0;margin-top:1px;">
+            <i class="${cfg.icon}"></i>
+          </div>
+          <div>
+            <div style="font-weight:800;color:${cfg.textColor};letter-spacing:0.5px;text-transform:uppercase;font-size:12px;margin-bottom:3px;">
+              Status Advisory: ${cfg.label}
+            </div>
+            <div style="color:#d1d5db;font-size:12px;">
+              ${cfg.cautionNote || 'Purchases and downloads for this build are temporarily paused for maintenance and testing. Join our Discord for live release updates.'}
+            </div>
+          </div>
+        `;
+      }
+
+      if (cartBtn) {
+        cartBtn.setAttribute('disabled', 'true');
+        cartBtn.style.opacity = '0.5';
+        cartBtn.style.pointerEvents = 'none';
+        cartBtn.style.cursor = 'not-allowed';
+        cartBtn.innerHTML = `<i class="fa-solid fa-lock"></i> Paused`;
+      }
+      if (buyBtn) {
+        buyBtn.setAttribute('disabled', 'true');
+        buyBtn.style.opacity = '0.5';
+        buyBtn.style.pointerEvents = 'none';
+        buyBtn.style.cursor = 'not-allowed';
+        buyBtn.innerHTML = `<span>${cfg.label}</span>`;
+      }
+    } else {
+      const banner = document.getElementById('bc-status-caution-banner');
+      if (banner) banner.remove();
+
+      if (cartBtn) {
+        cartBtn.removeAttribute('disabled');
+        cartBtn.style.opacity = '1';
+        cartBtn.style.pointerEvents = 'auto';
+        cartBtn.style.cursor = 'pointer';
+        cartBtn.innerHTML = `<i class="fa-solid fa-cart-shopping"></i> Add to Cart`;
+      }
+      if (buyBtn) {
+        buyBtn.removeAttribute('disabled');
+        buyBtn.style.opacity = '1';
+        buyBtn.style.pointerEvents = 'auto';
+        buyBtn.style.cursor = 'pointer';
+        buyBtn.innerHTML = `Buy Now &gt;&gt;`;
+      }
+    }
+  }
+
   function openGameCheats(gameKey) {
     const game = CATALOG[gameKey];
     if (!game) return;
@@ -291,16 +557,25 @@
 
     listEl.innerHTML = '';
     game.cheats.forEach(cheat => {
+      const liveInfo = getLiveProductStatus(cheat.name, cheat.id);
+      const liveStatus = liveInfo ? liveInfo.status : cheat.status;
+      const cfg = liveInfo ? liveInfo.config : getStatusConfig(liveStatus);
+      const isPurchaseAllowed = cfg.canPurchase !== false;
+
       const card = document.createElement('div');
       card.style.cssText = 'background:#1a1d26;border:1px solid rgba(255,255,255,0.08);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;transition:all 0.25s ease;cursor:pointer;position:relative;';
       card.onmouseenter = () => { card.style.borderColor = 'rgba(185,55,226,0.5)'; card.style.transform = 'translateY(-3px)'; };
       card.onmouseleave = () => { card.style.borderColor = 'rgba(255,255,255,0.08)'; card.style.transform = 'translateY(0)'; };
 
+      const actionButtonHtml = isPurchaseAllowed
+        ? `<button onclick="event.stopPropagation(); window.openCheatConfig('${gameKey}', '${cheat.id}')" style="background:#252834;border:1px solid rgba(255,255,255,0.12);color:#ffffff;padding:8px 16px;border-radius:8px;font-size:12px;font-weight:800;cursor:pointer;transition:all 0.2s ease;" onmouseover="this.style.background='#323646'; this.style.borderColor='rgba(255,255,255,0.25)';" onmouseout="this.style.background='#252834'; this.style.borderColor='rgba(255,255,255,0.12)';">View Options</button>`
+        : `<button onclick="event.stopPropagation(); window.showStatusCautionModal('${escapeHtml(cheat.name)}', '${cfg.label}', '${escapeHtml(cfg.cautionNote || '')}')" style="background:rgba(239,68,68,0.12);border:1px solid rgba(239,68,68,0.35);color:#fca5a5;padding:8px 12px;border-radius:8px;font-size:11px;font-weight:800;cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:all 0.2s ease;" onmouseover="this.style.background='rgba(239,68,68,0.2)';" onmouseout="this.style.background='rgba(239,68,68,0.12)';"><i class="fa-solid fa-triangle-exclamation"></i> ${cfg.label} (Paused)</button>`;
+
       card.innerHTML = `
         <div style="position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;background:#0d0f14;">
           <img src="${cheat.image}" alt="${cheat.name}" style="width:100%;height:100%;object-fit:cover;transition:transform 0.3s ease;" onerror="this.src='${game.banner}'">
-          <div style="position:absolute;top:10px;left:10px;background:rgba(16,185,129,0.15);border:1px solid rgba(16,185,129,0.3);color:#34d399;font-size:10px;font-weight:800;padding:3px 8px;border-radius:999px;display:flex;align-items:center;gap:5px;backdrop-filter:blur(6px);">
-            <span style="width:6px;height:6px;border-radius:50%;background:#34d399;"></span> ${cheat.status}
+          <div style="position:absolute;top:10px;left:10px;background:${cfg.bgColor};border:1px solid ${cfg.borderColor};color:${cfg.textColor};font-size:10px;font-weight:800;padding:3px 9px;border-radius:999px;display:flex;align-items:center;gap:6px;backdrop-filter:blur(6px);letter-spacing:0.4px;">
+            <span style="width:6px;height:6px;border-radius:50%;background:${cfg.dotColor};box-shadow:0 0 6px ${cfg.dotColor};"></span> ${cfg.label}
           </div>
           <div style="position:absolute;bottom:10px;right:10px;background:rgba(0,0,0,0.7);color:#ffffff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:6px;">
             ${cheat.tag}
@@ -318,14 +593,18 @@
               <div style="font-size:10px;color:#8896a6;text-transform:uppercase;font-weight:700;">Starting from</div>
               <div style="font-size:16px;font-weight:900;color:#34d399;">$${cheat.minPrice.toFixed(2)}</div>
             </div>
-            <button onclick="event.stopPropagation(); window.openCheatConfig('${gameKey}', '${cheat.id}')" style="background:#252834;border:1px solid rgba(255,255,255,0.12);color:#ffffff;padding:8px 16px;border-radius:8px;font-size:12px;font-weight:800;cursor:pointer;transition:all 0.2s ease;" onmouseover="this.style.background='#323646'; this.style.borderColor='rgba(255,255,255,0.25)';" onmouseout="this.style.background='#252834'; this.style.borderColor='rgba(255,255,255,0.12)';">
-              View Options
-            </button>
+            ${actionButtonHtml}
           </div>
         </div>
       `;
 
-      card.onclick = () => window.openCheatConfig(gameKey, cheat.id);
+      card.onclick = () => {
+        if (isPurchaseAllowed) {
+          window.openCheatConfig(gameKey, cheat.id);
+        } else {
+          window.showStatusCautionModal(cheat.name, cfg.label, cfg.cautionNote);
+        }
+      };
       listEl.appendChild(card);
     });
 
@@ -486,6 +765,16 @@
   }
 
   function addToCart(item) {
+    if (!item) return;
+
+    // Verify live detection & update status
+    const liveInfo = getLiveProductStatus(item.name || item.id, item.game || '');
+    if (liveInfo && liveInfo.config && liveInfo.config.canPurchase === false) {
+      showToast('Purchase Paused', `${item.name} is currently ${liveInfo.status}.`);
+      showStatusCautionModal(item.name, liveInfo.status, liveInfo.config.cautionNote);
+      return;
+    }
+
     const existingIdx = cart.findIndex(i => i.id === item.id && i.variantId === item.variantId);
     if (existingIdx > -1) {
       cart[existingIdx].quantity += item.quantity;
@@ -2050,6 +2339,10 @@
   window.getRegisteredUsers = getRegisteredUsers;
   window.getCurrentUser = getCurrentUser;
   window.handleSupabaseUser = handleSupabaseUser;
+  window.fetchLiveStatus = fetchLiveStatus;
+  window.getLiveProductStatus = getLiveProductStatus;
+  window.syncProductPageStatus = syncProductPageStatus;
+  window.showStatusCautionModal = showStatusCautionModal;
 
   // Immediate check if Supabase is already loaded on page boot
   if (typeof window !== 'undefined' && window.supabase) {
@@ -2080,6 +2373,28 @@
 
     ensureSupabaseLibrary(() => {
       checkSupabaseSession();
+    });
+
+    // Initial Live Status Sync
+    fetchLiveStatus().then(() => {
+      syncProductPageStatus();
+    });
+
+    // Zero-Reload Polling every 15 seconds
+    setInterval(() => {
+      if (document.visibilityState === 'visible') {
+        fetchLiveStatus().then(() => {
+          syncProductPageStatus();
+        });
+      }
+    }, 15000);
+
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible') {
+        fetchLiveStatus().then(() => {
+          syncProductPageStatus();
+        });
+      }
     });
   });
 })();
