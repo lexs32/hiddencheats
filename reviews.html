@@ -194,16 +194,18 @@
       transform: translateY(-1px);
     }
 
-    /* Hero Header */
+    /* Hero Header - Glow removed */
     .reviews-hero {
       position: relative;
       padding: 48px 0 24px;
-      background: radial-gradient(circle at 50% 0%, rgba(185, 55, 226, 0.1) 0%, transparent 65%);
+      background: none;
     }
 
     .reviews-banner-card {
       display: flex;
       align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
       gap: 18px;
       margin-bottom: 28px;
     }
@@ -213,7 +215,32 @@
       height: 52px;
       object-fit: contain;
       flex-shrink: 0;
-      filter: drop-shadow(0 4px 12px rgba(185, 55, 226, 0.25));
+      filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.4));
+    }
+
+    .review-btn-write {
+      background: linear-gradient(135deg, #b937e2 0%, #7d44ed 100%);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #ffffff !important;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.4px;
+      padding: 0 20px;
+      height: 42px;
+      border-radius: 8px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(125, 68, 237, 0.35);
+      transition: all 0.2s ease;
+    }
+
+    .review-btn-write:hover {
+      filter: brightness(1.15);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(125, 68, 237, 0.5);
     }
 
     .reviews-banner-title {
@@ -291,14 +318,14 @@
     .filter-pill:hover {
       color: #ffffff;
       background: #232736;
-      border-color: rgba(185, 55, 226, 0.4);
+      border-color: rgba(255, 255, 255, 0.2);
     }
 
     .filter-pill.active {
-      background: linear-gradient(135deg, #b937e2 0%, #7d44ed 100%);
+      background: #252a38;
       color: #ffffff !important;
-      border-color: transparent;
-      box-shadow: 0 4px 14px rgba(185, 55, 226, 0.4);
+      border-color: rgba(255, 255, 255, 0.25);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
     }
 
     /* Reviews Grid */
@@ -322,7 +349,7 @@
     }
 
     .review-card:hover {
-      border-color: rgba(185, 55, 226, 0.3);
+      border-color: rgba(255, 255, 255, 0.16);
       transform: translateY(-2px);
     }
 
@@ -523,13 +550,22 @@
     <section class="reviews-hero">
       <!-- Banner Header -->
       <div class="reviews-banner-card">
-        <img src="favicon.png" alt="HiddenCheats" class="reviews-banner-logo">
-        <div>
-          <h1 class="reviews-banner-title">Customer Reviews</h1>
-          <div class="reviews-banner-subtitle">
-            <i class="fa-solid fa-comment-check" style="color:#34d399;"></i>
-            <span>1,570 verified reviews from satisfied customers</span>
+        <div style="display:flex;align-items:center;gap:18px;">
+          <img src="favicon.png" alt="HiddenCheats" class="reviews-banner-logo">
+          <div>
+            <h1 class="reviews-banner-title">Customer Reviews</h1>
+            <div class="reviews-banner-subtitle">
+              <i class="fa-solid fa-comment-check" style="color:#34d399;"></i>
+              <span id="reviewsCountSubtitle">1,570 verified reviews from satisfied customers</span>
+            </div>
           </div>
+        </div>
+
+        <div>
+          <button type="button" onclick="window.openAddReviewModal()" class="review-btn-write">
+            <i class="fa-solid fa-pen-to-square"></i>
+            <span>Write a Review</span>
+          </button>
         </div>
       </div>
 
@@ -747,6 +783,82 @@
       </div>
     </section>
 
+
+    <!-- Write a Review Modal -->
+    <div id="add-review-modal" style="position:fixed;inset:0;background:rgba(0,0,0,0.85);backdrop-filter:blur(10px);z-index:99999;display:none;align-items:center;justify-content:center;padding:16px;">
+      <div style="background:#141720;border:1px solid rgba(255,255,255,0.1);border-radius:16px;width:560px;max-width:100%;max-height:92vh;overflow-y:auto;padding:28px;box-shadow:0 25px 60px rgba(0,0,0,0.85);position:relative;">
+        
+        <!-- Modal Header -->
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.08);padding-bottom:18px;margin-bottom:20px;">
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div style="width:42px;height:42px;border-radius:10px;background:linear-gradient(135deg, #b937e2, #7d44ed);display:flex;align-items:center;justify-content:center;color:#ffffff;font-size:18px;box-shadow:0 4px 14px rgba(125, 68, 237, 0.35);">
+              <i class="fa-solid fa-pen-to-square"></i>
+            </div>
+            <div>
+              <h3 style="margin:0;font-size:19px;font-weight:800;color:#ffffff;">Write a Review</h3>
+              <p id="review-user-info" style="margin:3px 0 0;font-size:12px;color:#94a3b8;">Posting as Verified Customer</p>
+            </div>
+          </div>
+          <button type="button" onclick="window.closeAddReviewModal()" style="background:none;border:none;color:#94a3b8;font-size:24px;cursor:pointer;line-height:1;padding:0 4px;">&times;</button>
+        </div>
+
+        <!-- Review Form -->
+        <form id="addReviewForm" onsubmit="window.submitReview(event)" style="display:flex;flex-direction:column;gap:18px;">
+          
+          <!-- Select Game -->
+          <div>
+            <label style="display:block;font-size:12px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:#cbd5e1;margin-bottom:8px;">Choose Game</label>
+            <select id="reviewGameSelect" required onchange="window.onReviewGameChange()" style="width:100%;background:#1a1d28;border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:12px 14px;color:#ffffff;font-size:14px;font-weight:600;outline:none;cursor:pointer;">
+              <option value="arc-raiders" data-default-prod="Arc Raiders">Arc Raiders</option>
+              <option value="siege-x" data-default-prod="Inferno - R6 Full">Siege X</option>
+              <option value="apex-legends" data-default-prod="Apex Pro External">Apex Legends</option>
+              <option value="call-of-duty" data-default-prod="Phantom - Warzone / MW3">Call of Duty</option>
+              <option value="counter-strike-2" data-default-prod="Prime - CS2 Cheat">Counter Strike 2</option>
+              <option value="rust" data-default-prod="Oxide - Rust Cheat">Rust</option>
+              <option value="fortnite" data-default-prod="Fortnite Softaim & ESP">Fortnite</option>
+              <option value="marvel-rivals" data-default-prod="Marvel Rivals ESP & Aimbot">Marvel Rivals</option>
+              <option value="hwid-spoofer" data-default-prod="HWID Spoofer & Cleaner">HWID Spoofer</option>
+            </select>
+          </div>
+
+          <!-- Specific Cheat / Product Name -->
+          <div>
+            <label style="display:block;font-size:12px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:#cbd5e1;margin-bottom:8px;">Cheat / Product Name</label>
+            <input type="text" id="reviewProductName" required placeholder="e.g. Arc Raiders ESP or Inferno R6" style="width:100%;background:#1a1d28;border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:12px 14px;color:#ffffff;font-size:14px;outline:none;">
+          </div>
+
+          <!-- Star Rating -->
+          <div>
+            <label style="display:block;font-size:12px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:#cbd5e1;margin-bottom:8px;">Rating</label>
+            <div id="starRatingContainer" style="display:flex;align-items:center;gap:8px;font-size:24px;color:#f59e0b;cursor:pointer;">
+              <i class="fa-solid fa-star review-star" data-val="1"></i>
+              <i class="fa-solid fa-star review-star" data-val="2"></i>
+              <i class="fa-solid fa-star review-star" data-val="3"></i>
+              <i class="fa-solid fa-star review-star" data-val="4"></i>
+              <i class="fa-solid fa-star review-star" data-val="5"></i>
+              <span id="starRatingLabel" style="font-size:13px;font-weight:700;color:#94a3b8;margin-left:8px;">5 / 5 Stars</span>
+            </div>
+            <input type="hidden" id="reviewRatingInput" value="5">
+          </div>
+
+          <!-- Review Message -->
+          <div>
+            <label style="display:block;font-size:12px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:#cbd5e1;margin-bottom:8px;">Review Message</label>
+            <textarea id="reviewMessageInput" required minlength="5" rows="4" placeholder="How was the detection rate, ESP clarity, aimbot smoothness, or support?" style="width:100%;background:#1a1d28;border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:12px 14px;color:#ffffff;font-size:14px;resize:vertical;outline:none;font-family:inherit;"></textarea>
+          </div>
+
+          <!-- Modal Footer -->
+          <div style="display:flex;align-items:center;justify-content:flex-end;gap:12px;border-top:1px solid rgba(255,255,255,0.08);padding-top:18px;margin-top:6px;">
+            <button type="button" onclick="window.closeAddReviewModal()" style="background:#20232e;border:1px solid rgba(255,255,255,0.1);color:#94a3b8;padding:11px 20px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;">Cancel</button>
+            <button type="submit" id="submitReviewBtn" style="background:linear-gradient(135deg, #b937e2 0%, #7d44ed 100%);border:1px solid rgba(255,255,255,0.15);color:#ffffff;padding:11px 24px;border-radius:8px;font-size:13px;font-weight:800;letter-spacing:0.4px;cursor:pointer;box-shadow:0 4px 14px rgba(125, 68, 237, 0.35);display:inline-flex;align-items:center;gap:8px;">
+              <i class="fa-solid fa-paper-plane"></i>
+              <span>Submit Review</span>
+            </button>
+          </div>
+
+        </form>
+      </div>
+    </div>
   </main>
 
   <!-- Footer -->
@@ -812,29 +924,272 @@
       drawer.style.display = (drawer.style.display === 'none' || drawer.style.display === '') ? 'block' : 'none';
     }
 
-    // Interactive category filter pills logic for reviews
-    document.addEventListener('DOMContentLoaded', () => {
+    // Helper for HTML entity escaping
+    function escapeHtmlSafe(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    // Dynamic Review Cards Rendering
+    function renderSingleReviewCard(r, prepend = false) {
+      const container = document.getElementById('reviewsGridContainer');
+      if (!container) return;
+
+      const card = document.createElement('div');
+      card.className = 'review-card user-submitted-review';
+      card.setAttribute('data-game', r.game || 'all');
+
+      let starsHtml = '';
+      const rating = Number(r.rating) || 5;
+      for (let i = 1; i <= 5; i++) {
+        if (i <= rating) {
+          starsHtml += '<i class="fa-solid fa-star"></i>';
+        } else {
+          starsHtml += '<i class="fa-regular fa-star" style="opacity:0.35;"></i>';
+        }
+      }
+
+      card.innerHTML = `
+        <div>
+          <div class="review-card-header">
+            <div class="review-stars">${starsHtml}</div>
+            <span class="review-date">${escapeHtmlSafe(r.date)}</span>
+          </div>
+          <p class="review-message">${escapeHtmlSafe(r.message)}</p>
+        </div>
+        <div class="review-footer">
+          <div style="display:flex;align-items:center;gap:8px;">
+            <div style="width:24px;height:24px;border-radius:50%;overflow:hidden;border:1px solid rgba(255,255,255,0.15);background:#1a1d28;flex-shrink:0;">
+              <img src="${encodeURI(r.authorAvatar || 'favicon.png')}" alt="${escapeHtmlSafe(r.authorName)}" style="width:100%;height:100%;object-fit:cover;">
+            </div>
+            <div>
+              <span class="review-product-name" style="color:#ffffff;">${escapeHtmlSafe(r.productName)}</span>
+              <span style="font-size:11px;color:#94a3b8;display:block;">by ${escapeHtmlSafe(r.authorName)}</span>
+            </div>
+          </div>
+          <span class="review-badge-verified"><i class="fa-solid fa-shield-check"></i> Verified</span>
+        </div>
+      `;
+
+      if (prepend && container.firstChild) {
+        container.insertBefore(card, container.firstChild);
+      } else {
+        container.appendChild(card);
+      }
+    }
+
+    function loadStoredReviews() {
+      try {
+        const stored = localStorage.getItem('hc_user_reviews');
+        if (stored) {
+          const list = JSON.parse(stored);
+          if (Array.isArray(list)) {
+            // Render stored reviews at the top of the grid
+            list.forEach(r => renderSingleReviewCard(r, true));
+            const sub = document.getElementById('reviewsCountSubtitle');
+            if (sub) {
+              const total = 1570 + list.length;
+              sub.textContent = total.toLocaleString() + ' verified reviews from satisfied customers';
+            }
+          }
+        }
+      } catch (e) {
+        console.error('Failed loading stored reviews', e);
+      }
+    }
+
+    // Interactive category filter pills logic
+    let currentFilter = 'all';
+
+    function filterTo(targetGame) {
+      currentFilter = targetGame;
       const pills = document.querySelectorAll('.filter-pill');
       const cards = document.querySelectorAll('.review-card');
 
-      function filterTo(targetGame) {
-        pills.forEach(p => {
-          if (p.getAttribute('data-filter') === targetGame) {
-            p.classList.add('active');
-          } else {
-            p.classList.remove('active');
-          }
-        });
+      pills.forEach(p => {
+        if (p.getAttribute('data-filter') === targetGame) {
+          p.classList.add('active');
+        } else {
+          p.classList.remove('active');
+        }
+      });
 
-        cards.forEach(c => {
-          if (targetGame === 'all' || c.getAttribute('data-game') === targetGame) {
-            c.style.display = 'flex';
-          } else {
-            c.style.display = 'none';
-          }
-        });
+      cards.forEach(c => {
+        if (targetGame === 'all' || c.getAttribute('data-game') === targetGame) {
+          c.style.display = 'flex';
+        } else {
+          c.style.display = 'none';
+        }
+      });
+    }
+
+    // Modal & Star Rating Controllers
+    window.selectedReviewRating = 5;
+
+    window.openAddReviewModal = function() {
+      const user = (window.getCurrentUser && window.getCurrentUser()) || 
+                   (localStorage.getItem('hc_user') ? JSON.parse(localStorage.getItem('hc_user')) : null);
+
+      if (!user || !user.loggedIn) {
+        if (typeof window.showToast === 'function') {
+          window.showToast('Login Required', 'You must be signed in to submit a review.');
+        } else {
+          alert('You must be signed in to submit a review.');
+        }
+        if (typeof window.openAuthModal === 'function') {
+          window.openAuthModal('signin');
+        }
+        return;
       }
 
+      const infoEl = document.getElementById('review-user-info');
+      if (infoEl) {
+        infoEl.innerHTML = `Posting as <strong style="color:#ffffff;">${escapeHtmlSafe(user.name || 'Member')}</strong> • <span style="color:#34d399;font-weight:700;"><i class="fa-solid fa-shield-check"></i> Verified Customer</span>`;
+      }
+
+      // If user is currently filtering by a specific game, preset dropdown to it
+      const select = document.getElementById('reviewGameSelect');
+      if (select && currentFilter && currentFilter !== 'all') {
+        select.value = currentFilter;
+      }
+
+      window.onReviewGameChange();
+      const modal = document.getElementById('add-review-modal');
+      if (modal) modal.style.display = 'flex';
+    };
+
+    window.closeAddReviewModal = function() {
+      const modal = document.getElementById('add-review-modal');
+      if (modal) modal.style.display = 'none';
+    };
+
+    window.onReviewGameChange = function() {
+      const select = document.getElementById('reviewGameSelect');
+      const prodInput = document.getElementById('reviewProductName');
+      if (select && prodInput) {
+        const selectedOpt = select.options[select.selectedIndex];
+        if (selectedOpt && (!prodInput.value || prodInput.getAttribute('data-autofilled') === 'true')) {
+          prodInput.value = selectedOpt.getAttribute('data-default-prod') || selectedOpt.text;
+          prodInput.setAttribute('data-autofilled', 'true');
+        }
+      }
+    };
+
+    function initStarRating() {
+      const container = document.getElementById('starRatingContainer');
+      if (!container) return;
+      const stars = container.querySelectorAll('.review-star');
+      const label = document.getElementById('starRatingLabel');
+      const input = document.getElementById('reviewRatingInput');
+
+      function updateStars(val) {
+        stars.forEach(s => {
+          const v = parseInt(s.getAttribute('data-val'), 10);
+          if (v <= val) {
+            s.className = 'fa-solid fa-star review-star';
+            s.style.color = '#f59e0b';
+          } else {
+            s.className = 'fa-regular fa-star review-star';
+            s.style.color = 'rgba(255,255,255,0.2)';
+          }
+        });
+        if (label) label.textContent = val + ' / 5 Stars';
+        if (input) input.value = val;
+      }
+
+      stars.forEach(s => {
+        s.addEventListener('mouseenter', () => {
+          updateStars(parseInt(s.getAttribute('data-val'), 10));
+        });
+        s.addEventListener('click', () => {
+          window.selectedReviewRating = parseInt(s.getAttribute('data-val'), 10);
+          updateStars(window.selectedReviewRating);
+        });
+      });
+
+      container.addEventListener('mouseleave', () => {
+        updateStars(window.selectedReviewRating || 5);
+      });
+
+      updateStars(5);
+    }
+
+    window.submitReview = function(e) {
+      e.preventDefault();
+      const user = (window.getCurrentUser && window.getCurrentUser()) || 
+                   (localStorage.getItem('hc_user') ? JSON.parse(localStorage.getItem('hc_user')) : null);
+
+      if (!user || !user.loggedIn) {
+        window.closeAddReviewModal();
+        if (typeof window.openAuthModal === 'function') window.openAuthModal('signin');
+        return;
+      }
+
+      const game = document.getElementById('reviewGameSelect').value;
+      const productName = document.getElementById('reviewProductName').value.trim();
+      const rating = parseInt(document.getElementById('reviewRatingInput').value, 10) || 5;
+      const message = document.getElementById('reviewMessageInput').value.trim();
+
+      if (!message || message.length < 5) {
+        alert('Please enter a review message of at least 5 characters.');
+        return;
+      }
+
+      const now = new Date();
+      const dateStr = String(now.getDate()).padStart(2, '0') + '/' + 
+                      String(now.getMonth() + 1).padStart(2, '0') + '/' + 
+                      now.getFullYear();
+
+      const newReview = {
+        id: 'rev_' + Date.now(),
+        game: game,
+        productName: productName,
+        rating: rating,
+        message: message,
+        authorName: user.name || 'Member',
+        authorRole: user.role || 'Verified Customer',
+        authorAvatar: user.avatar || 'favicon.png',
+        date: dateStr,
+        verified: true
+      };
+
+      try {
+        let list = JSON.parse(localStorage.getItem('hc_user_reviews') || '[]');
+        list.unshift(newReview);
+        localStorage.setItem('hc_user_reviews', JSON.stringify(list));
+      } catch (err) {
+        console.error('Failed to store review in localStorage:', err);
+      }
+
+      // Prepend to UI
+      renderSingleReviewCard(newReview, true);
+
+      // Re-apply current category filter so the newly added card is placed properly
+      filterTo(currentFilter);
+
+      // Reset form
+      document.getElementById('addReviewForm').reset();
+      document.getElementById('reviewRatingInput').value = '5';
+      window.selectedReviewRating = 5;
+      initStarRating();
+
+      window.closeAddReviewModal();
+
+      if (typeof window.showToast === 'function') {
+        window.showToast('Review Published', 'Your review for ' + productName + ' has been posted!');
+      }
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+      loadStoredReviews();
+      initStarRating();
+
+      const pills = document.querySelectorAll('.filter-pill');
       pills.forEach(pill => {
         pill.addEventListener('click', (e) => {
           e.preventDefault();
