@@ -370,6 +370,12 @@
     updateProductTotalPrice();
   }
 
+  function adjustQuantity(delta) {
+    if (typeof modifyProductQty === 'function') {
+      modifyProductQty(delta);
+    }
+  }
+
   function updateProductTotalPrice() {
     const activeBtn = document.querySelector('.bc-variant-btn.is-active');
     if (!activeBtn) return;
@@ -931,10 +937,12 @@
     if (!container) return;
 
     const allProducts = [
-      { gameKey: 'arc', cheatId: 'private-arc', name: 'Ancient - ARC Raiders', price: 6.00, stock: 42, image: 'assets/images/bearcheats/1103375.webp' },
-      { gameKey: 'apex', cheatId: 'private-apex', name: 'Krush - Apex Legends', price: 6.00, stock: 38, image: 'assets/images/bearcheats/1103383.webp' },
-      { gameKey: 'cod', cheatId: 'private-cod', name: 'Private - Call of Duty', price: 6.00, stock: 29, image: 'assets/images/bearcheats/1100366.webp' },
-      { gameKey: 'fortnite', cheatId: 'private-fortnite', name: 'Nebula - Fortnite', price: 6.00, stock: 55, image: 'assets/images/bearcheats/1100362.webp' }
+      { gameKey: 'arc', cheatId: 'private-arc', name: 'Private - ARC Raiders', price: 6.00, stock: 42, image: 'boxes/arc.png', page: 'arc.html' },
+      { gameKey: 'apex', cheatId: 'private-apex', name: 'Private - Apex Legends', price: 6.00, stock: 38, image: 'boxes/apex.png', page: 'apex.html' },
+      { gameKey: 'cod', cheatId: 'private-cod', name: 'Private - Call of Duty', price: 6.00, stock: 29, image: 'boxes/cod.png', page: 'cod.html' },
+      { gameKey: 'fortnite', cheatId: 'private-fortnite', name: 'Private - Fortnite', price: 6.00, stock: 55, image: 'boxes/fort.png', page: 'fortnite.html' },
+      { gameKey: 'status', cheatId: 'siege-x', name: 'Inferno - Rainbow Six Siege', price: 7.00, stock: 25, image: 'boxes/r6.png', page: 'status.html' },
+      { gameKey: 'status', cheatId: 'rust', name: 'Disarray - Rust Private', price: 8.00, stock: 18, image: 'boxes/rust.png', page: 'status.html' }
     ];
 
     let filtered = allProducts;
@@ -942,7 +950,7 @@
       const q = query.toLowerCase();
       filtered = allProducts.filter(p => p.name.toLowerCase().includes(q) || p.gameKey.toLowerCase().includes(q));
     } else {
-      filtered = allProducts.slice(0, 3);
+      filtered = allProducts.slice(0, 4);
     }
 
     if (filtered.length === 0) {
@@ -951,9 +959,9 @@
     }
 
     container.innerHTML = filtered.map(p => `
-      <div onclick="window.openCheatConfig('${p.gameKey}', '${p.cheatId}'); window.closeSearchModal();" class="cSearch_product_row" style="display:flex;align-items:center;justify-content:space-between;background:#1a1d27;border:1px solid rgba(255,255,255,0.05);border-radius:10px;padding:10px 12px;cursor:pointer;transition:all 0.15s ease;">
+      <div onclick="window.location.href='${p.page}'; window.closeSearchModal();" class="cSearch_product_row" style="display:flex;align-items:center;justify-content:space-between;background:#1a1d27;border:1px solid rgba(255,255,255,0.05);border-radius:10px;padding:10px 12px;cursor:pointer;transition:all 0.15s ease;">
         <div style="display:flex;align-items:center;gap:12px;">
-          <img src="${p.image}" alt="${p.name}" style="width:78px;height:48px;border-radius:6px;object-fit:cover;flex-shrink:0;">
+          <img src="${p.image}" alt="${p.name}" style="width:48px;height:48px;border-radius:6px;object-fit:contain;background:#11131a;padding:2px;flex-shrink:0;">
           <div>
             <div style="font-size:14px;font-weight:600;color:#ffffff;">${p.name}</div>
             <div style="display:flex;align-items:center;gap:6px;margin-top:3px;">
@@ -1354,23 +1362,7 @@
     try {
       const stored = localStorage.getItem('hc_user');
       if (stored) return JSON.parse(stored);
-      const defaultUser = {
-        name: 'yvko2',
-        email: 'yvko2@gmail.com',
-        password: 'password123',
-        loggedIn: true,
-        role: 'MEMBERS',
-        balance: '0.00',
-        avatar: 'favicon.png',
-        discordTag: 'yvko2#0001',
-        discordId: '849201948201948201',
-        orders: [
-          { id: 'ORD-849201', product: 'Private - Arc Raiders (30 Day)', key: 'HIDDEN-ARC-8492-XK91-2041', status: 'Active', expires: '29 Days Left' },
-          { id: 'ORD-849202', product: 'SVO DMA - Valorant (30 Day)', key: 'HIDDEN-VAL-5829-DMA1-9942', status: 'Active', expires: '28 Days Left' }
-        ]
-      };
-      localStorage.setItem('hc_user', JSON.stringify(defaultUser));
-      return defaultUser;
+      return null;
     } catch (e) {
       return null;
     }
